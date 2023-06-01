@@ -1,6 +1,10 @@
-import { CurrencyListAPIResponse, Currency, CurrencyData, CurrencyDataAPIResponse, YearMonthDayString } from '../types';
+import { CurrencyListAPIResponse, Currency, CurrencyData, CurrencyDataAPIResponse } from '../types';
 import { mapCurrencyAPIResponse } from '../utils';
 
+/**
+ * Fetches a list of available currencies.
+ * @returns A Promise that resolves to the currency list.
+ */
 export const fetchCurrencies = async (): Promise<Currency[]> => {
     const CURRENCY_LIST_API_URL = 'https://cdn.jsdelivr.net/gh/fawazahmed0/currency-api@1/latest/currencies.min.json';
     const response = await fetch(CURRENCY_LIST_API_URL);
