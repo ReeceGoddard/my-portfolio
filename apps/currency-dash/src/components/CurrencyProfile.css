@@ -1,0 +1,12 @@
+.conversions {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 20px;
+    padding: 40px;
+}
+
+.conversion {
+    padding: 20px;
+    background: #f5f5f5;
+    text-align: center;
+}

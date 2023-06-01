@@ -1,0 +1,19 @@
+main {
+    display: flex;
+}
+
+.sidebar {
+    width: 420px;
+    border-right: 2px solid black;
+    height: 100dvh;
+    overflow: hidden;
+
+    &:hover {
+        overflow-y: auto;
+    }
+}
+
+.content {
+    flex: 1 1 auto;
+    overflow: auto;
+}
