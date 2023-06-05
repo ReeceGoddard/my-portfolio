@@ -1,0 +1,134 @@
+/* Default layout to mobile selector */
+.wrapper {
+    height: 100%;
+    border-top: 3px solid black;
+    position: relative;
+
+    &.loading {
+        background: red;
+    }
+}
+
+.list-container {
+    position: absolute;
+    bottom: 100cqh;
+    overflow-y: auto;
+    width: 100%;
+    background: hsla(0, 0%, 100%, 0.2);
+    transition: height 100ms ease-out;
+    height: 0;
+    backdrop-filter: blur(18px) saturate(1.5);
+
+    &.list-showing {
+        height: calc(100svh - 100cqh);
+    }
+}
+
+.search-wrapper {
+    padding: 20px;
+}
+
+input.search {
+    display: block;
+    border: 0;
+    font-size: 0.8em;
+    height: 4em;
+    width: 100%;
+    border-radius: 0;
+    padding: 0 1.2em;
+    color: #000;
+    border: 2px solid black;
+    box-shadow: 0 3px 10px hsla(0, 0%, 0%, 0.2);
+
+    &::placeholder {
+        font-style: italic;
+        color: lightslategrey;
+    }
+}
+
+label {
+    display: flex;
+}
+
+.currencies {
+    padding-bottom: 30px;
+}
+
+.currency {
+    display: flex;
+    align-items: center;
+    color: #000000;
+    min-height: 2.6em;
+    font-size: 0.8em;
+    padding: 0.6em 1.6em;
+    line-height: 1.3;
+
+    &:hover {
+        background: #f5f5fa;
+        color: blue;
+    }
+}
+
+button.toggle-list {
+    height: 100%;
+    width: 100%;
+    display: block;
+    background: #ffffff;
+    border-radius: 0;
+    text-align: left;
+    font-size: 28px;
+    font-weight: 900;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+
+    & svg {
+        width: 32px;
+        height: 32px;
+    }
+
+    &.list-showing {
+        background: black;
+        color: white;
+    }
+}
+
+/* In a tall container -- layout as list */
+@container (min-height: 300px) {
+    .wrapper {
+        border-top: 0;
+        border-right: 3px solid black;
+        background: #ffffff;
+        position: relative;
+    }
+
+    button.toggle-list {
+        display: none;
+    }
+
+    .search-wrapper {
+        position: sticky;
+        top: 0;
+        left: 0;
+        width: 100%;
+        background: hsla(0, 100%, 100%, 0.8);
+        /* backdrop-filter: blur(10px); */
+
+        &::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            backdrop-filter: blur(30px);
+        }
+    }
+
+    .list-container {
+        position: static;
+        height: 100%;
+    }
+}
