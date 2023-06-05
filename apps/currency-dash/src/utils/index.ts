@@ -1,4 +1,4 @@
-import { CurrencyData, CurrencyDataAPIResponse } from '../types';
+import { ConversionsHistoryForCurrency, Currency, CurrencyData, CurrencyDataAPIResponse } from '../types';
 
 export const mapCurrencyAPIResponse = (
     currencyDataResponse: CurrencyDataAPIResponse,
@@ -6,7 +6,7 @@ export const mapCurrencyAPIResponse = (
 ): Promise<CurrencyData> => {
     const currencyData: CurrencyData = {
         date: '',
-        selectedCurrency: {
+        baseCurrency: {
             code: currencyCode,
             label: currencyCode, //TODO: get real label from datastore
             rate: 1,
@@ -29,3 +29,100 @@ export const mapCurrencyAPIResponse = (
 
     return Promise.resolve(currencyData);
 };
+
+export const convertCurrencyDataToHistory = (
+    baseCurrency: Currency,
+    currencyDataList: CurrencyData[]
+): ConversionsHistoryForCurrency => {
+    const BASE_CURRENCY = currencyDataList[0].baseCurrency; // Get baseCurrency from first day, all days should be the same
+
+    // Init object to return
+    const conversionHistory: ConversionsHistoryForCurrency = {
+        baseCurrency: {
+            currencyCode: baseCurrency.code,
+            label: baseCurrency.label,
+        },
+        currencyConversions: [],
+    };
+
+    // Map conversion data of a date to specific currency history
+    currencyDataList.forEach(dayOfData => {
+        dayOfData.conversions.forEach(conversionsForDate => {
+            const foundElement = conversionHistory.currencyConversions.find(
+                item => item.currencyCode === conversionsForDate.code
+            );
+
+            if (!foundElement) {
+                // Add new currency to currencyConversions
+                conversionHistory.currencyConversions.push({
+                    currencyCode: conversionsForDate.code,
+                    conversionHistory: [{ rate: conversionsForDate.rate, date: dayOfData.date }],
+                });
+            } else {
+                // Add currency conversion to existing currency in currencyConversions
+                foundElement.conversionHistory.push({ rate: conversionsForDate.rate, date: dayOfData.date });
+            }
+        });
+    });
+
+    return conversionHistory;
+};
+
+export const getFormattedDateString = (date: Date): string => {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    return `${year}-${month}-${day}`;
+};
+
+export const getDateStringsFromToday = (numOfDays = 0) => {
+    const date = new Date(); // Init to today
+    const dateStrings = [];
+
+    for (let i = 0; i < numOfDays; i++) {
+        const dateString = getFormattedDateString(date);
+        dateStrings.push(dateString);
+        date.setDate(date.getDate() - 1);
+    }
+
+    return dateStrings;
+};
+
+export class Alpha {
+    readonly value: number;
+
+    constructor(value: number) {
+        if (value < 0 || value > 1) {
+            throw new Error('Alpha value must be between 0 and 1.');
+        }
+
+        this.value = value;
+    }
+}
+
+export function addAlphaToHSL(hslString: string, alpha: Alpha) {
+    // Remove any leading or trailing spaces from the HSL string
+    const trimmedHSL = hslString.trim();
+
+    // Extract the HSL values using regular expressions
+    const hslPattern = /hsl\(\s*(\d+),\s*(\d+%?),\s*(\d+%?)\)/;
+    const [, hue, saturation, lightness] = trimmedHSL.match(hslPattern);
+
+    // Construct the updated HSL string with alpha
+    const updatedHSL = `hsla(${hue}, ${saturation}, ${lightness}, ${alpha.value})`;
+
+    return updatedHSL;
+}
+
+// export const getLabelFromCode = (currencyCode: string): string => {
+//     const query = currencyListQuery();
+//     return queryClient.ensureQueryData(query);
+
+//     if (!data) throw new Error('Currency list not available.');
+
+//     const currency = data.find(item => item.code === currencyCode);
+
+//     if (!currency) throw new Error('Cannot find currency for code provided.');
+
+//     return currency.label;
+// };
