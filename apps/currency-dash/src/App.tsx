@@ -3,6 +3,7 @@ import { ErrorPage } from './pages/ErrorPage';
 import { IndexPage, loader as indexLoader } from './pages/IndexPage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { CurrencyProfile, loader as profileLoader } from './components/CurrencyProfile';
+import { ThemeProvider } from './providers/ThemeProvider';
 
 function App() {
     const queryClient = new QueryClient();
@@ -29,7 +30,10 @@ function App() {
 
     return (
         <QueryClientProvider client={queryClient}>
-            <RouterProvider router={router} />
+            <ThemeProvider>
+                {/* <ReactQueryDevtools initialIsOpen={false} /> */}
+                <RouterProvider router={router} />
+            </ThemeProvider>
         </QueryClientProvider>
     );
 }
