@@ -1,30 +1,26 @@
 import { MainLayout } from '../layouts/MainLayout';
 import { Outlet } from 'react-router-dom';
-import { CurrencyList } from '../components/CurrencyList';
-import { QueryClient, useQuery } from '@tanstack/react-query';
-import { fetchCurrencies } from '../services/CurrencyService';
-
-const currencyListQuery = () => ({
-    queryKey: ['currency-list'],
-    queryFn: fetchCurrencies,
-});
+import { CurrencySelector } from '../components/CurrencySelector';
+import { QueryClient } from '@tanstack/react-query';
+import { CurrencyProvider } from '../providers/CurrencyProvider';
+import { currencyListQuery } from '../services/queries/CurrencyQueries';
 
 export const loader = (queryClient: QueryClient) => async () => {
     const query = currencyListQuery();
-    return queryClient.getQueryData(query.queryKey) ?? (await queryClient.fetchQuery(query));
+    return queryClient.ensureQueryData(query);
 };
 
 export const IndexPage = () => {
-    const { data: currencies, isLoading } = useQuery(currencyListQuery());
-
     return (
-        <MainLayout>
-            <MainLayout.Slot name="sidebar">
-                <CurrencyList options={currencies ?? []} isLoading={isLoading} />
-            </MainLayout.Slot>
-            <MainLayout.Slot name="content">
-                <Outlet />
-            </MainLayout.Slot>
-        </MainLayout>
+        <CurrencyProvider>
+            <MainLayout>
+                <MainLayout.Slot name="selector">
+                    <CurrencySelector />
+                </MainLayout.Slot>
+                <MainLayout.Slot name="content">
+                    <Outlet />
+                </MainLayout.Slot>
+            </MainLayout>
+        </CurrencyProvider>
     );
 };
