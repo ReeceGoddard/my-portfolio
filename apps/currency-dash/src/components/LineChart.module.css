@@ -1,0 +1,15 @@
+.days {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    padding: 0 0.1em;
+    margin-top: 0.4em;
+    user-select: none;
+
+    & .day {
+        font-size: 0.6em;
+        color: var(--med-grey);
+        font-weight: 800;
+        font-style: italic;
+    }
+}

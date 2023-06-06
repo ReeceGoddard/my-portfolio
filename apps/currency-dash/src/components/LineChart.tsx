@@ -1,6 +1,8 @@
 import { HTMLProps, MouseEvent, useCallback, useMemo } from 'react';
 import { useCurrencyContext } from '../providers/CurrencyProvider';
 import { HSLA } from '../utils/HSLA';
+import styles from './LineChart.module.css';
+import { getDaysOfTheWeekLetters } from '../utils';
 
 export type LineChartMode = 'neutral' | 'negative' | 'positive';
 
@@ -141,6 +143,13 @@ export const LineChart: React.FC<LineChartProps> = ({
                     );
                 })}
             </svg>
+            <div className={styles.days}>
+                {getDaysOfTheWeekLetters().map((day, index) => (
+                    <div className={styles.day} key={`${index}${day}`}>
+                        {day}
+                    </div>
+                ))}
+            </div>
         </div>
     );
 };
