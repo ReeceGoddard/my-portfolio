@@ -1,27 +1,45 @@
 .conversion {
+    padding: 0.7em;
+    border-radius: 0.7em;
+    background: #ffffff;
+    box-shadow: 0 4px 6px rgba(0 0 0 / 8%);
+    border: 2px solid transparent;
+    transition: all var(--transition-duration) var(--transition-ease);
+    transform: scale(1);
+
+    &:hover {
+        border: 2px solid var(--border-color);
+        box-shadow: 0 0 50px 40px white;
+        transform: scale(1.03);
+    }
 }
 
 .main-heading {
-    text-align: left;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    gap: 4px;
+    justify-content: space-between;
+
+    .label {
+        line-height: 1.2;
+        align-self: center;
+    }
+
+    & .code {
+        font-weight: 900;
+    }
 }
 
 .sub-heading {
-    font-weight: 900;
+    font-weight: 800;
     font-style: italic;
-    margin-top: 0.4em;
+    margin-top: 0.6em;
     color: var(--med-grey);
 }
 
 svg.arrow {
     width: 1.2em;
     height: fit-content;
-    margin-left: 4px;
-
-    & path {
-        filter: drop-shadow(0 1px 2px white);
-    }
 }
 
 .weekly-diff {
