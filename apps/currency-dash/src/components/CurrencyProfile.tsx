@@ -1,13 +1,14 @@
 import { QueryClient } from '@tanstack/react-query';
 import { LoaderFunctionArgs, useLoaderData, useParams } from 'react-router-dom';
 import { ConversionCard } from './ConversionCard';
-import './CurrencyProfile.css';
 import { useCurrencyContext } from '../providers/CurrencyProvider';
 import { useCallback, useEffect, useState } from 'react';
 import { currencyDataQuery, currencyListQuery } from '../services/queries/CurrencyQueries';
 import { ConversionsHistoryForCurrency } from '../types';
 import { Tooltip } from './Tooltip';
 import { SVGGradientDefs } from './SVGGradientDefs';
+
+import styles from './CurrencyProfile.module.css';
 
 export const loader =
     (queryClient: QueryClient) =>
@@ -58,12 +59,13 @@ export const CurrencyProfile = () => {
     useEffect(() => setSelectedCurrency(currencyCode), [currencyCode, setSelectedCurrency]);
 
     return (
-        <div className="currency-profile">
-            <h1 className="main-heading">
+        <div className={styles.currencyProfile}>
+            <h1 className={styles.mainHeading}>
                 {currencyHistory?.baseCurrency.label} ({currencyHistory.baseCurrency.currencyCode.toUpperCase()})
             </h1>
-            <h3 className="sub-heading">{new Date().toDateString()} — Weekly View</h3>
-            <div className="conversions">
+            <h3 className={styles.subHeading}>{new Date().toDateString()} — Weekly View</h3>
+
+            <div className={styles.conversions}>
                 {filterAndSortCurrencies().map(currency => (
                     <ConversionCard
                         key={currency.currencyCode}
@@ -74,15 +76,15 @@ export const CurrencyProfile = () => {
             </div>
 
             {!showAllCurrencies && (
-                <button className="show-all" onClick={() => setShowAllCurrencies(true)}>
+                <button className={styles.showAll} onClick={() => setShowAllCurrencies(true)}>
                     Show All Currencies
                 </button>
             )}
 
             {showAllCurrencies && (
-                <section className="all-currencies">
+                <section className={styles.allCurrencies}>
                     <h2>All Currencies</h2>
-                    <div className="conversions">
+                    <div className={styles.conversions}>
                         {currencyHistory?.currencyConversions
                             .filter(
                                 currency =>
