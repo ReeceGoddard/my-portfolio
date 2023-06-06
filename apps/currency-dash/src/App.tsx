@@ -2,8 +2,9 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { ErrorPage } from './pages/ErrorPage';
 import { IndexPage, loader as indexLoader } from './pages/IndexPage';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { CurrencyProfile, loader as profileLoader } from './components/CurrencyProfile';
+import { CurrencyProfile } from './components/CurrencyProfile';
 import { ThemeProvider } from './providers/ThemeProvider';
+import { currencyProfileLoader } from './components/CurrencyProfileLoader';
 
 function App() {
     const queryClient = new QueryClient();
@@ -22,7 +23,7 @@ function App() {
                 {
                     path: 'currency/:currencyCode',
                     element: <CurrencyProfile />,
-                    loader: profileLoader(queryClient),
+                    loader: currencyProfileLoader(queryClient),
                 },
             ],
         },
