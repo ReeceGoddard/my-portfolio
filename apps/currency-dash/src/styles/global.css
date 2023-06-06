@@ -14,6 +14,10 @@
     -webkit-text-size-adjust: 100%;
 
     --med-grey: #9b9bac;
+    --warm-stone: #f1eeeb;
+    --border-color: hsla(0, 20%, 50%, 0.2);
+    --transition-duration: 160ms;
+    --transition-ease: ease-out;
 }
 
 * {
