@@ -18,6 +18,9 @@
     --border-color: hsla(0, 20%, 50%, 0.2);
     --transition-duration: 160ms;
     --transition-ease: ease-out;
+    --transition: all var(--transition-duration) var(--transition-ease);
+
+    --selector-panel-width: 320px;
 }
 
 * {
@@ -59,7 +62,6 @@ button {
     font-family: inherit;
     background: white;
     color: black;
-    box-shadow: 0 10px 50px hsla(0, 0%, 0%, 0.14);
     transition: all 160ms ease-out;
 
     &:hover {
