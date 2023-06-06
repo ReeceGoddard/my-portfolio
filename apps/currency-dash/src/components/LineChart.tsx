@@ -102,7 +102,7 @@ export const LineChart: React.FC<LineChartProps> = ({
         const GAP = 10;
         const rect = event.currentTarget.getBoundingClientRect();
         const x = +rect.left.toFixed(0) + rect.width / 2;
-        const y = +rect.top.toFixed(0) + rect.height + GAP;
+        const y = +rect.top.toFixed(0) + rect.height + window.scrollY + GAP;
         setTooltipProps({ value, position: { x, y }, hidden: false });
     };
 
