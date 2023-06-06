@@ -88,6 +88,29 @@ export const getDateStringsFromToday = (numOfDays = 0) => {
     return dateStrings;
 };
 
+/**
+ * Generates an array of days of the week starting from a specified day or the next day after the current day.
+ * @param {number} [startDay] - Optional. The starting day of the week (0 for Sunday, 1 for Monday, and so on).
+ * @returns {string[]} - An array of strings representing the days of the week.
+ */
+export const getDaysOfTheWeekLetters = (startDay?: number): string[] => {
+    const dayLetters = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
+
+    // If startDay is not provided, set it to tomorrow
+    if (startDay === undefined) {
+        startDay = (new Date().getDay() + 1) % dayLetters.length;
+    }
+
+    // Calculate the starting index based on the provided startDay
+    const startingIndex = startDay % dayLetters.length;
+
+    // Generate the array of days of the week by mapping over the dayLetters array
+    return dayLetters.map((_, index) => {
+        const newIndex = (startingIndex + index) % dayLetters.length;
+        return dayLetters[newIndex];
+    });
+};
+
 export class Alpha {
     readonly value: number;
 
