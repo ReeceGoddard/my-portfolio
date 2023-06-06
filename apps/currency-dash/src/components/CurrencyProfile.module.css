@@ -5,33 +5,71 @@
 }
 
 .currency-profile {
-    padding: 30px 30px 60vh;
-    max-width: --var(desktop-breakpoint);
     margin: 0 auto;
+    padding-bottom: 60vh;
+}
+
+.header-content-wrapper {
+    max-width: --var(desktop-breakpoint);
+    padding: 30px;
 }
 
 .main-heading {
     line-height: 1.2;
     margin: 0;
+    transition: var(--transition);
+}
+
+.subheader-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 2em;
+    justify-content: space-between;
 }
 
 .sub-heading {
     margin-top: 20px;
     color: var(--med-grey);
+    flex: 0 0 auto;
+    transition: var(--transition);
+}
+
+input.search {
+    background: none;
+    border: 0;
+    border-bottom: 2px solid var(--med-grey);
+    width: 20em;
+    height: 3em;
+    font-size: 0.8em;
+    margin-top: 10px;
+    transition: all var(--transition-duration) var(--transition-ease);
+
+    &:focus {
+        padding: 0 1em;
+    }
+
+    &::placeholder {
+        color: var(--med-grey);
+        font-style: italic;
+        font-weight: 600;
+    }
 }
 
 .conversions {
     display: grid;
     align-items: start;
-    margin-top: 60px;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: var(--dynamic-gap);
 }
 
+.content {
+    max-width: --var(desktop-breakpoint);
+    margin: 30px auto 0;
+    padding: 0 30px;
+}
+
 button.show-all {
-    margin-top: 80px;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 80px auto 0;
 }
 
 section.all-currencies {
@@ -44,8 +82,50 @@ section.all-currencies {
     }
 
     .currency-profile {
-        padding: calc(30px + 4vw) calc(30px + 4vw) 60vh;
+        padding-top: calc(30px + 4vw);
+        /* padding: calc(30px + 4vw) calc(30px + 4vw) 60vh; */
+    }
+
+    header {
+        transition: var(--transition);
+        height: 10em;
+        position: sticky;
+        top: 0;
+
+        &.small {
+            z-index: 100;
+            pointer-events: none;
+
+            & .sticky-container {
+                pointer-events: auto;
+                background: rgb(240 238 235 / 65%);
+                backdrop-filter: blur(16px);
+            }
+
+            & .header-content-wrapper {
+                padding: 1.4em calc(30px + 4vw);
+            }
+
+            & .main-heading {
+                font-size: 1.6em;
+            }
+
+            & .sub-heading {
+                font-size: 0.8em;
+                margin-top: 0.6em;
+            }
+        }
+    }
+
+    .header-content-wrapper {
         max-width: 1600px;
+        padding: 0 calc(30px + 4vw) 2em;
+        margin: auto;
+    }
+
+    .content {
+        max-width: 1600px;
+        padding: 0 calc(30px + 4vw);
     }
 
     button.show-all {

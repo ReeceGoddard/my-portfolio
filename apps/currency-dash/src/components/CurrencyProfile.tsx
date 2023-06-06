@@ -1,28 +1,11 @@
-import { QueryClient } from '@tanstack/react-query';
-import { LoaderFunctionArgs, useLoaderData, useParams } from 'react-router-dom';
+import { useLoaderData, useParams } from 'react-router-dom';
 import { ConversionCard } from './ConversionCard';
 import { useCurrencyContext } from '../providers/CurrencyProvider';
 import { useCallback, useEffect, useState } from 'react';
-import { currencyDataQuery, currencyListQuery } from '../services/queries/CurrencyQueries';
 import { ConversionsHistoryForCurrency } from '../types';
 import { Tooltip } from './Tooltip';
 import { SVGGradientDefs } from './SVGGradientDefs';
-
 import styles from './CurrencyProfile.module.css';
-
-export const loader =
-    (queryClient: QueryClient) =>
-    async ({ params }: LoaderFunctionArgs) => {
-        if (params.currencyCode) {
-            const currencyList = await queryClient.ensureQueryData(currencyListQuery());
-            const baseCurrency = currencyList.find(currency => currency.code === params.currencyCode);
-
-            if (baseCurrency) {
-                const query = currencyDataQuery(baseCurrency);
-                return queryClient.ensureQueryData(query);
-            }
-        }
-    };
 
 export const CurrencyProfile = () => {
     const { currencyCode } = useParams<keyof { currencyCode: string }>() as { currencyCode: string };
@@ -58,49 +41,76 @@ export const CurrencyProfile = () => {
 
     useEffect(() => setSelectedCurrency(currencyCode), [currencyCode, setSelectedCurrency]);
 
+    const [isScrolled, setIsScrolled] = useState(false);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            setIsScrolled(scrollTop > 60);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
     return (
         <div className={styles.currencyProfile}>
-            <h1 className={styles.mainHeading}>
-                {currencyHistory?.baseCurrency.label} ({currencyHistory.baseCurrency.currencyCode.toUpperCase()})
-            </h1>
-            <h3 className={styles.subHeading}>{new Date().toDateString()} — Weekly View</h3>
-
-            <div className={styles.conversions}>
-                {filterAndSortCurrencies().map(currency => (
-                    <ConversionCard
-                        key={currency.currencyCode}
-                        currencyCode={currency.currencyCode}
-                        rates={currency.conversionHistory}
-                    />
-                ))}
-            </div>
-
-            {!showAllCurrencies && (
-                <button className={styles.showAll} onClick={() => setShowAllCurrencies(true)}>
-                    Show All Currencies
-                </button>
-            )}
-
-            {showAllCurrencies && (
-                <section className={styles.allCurrencies}>
-                    <h2>All Currencies</h2>
-                    <div className={styles.conversions}>
-                        {currencyHistory?.currencyConversions
-                            .filter(
-                                currency =>
-                                    currency.currencyCode.toUpperCase() !==
-                                    currencyHistory.baseCurrency.currencyCode.toUpperCase()
-                            )
-                            .map(currency => (
-                                <ConversionCard
-                                    key={currency.currencyCode}
-                                    currencyCode={currency.currencyCode}
-                                    rates={currency.conversionHistory}
-                                />
-                            ))}
+            <header className={isScrolled ? styles.small : ''}>
+                <div className={styles.stickyContainer}>
+                    <div className={styles.headerContentWrapper}>
+                        <h1 className={styles.mainHeading}>
+                            {currencyHistory?.baseCurrency.label} (
+                            {currencyHistory.baseCurrency.currencyCode.toUpperCase()})
+                        </h1>
+                        <div className={styles.subheaderWrapper}>
+                            <h3 className={styles.subHeading}>{new Date().toDateString()} — Weekly View</h3>
+                            {/* <input type="text" className={styles.search} placeholder="Search..." /> */}
+                        </div>
                     </div>
-                </section>
-            )}
+                </div>
+            </header>
+
+            <div className={styles.content}>
+                <div className={styles.conversions}>
+                    {filterAndSortCurrencies().map(currency => (
+                        <ConversionCard
+                            key={currency.currencyCode}
+                            currencyCode={currency.currencyCode}
+                            rates={currency.conversionHistory}
+                        />
+                    ))}
+                </div>
+
+                {!showAllCurrencies && (
+                    <button className={styles.showAll} onClick={() => setShowAllCurrencies(true)}>
+                        Show All Currencies
+                    </button>
+                )}
+
+                {showAllCurrencies && (
+                    <section className={styles.allCurrencies}>
+                        <h2>All Currencies</h2>
+                        <div className={styles.conversions}>
+                            {currencyHistory?.currencyConversions
+                                .filter(
+                                    currency =>
+                                        currency.currencyCode.toUpperCase() !==
+                                        currencyHistory.baseCurrency.currencyCode.toUpperCase()
+                                )
+                                .map(currency => (
+                                    <ConversionCard
+                                        key={currency.currencyCode}
+                                        currencyCode={currency.currencyCode}
+                                        rates={currency.conversionHistory}
+                                    />
+                                ))}
+                        </div>
+                    </section>
+                )}
+            </div>
 
             <SVGGradientDefs />
             <Tooltip {...tooltipProps} />
