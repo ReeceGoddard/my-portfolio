@@ -1,7 +1,7 @@
 :root {
     --min-gap: 10px;
-    --max-gap: 90px;
-    --dynamic-gap: clamp(var(--min-gap), calc(50px + 2vw), var(--max-gap));
+    --max-gap: 60px;
+    --dynamic-gap: clamp(var(--min-gap), calc(20px + 2vw), var(--max-gap));
 }
 
 .currency-profile {
@@ -11,17 +11,19 @@
 }
 
 .main-heading {
-    line-height: 1;
+    line-height: 1.2;
     margin: 0;
 }
 
 .sub-heading {
     margin-top: 20px;
+    color: var(--med-grey);
 }
 
 .conversions {
     display: grid;
-    margin-top: 80px;
+    align-items: start;
+    margin-top: 60px;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: var(--dynamic-gap);
 }
@@ -37,6 +39,10 @@ section.all-currencies {
 }
 
 @media screen and (min-width: 1326px) {
+    .conversion {
+        margin-top: 80px;
+    }
+
     .currency-profile {
         padding: calc(30px + 4vw) calc(30px + 4vw) 60vh;
         max-width: 1600px;
