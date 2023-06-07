@@ -26,7 +26,8 @@
 }
 
 .search-wrapper {
-    padding: 0;
+    margin-bottom: 0.6em;
+    background: var(--aside-background);
 }
 
 input.search {
@@ -36,7 +37,7 @@ input.search {
     height: 4em;
     width: 100%;
     color: var(--input-color);
-    background: var(--input-background);
+    background: var(--aside-background);
     font-weight: 600;
     border: 2px solid var(--input-border-color);
     border-left-width: 0;
@@ -70,7 +71,7 @@ label {
 }
 
 .currencies {
-    padding-bottom: 30px;
+    padding-bottom: 1em;
 }
 
 .currency {
@@ -81,18 +82,19 @@ label {
     color: var(--aside-menu-item-color);
     min-height: 2.6em;
     font-size: 0.8em;
-    padding: 0.6em 1.2em;
+    padding: 0.6em 0.8em 0.6em 1.4em;
     line-height: 1.4;
     transition: var(--transition);
 
-    & .code {
+    & .badge.code {
         display: inline-block;
         padding: 0.1em 0.3em;
-        font-size: 0.9em;
-        background: var(--very-light-grey);
+        font-size: 0.8em;
+        background: var(--badge-background);
         border-radius: 0.2em;
         transition: var(--transition);
-        font-weight: 600;
+        font-weight: 800;
+        color: var(--badge-color);
     }
 
     &:hover {
@@ -216,7 +218,12 @@ button.toggle-list {
         top: 0;
         left: 0;
         width: 100%;
-        padding: 0 0.6em 1em;
+        padding: 0 0.6em;
+        margin-bottom: 0.8em;
+
+        & input.search {
+            padding: 0 0.8em;
+        }
     }
 
     .list-container {
@@ -234,7 +241,7 @@ button.toggle-list {
         align-items: center;
         justify-content: center;
         padding: 1.5em 0 0.6em;
-        background: white;
+        background: var(--aside-background);
 
         & svg.logo {
             height: 3em;
@@ -258,9 +265,5 @@ button.toggle-list {
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
-    }
-
-    input.search {
-        padding: 0 0.8em;
     }
 }

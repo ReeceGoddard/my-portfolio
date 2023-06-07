@@ -23,7 +23,7 @@
     .label {
         line-height: 1.2;
         align-self: center;
-        color: var(--med-grey);
+        color: var(--card-heading-faded-color);
         flex: 1 1 auto;
         text-overflow: ellipsis;
         white-space: nowrap;
@@ -32,11 +32,11 @@
 
     & .code {
         font-weight: 900;
-        color: black;
+        color: var(--card-heading-color);
     }
 
     & .main-rate {
-        color: black;
+        color: var(--card-heading-color);
     }
 }
 

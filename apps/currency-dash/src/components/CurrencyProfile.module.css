@@ -35,7 +35,7 @@ header.profile-header {
         display: inline-block;
         vertical-align: middle;
         border-radius: 0.2em;
-        background: var(--badge-background);
+        background: hsl(0deg 0% 100% / 60%);
         box-shadow: 4px 4px 10px hsla(0deg 0% 0% / 10%);
         transition: all 60ms var(--transition-ease);
     }
