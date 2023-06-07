@@ -37,13 +37,15 @@ input.search {
     width: 100%;
     border-radius: 0;
     padding: 0 1.2em;
-    color: #000;
-    border: 2px solid black;
+    color: var(--input-color);
+    background: var(--input-background);
+    font-weight: 600;
+    border: 2px solid var(--input-border-color);
     box-shadow: 0 3px 10px hsla(0, 0%, 0%, 0.2);
 
     &::placeholder {
         font-style: italic;
-        color: lightslategrey;
+        color: var(--input-placeholder-color);
     }
 }
 
@@ -58,15 +60,15 @@ label {
 .currency {
     display: flex;
     align-items: center;
-    color: #000000;
+    color: var(--aside-menu-item-color);
     min-height: 2.6em;
     font-size: 0.8em;
     padding: 0.6em 1.6em;
     line-height: 1.3;
 
     &:hover {
-        background: #f5f5fa;
-        color: blue;
+        background: var(--off-white);
+        color: var(--ultramarine);
     }
 }
 
@@ -115,7 +117,7 @@ button.toggle-list {
 @container (min-height: 300px) {
     .wrapper {
         border-top: 0;
-        background: white;
+        background: var(--aside-background);
         position: relative;
         box-shadow: none;
     }
@@ -143,7 +145,7 @@ button.toggle-list {
     }
 
     .list-container {
-        position: static;
+        position: initial;
         height: 100%;
         background: none;
     }
