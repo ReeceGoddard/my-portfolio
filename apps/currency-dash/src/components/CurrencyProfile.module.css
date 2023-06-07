@@ -26,7 +26,7 @@ header {
     font-family: var(--font-family-serif);
 
     & .code {
-        color: var(--off-black);
+        color: var(--verdigris);
         font-size: 0.3em;
         font-weight: 900;
         letter-spacing: 1px;
@@ -35,7 +35,7 @@ header {
         display: inline-block;
         vertical-align: middle;
         border-radius: 0.2em;
-        background: hsl(0deg 0% 100% / 60%);
+        background: var(--badge-background);
         box-shadow: 4px 4px 10px hsla(0deg 0% 0% / 10%);
         transition: all 60ms var(--transition-ease);
     }
@@ -93,11 +93,28 @@ input.search {
 }
 
 button.show-all {
-    margin: 80px auto 0;
+    margin: 6em auto 0;
+    border-left-width: 0;
+    border-right-width: 0;
+    border-bottom-width: 0;
+    text-decoration: underline;
+    width: 100%;
+    height: 6em;
+
+    &:not(:hover) {
+        border-radius: 0;
+    }
 }
 
 section.all-currencies {
     margin-top: 8em;
+
+    & .section-heading {
+        text-align: center;
+        margin-bottom: calc(1em + 2vw);
+        color: var(--section-heading-color);
+        position: relative;
+    }
 }
 
 @media screen and (min-width: 1326px) {
@@ -123,6 +140,7 @@ section.all-currencies {
             & .sticky-container {
                 pointer-events: auto;
                 background: rgb(240 238 235 / 65%);
+                background: var(--header-background);
                 backdrop-filter: blur(16px);
             }
 
@@ -157,6 +175,5 @@ section.all-currencies {
     }
 
     button.show-all {
-        margin-left: 0;
     }
 }

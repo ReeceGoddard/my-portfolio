@@ -94,7 +94,7 @@ export const CurrencyProfile = () => {
 
                 {showAllCurrencies && (
                     <section className={styles.allCurrencies}>
-                        <h2>All Currencies</h2>
+                        <h2 className={styles.sectionHeading}>All Currencies</h2>
                         <div className={styles.conversions}>
                             {currencyHistory?.currencyConversions
                                 .filter(
