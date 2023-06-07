@@ -15,10 +15,16 @@
 
     --main-background-rgb-vals: 241 238 235;
     --main-background: var(--warm-stone);
+
     --card-color: white;
+    --card-heading-color: black;
+    --card-heading-faded-color: var(--med-grey);
+
     --chart-circle-background: white;
+
     --header-background: rgba(var(--main-background-rgb-vals) / 65%);
-    --badge-background: hsl(0deg 0% 100% / 60%);
+    --badge-background: var(--very-light-grey);
+    --badge-color: var(--ink);
     --tooltip-background: black;
     --tooltip-color: white;
     --section-heading-color: var(--ink);
@@ -151,6 +157,9 @@ button {
         --main-text-color: var(--off-white);
 
         --card-color: #262729;
+        --card-heading-color: white;
+        /* --card-heading-faded-color: ; */
+
         --chart-circle-background: black;
         --badge-background: var(--off-white);
         --tooltip-background: white;
