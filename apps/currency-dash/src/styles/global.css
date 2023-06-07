@@ -3,9 +3,40 @@
 :root {
     --med-grey: #9b9bac;
     --dark-grey: #53535f;
-    --off-black: #213547;
+    --ink: #213547;
     --warm-stone: #f1eeeb;
     --warm-stone-overlay: hsla(0, 20%, 50%, 0.2);
+    --verdigris: rgb(103 158 156);
+    --ultramarine: rgb(23 79 251);
+    --off-white: rgba(255 255 255 / 87%);
+
+    --main-text-color: var(--ink);
+
+    --main-background: var(--warm-stone);
+    --card-color: white;
+    --chart-circle-background: white;
+    --header-background: rgba(var(--main-background-rgb-vals) / 65%);
+    --badge-background: hsl(0deg 0% 100% / 60%);
+    --tooltip-background: black;
+    --tooltip-color: white;
+    --section-heading-color: var(--ink);
+
+    --white-overlay-20: rgb(255 255 255 / 20%);
+
+    --button-color: var(--verdigris);
+    --button-border-color: rgb(66 132 130);
+    --button-box-shadow-color: rgb(204 0 0 / 16%);
+    --button-background: var(--white-overlay-20);
+    --button-hover-background: var(--ultramarine);
+    --button-hover-color: white;
+
+    --input-color: black;
+    --input-background: white;
+    --input-border-color: black;
+    --input-placeholder-color: var(--dark-grey);
+
+    --aside-background: white;
+    --aside-menu-item-color: black;
 
     --border-color: var(--warm-stone-overlay);
     --transition-duration: 160ms;
@@ -25,8 +56,8 @@
     line-height: 1.5;
     font-weight: 400;
 
-    color-scheme: dark light;
-    color: var(--off-black);
+    color-scheme: light dark;
+    color: var(--main-text-color);
     background-color: #ffffff;
 
     font-synthesis: none;
@@ -79,25 +110,26 @@ h3 {
 button {
     display: flex;
     align-items: center;
-    font-weight: 700;
+    justify-content: center;
+    font-weight: 900;
     border-radius: 0.3em;
     border: 2px solid #dedee3;
-    height: 4em;
-    padding: 0 2em;
+    width: 100%;
+    height: 5em;
+    padding: 0 1.4em;
     font-size: 0.8em;
-    font-family: inherit;
-    background: white;
-    color: black;
+    font-family: var(--font-family-mono);
+    background: var(--button-background);
+    color: var(--button-color);
     transition: all 160ms ease-out;
-    border: 2px solid var(--border-color);
-    box-shadow: 0 0 50px 40px white;
+    border: 2px solid var(--button-border-color);
 
     &:hover {
-        background-color: blue;
-        color: white;
+        background-color: var(--button-hover-background);
+        color: var(--button-hover-color);
         border-color: transparent;
         text-shadow: 0 2px 2px hsla(0, 0%, 0%, 0.2);
-        box-shadow: 0 6px 20px hsla(0, 0%, 0%, 0.4);
+        box-shadow: 0px 4px 14px rgb(0 0 0 / 20%);
         cursor: pointer;
     }
 
@@ -109,13 +141,29 @@ button {
 
 @media (prefers-color-scheme: dark) {
     :root {
-        color: rgba(255, 255, 255, 0.87);
-        background-color: #242424;
+        --main-text-color: var(--off-white);
+
+        --card-color: #262729;
+        --chart-circle-background: black;
+        --badge-background: var(--off-white);
+        --tooltip-background: white;
+        --tooltip-color: var(--ink);
+        --section-heading-color: var(--off-white);
+
+        --button-color: rgb(125, 177, 255);
+        --button-border-color: var(--button-color);
+        --button-background: rgb(255 255 255 / 1%);
+        --button-hover-background: rgb(11 98 228);
+        --button-hover-color: white;
+
+        --aside-background: #161617;
+        --aside-menu-item-color: white;
+
+        --main-background-rgb-vals: 30 30 32;
+        --main-background: rgb(var(--main-background-rgb-vals));
+        --header-background: rgba(var(--main-background-rgb-vals) / 65%);
     }
     a:hover {
         color: #747bff;
-    }
-    button {
-        background-color: #f9f9f9;
     }
 }
