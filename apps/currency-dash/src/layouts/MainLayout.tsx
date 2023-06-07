@@ -20,7 +20,7 @@ export const MainLayout: React.FC<MainLayoutProps> & { Slot: React.FC<SlotProps>
     return (
         <main>
             <div className="content">{contentSlot?.props?.children}</div>
-            <div className="selector">{selectorSlot?.props?.children}</div>
+            <aside className="selector">{selectorSlot?.props?.children}</aside>
         </main>
     );
 };
