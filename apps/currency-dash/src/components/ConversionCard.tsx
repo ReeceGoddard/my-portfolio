@@ -3,6 +3,7 @@ import { RateForDate } from '../types';
 import { LineChart, LineChartMode } from './LineChart';
 import styles from './ConversionCard.module.css';
 import { DoubleArrowSVG } from './vectors/DoubleArrowSVG';
+import { getRateStrings } from '../utils';
 
 export interface ConversionCardProps extends HTMLProps<HTMLDivElement> {
     currencyCode: string;
@@ -18,16 +19,15 @@ const trendModeMap: { [key in Trend]: LineChartMode } = {
 };
 
 export const ConversionCard = ({ currencyCode, rates, ...rest }: ConversionCardProps): JSX.Element => {
-    const { trend, percentChanged, mainRate, ratePrecision } = useMemo<{
+    const { trend, percentChanged, mainRate, remainingRate } = useMemo<{
         trend: Trend;
         percentChanged: number;
         mainRate: string;
-        ratePrecision: string;
+        remainingRate: string;
     }>(() => {
         const { rate } = rates[0];
         const { rate: previousRate } = rates[rates.length - 1];
-        const mainRate = rate.toFixed(2);
-        const ratePrecision = rate.toString().split(mainRate)[1];
+        const { mainRate, remainingRate } = getRateStrings(rate);
 
         let trend: Trend = 'neutral';
         if (rate > previousRate) trend = 'up';
@@ -39,7 +39,7 @@ export const ConversionCard = ({ currencyCode, rates, ...rest }: ConversionCardP
             trend,
             percentChanged,
             mainRate,
-            ratePrecision,
+            remainingRate,
         };
     }, [rates]);
 
@@ -48,13 +48,13 @@ export const ConversionCard = ({ currencyCode, rates, ...rest }: ConversionCardP
     return (
         <div className={styles.conversion} {...rest}>
             <h3 className={styles.mainHeading}>
-                <div className={styles.label}>
+                <div className={styles.label} title={rates[0].rate.toString()}>
                     <span className={styles.code}>{currencyCode.toUpperCase()}</span>
                     &nbsp;
                     <span className={styles.fade}>=</span>
                     &nbsp;
-                    {mainRate}
-                    <span className={styles.fade}>{ratePrecision}</span>
+                    <span className={styles.mainRate}>{mainRate}</span>
+                    <span className={styles.fade}>{remainingRate}</span>
                 </div>
                 <DoubleArrowSVG
                     direction={trend === 'neutral' ? 'right' : trend === 'up' ? 'up' : 'down'}
