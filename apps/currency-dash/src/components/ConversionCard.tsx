@@ -49,8 +49,11 @@ export const ConversionCard = ({ currencyCode, rates, ...rest }: ConversionCardP
         <div className={styles.conversion} {...rest}>
             <h3 className={styles.mainHeading}>
                 <div className={styles.label}>
-                    <span className={styles.code}>{currencyCode.toUpperCase()}</span>{' '}
-                    <span className={styles.fade}>=</span> {mainRate}
+                    <span className={styles.code}>{currencyCode.toUpperCase()}</span>
+                    &nbsp;
+                    <span className={styles.fade}>=</span>
+                    &nbsp;
+                    {mainRate}
                     <span className={styles.fade}>{ratePrecision}</span>
                 </div>
                 <DoubleArrowSVG
