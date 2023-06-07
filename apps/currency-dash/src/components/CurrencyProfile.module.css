@@ -9,9 +9,14 @@
     padding-bottom: 60vh;
 }
 
+header {
+    transition: var(--transition);
+}
+
 .header-content-wrapper {
     max-width: --var(desktop-breakpoint);
     padding: 30px;
+    transition: var(--transition);
 }
 
 .main-heading {
@@ -21,15 +26,18 @@
     font-family: var(--font-family-serif);
 
     & .code {
-        background: transparent;
-        color: var(--dark-grey);
+        color: var(--off-black);
         font-size: 0.3em;
         font-weight: 900;
         letter-spacing: 1px;
-        padding: 0.2em 0.4em;
+        padding: 0.4em 0.5em;
+        margin-left: 0.2em;
+        display: inline-block;
         vertical-align: middle;
         border-radius: 0.2em;
-        background: var(--warm-stone-overlay);
+        background: hsl(0deg 0% 100% / 60%);
+        box-shadow: 4px 4px 10px hsla(0deg 0% 0% / 10%);
+        transition: all 60ms var(--transition-ease);
     }
 }
 
@@ -39,6 +47,7 @@
     gap: 2em;
     justify-content: space-between;
     margin-top: 0.6em;
+    transition: var(--transition);
 }
 
 .sub-heading {
@@ -57,7 +66,7 @@ input.search {
     height: 3em;
     font-size: 0.8em;
     margin-top: 10px;
-    transition: all var(--transition-duration) var(--transition-ease);
+    transition: var(--transition);
 
     &:focus {
         padding: 0 1em;
@@ -97,18 +106,19 @@ section.all-currencies {
     }
 
     .currency-profile {
-        padding-top: calc(30px + 4vw);
+        padding-top: calc(20px + 2vw);
     }
 
     header {
-        transition: var(--transition);
         height: 10em;
         position: sticky;
         top: 0;
+        padding-top: 1.4em;
 
         &.small {
             z-index: 100;
             pointer-events: none;
+            padding-top: 0;
 
             & .sticky-container {
                 pointer-events: auto;
@@ -122,11 +132,10 @@ section.all-currencies {
 
             & .main-heading {
                 font-size: 1.8em;
-            }
 
-            & .code {
-                font-size: 0.4em;
-                margin-left: 0.2em;
+                & .code {
+                    font-size: 0.4em;
+                }
             }
 
             & .sub-heading {
