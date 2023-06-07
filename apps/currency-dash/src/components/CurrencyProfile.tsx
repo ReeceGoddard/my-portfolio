@@ -62,8 +62,10 @@ export const CurrencyProfile = () => {
                 <div className={styles.stickyContainer}>
                     <div className={styles.headerContentWrapper}>
                         <h1 className={styles.mainHeading}>
-                            {currencyHistory?.baseCurrency.label} (
-                            {currencyHistory.baseCurrency.currencyCode.toUpperCase()})
+                            {currencyHistory?.baseCurrency.label}{' '}
+                            <span className={`${styles.code} mono`}>
+                                {currencyHistory.baseCurrency.currencyCode.toUpperCase()}
+                            </span>
                         </h1>
                         <div className={styles.subheaderWrapper}>
                             <h3 className={styles.subHeading}>{new Date().toDateString()} — Weekly View</h3>
