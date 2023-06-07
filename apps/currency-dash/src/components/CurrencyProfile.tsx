@@ -46,7 +46,7 @@ export const CurrencyProfile = () => {
     useEffect(() => {
         const handleScroll = () => {
             const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            setIsScrolled(scrollTop > 60);
+            setIsScrolled(scrollTop > 80);
         };
 
         window.addEventListener('scroll', handleScroll);
