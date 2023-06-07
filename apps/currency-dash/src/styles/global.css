@@ -9,9 +9,11 @@
     --verdigris: rgb(103 158 156);
     --ultramarine: rgb(23 79 251);
     --off-white: rgba(255 255 255 / 87%);
+    --very-light-grey: #f1f1f1;
 
     --main-text-color: var(--ink);
 
+    --main-background-rgb-vals: 241 238 235;
     --main-background: var(--warm-stone);
     --card-color: white;
     --chart-circle-background: white;
@@ -30,13 +32,18 @@
     --button-hover-background: var(--ultramarine);
     --button-hover-color: white;
 
+    --toggle-button-background: white;
+    --toggle-button-color: var(--ink);
+    --toggle-button-border-color: hsla(0deg 0% 0% / 8%);
+
     --input-color: black;
     --input-background: white;
     --input-border-color: black;
     --input-placeholder-color: var(--dark-grey);
 
     --aside-background: white;
-    --aside-menu-item-color: black;
+    --aside-menu-item-color: var(--dark-grey);
+    --aside-menu-item-hover-background: var(--very-light-grey);
 
     --border-color: var(--warm-stone-overlay);
     --transition-duration: 160ms;
@@ -155,6 +162,10 @@ button {
         --button-background: rgb(255 255 255 / 1%);
         --button-hover-background: rgb(11 98 228);
         --button-hover-color: white;
+
+        --toggle-button-background: var(--main-background);
+        --toggle-button-color: var(--off-white);
+        --toggle-button-border-color: var(--dark-grey);
 
         --aside-background: #161617;
         --aside-menu-item-color: white;
