@@ -49,7 +49,7 @@ export const CurrencySelector = (): JSX.Element => {
 
     return (
         <div className={styles.wrapper}>
-            <div ref={listContainerRef} className={`${styles.listContainer} ${showList ? 'list-showing' : ''}`}>
+            <div ref={listContainerRef} className={`${styles.listContainer} ${showList ? styles.listShowing : ''}`}>
                 <header className={styles.logoHeader}>
                     <LogoSVG className={styles.logo} />
                     <h1 className={styles.logoName}>FX Dash</h1>
@@ -69,10 +69,12 @@ export const CurrencySelector = (): JSX.Element => {
                         <Link
                             to={`/currency/${currency.code}`}
                             key={currency.code}
-                            className={styles.currency}
+                            className={`${styles.currency} ${
+                                selectedCurrency ? (currency.code === selectedCurrency ? styles.selected : '') : ''
+                            }`}
                             onClick={() => handleLinkClick(currency.code)}
                         >
-                            {currency.label} ({currency.code.toUpperCase()})
+                            {currency.label} <span className={styles.code}>{currency.code.toUpperCase()}</span>
                         </Link>
                     ))}
                 </div>
