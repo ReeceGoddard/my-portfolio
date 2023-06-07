@@ -58,7 +58,7 @@ export const CurrencyProfile = () => {
 
     return (
         <div className={styles.currencyProfile}>
-            <header className={isScrolled ? styles.small : ''}>
+            <header className={`${styles.profileHeader} ${isScrolled ? styles.small : ''}`}>
                 <div className={styles.stickyContainer}>
                     <div className={styles.headerContentWrapper}>
                         <h1 className={styles.mainHeading}>

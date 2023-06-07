@@ -9,7 +9,7 @@
     padding-bottom: 60vh;
 }
 
-header {
+header.profile-header {
     transition: var(--transition);
 }
 
@@ -126,7 +126,7 @@ section.all-currencies {
         padding-top: calc(20px + 2vw);
     }
 
-    header {
+    header.profile-header {
         height: 10em;
         position: sticky;
         top: 0;
