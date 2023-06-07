@@ -88,6 +88,19 @@ export const getDateStringsFromToday = (numOfDays = 0) => {
     return dateStrings;
 };
 
+type RateString = {
+    mainRate: string;
+    remainingRate: string;
+};
+
+export const getRateStrings = (rate: number): RateString => {
+    const [rateInteger, rateDecimals] = rate.toString().split('.');
+    const rateFirstTwoDeciamls = rateDecimals.slice(0, 2);
+    const mainRate = `${rateInteger}.${rateFirstTwoDeciamls}`;
+    const remainingRate = rateDecimals.slice(2);
+    return { mainRate, remainingRate };
+};
+
 /**
  * Generates an array of days of the week starting from a specified day or the next day after the current day.
  * @param {number} [startDay] - Optional. The starting day of the week (0 for Sunday, 1 for Monday, and so on).
