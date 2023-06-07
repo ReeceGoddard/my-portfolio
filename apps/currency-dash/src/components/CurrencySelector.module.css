@@ -113,6 +113,11 @@ button.toggle-list {
     }
 }
 
+.logo-selected-currency-wrapper {
+    display: flex;
+    align-items: center;
+}
+
 /* In a tall container -- layout as list */
 @container (min-height: 300px) {
     .wrapper {

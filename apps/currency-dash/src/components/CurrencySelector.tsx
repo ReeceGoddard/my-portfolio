@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useCurrencyContext } from '../providers/CurrencyProvider';
 import { useCurrencyList } from '../hooks/useCurrencyList';
 import { ChevronSVG } from './vectors/ChevronSVG';
-import './CurrencySelector.css';
+import styles from './CurrencySelector.module.css';
 
 export const CurrencySelector = (): JSX.Element => {
     const [searchText, setSearchText] = useState<string>('');
@@ -47,24 +47,24 @@ export const CurrencySelector = (): JSX.Element => {
     };
 
     return (
-        <div className="wrapper">
-            <div ref={listContainerRef} className={`list-container ${showList ? 'list-showing' : ''}`}>
-                <div className="search-wrapper">
+        <div className={styles.wrapper}>
+            <div ref={listContainerRef} className={`${styles.listContainer} ${showList ? 'list-showing' : ''}`}>
+                <div className={styles.searchWrapper}>
                     <input
                         ref={searchInputRef}
-                        className="search"
+                        className={styles.search}
                         type="text"
                         onInput={handleInputChange}
                         placeholder="Search..."
                         value={searchText}
                     />
                 </div>
-                <div className="currencies">
+                <div className={styles.currencies}>
                     {filteredCurrencies?.map(currency => (
                         <Link
                             to={`/currency/${currency.code}`}
                             key={currency.code}
-                            className="currency"
+                            className={styles.currency}
                             onClick={() => handleLinkClick(currency.code)}
                         >
                             {currency.label} ({currency.code.toUpperCase()})
@@ -72,8 +72,13 @@ export const CurrencySelector = (): JSX.Element => {
                     ))}
                 </div>
             </div>
-            <button className={`toggle-list ${showList ? 'list-showing' : ''}`} onClick={handleToggleClick}>
-                <div>{selectedCurrency?.toUpperCase()}</div>
+            <button
+                className={`${styles.toggleList} ${showList ? styles.listShowing : ''}`}
+                onClick={handleToggleClick}
+            >
+                <div className={styles.logoSelectedCurrencyWrapper}>
+                    <div>{selectedCurrency?.toUpperCase()}</div>
+                </div>
                 <ChevronSVG />
             </button>
         </div>
