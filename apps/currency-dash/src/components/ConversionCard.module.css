@@ -1,7 +1,7 @@
 .conversion {
     padding: 0.7em;
     border-radius: 0.7em;
-    background: #ffffff;
+    background: var(--card-color);
     box-shadow: 0 4px 6px rgba(0 0 0 / 8%);
     border: 2px solid transparent;
     transition: all var(--transition-duration) var(--transition-ease);
@@ -9,7 +9,7 @@
 
     &:hover {
         border: 2px solid var(--border-color);
-        box-shadow: 0 0 50px 40px white;
+        box-shadow: 0 0 50px 40px var(--card-color);
         transform: scale(1.03);
     }
 }
