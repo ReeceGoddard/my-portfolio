@@ -4,6 +4,7 @@ import { useCurrencyContext } from '../providers/CurrencyProvider';
 import { useCurrencyList } from '../hooks/useCurrencyList';
 import { ChevronSVG } from './vectors/ChevronSVG';
 import styles from './CurrencySelector.module.css';
+import { LogoSVG } from './vectors/LogoSVG';
 
 export const CurrencySelector = (): JSX.Element => {
     const [searchText, setSearchText] = useState<string>('');
@@ -49,6 +50,10 @@ export const CurrencySelector = (): JSX.Element => {
     return (
         <div className={styles.wrapper}>
             <div ref={listContainerRef} className={`${styles.listContainer} ${showList ? 'list-showing' : ''}`}>
+                <header className={styles.logoHeader}>
+                    <LogoSVG className={styles.logo} />
+                    <h1 className={styles.logoName}>FX Dash</h1>
+                </header>
                 <div className={styles.searchWrapper}>
                     <input
                         ref={searchInputRef}
@@ -77,9 +82,10 @@ export const CurrencySelector = (): JSX.Element => {
                 onClick={handleToggleClick}
             >
                 <div className={styles.logoSelectedCurrencyWrapper}>
+                    <LogoSVG className={styles.logo} />
                     <div>{selectedCurrency?.toUpperCase()}</div>
                 </div>
-                <ChevronSVG />
+                <ChevronSVG className={styles.chevron} />
             </button>
         </div>
     );
