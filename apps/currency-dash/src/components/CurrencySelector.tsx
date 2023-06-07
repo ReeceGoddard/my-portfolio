@@ -74,7 +74,8 @@ export const CurrencySelector = (): JSX.Element => {
                             }`}
                             onClick={() => handleLinkClick(currency.code)}
                         >
-                            {currency.label} <span className={styles.code}>{currency.code.toUpperCase()}</span>
+                            <div>{currency.label}</div>
+                            <div className={`${styles.badge} ${styles.code}`}>{currency.code.toUpperCase()}</div>
                         </Link>
                     ))}
                 </div>
