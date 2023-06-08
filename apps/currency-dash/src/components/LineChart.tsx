@@ -35,23 +35,17 @@ export const LineChart: React.FC<LineChartProps> = ({
         [VIEWBOX_HEIGHT, minValue, maxValue]
     );
 
-    const { lineColor, gradientColor } = useMemo<{ lineColor: HSLA; gradientColor: HSLA }>(() => {
+    const lineColor = useMemo(() => {
         if (mode === 'negative') {
-            const lineColor = new HSLA({ hue: 350, saturation: 80, lightness: 45 });
-            const gradientColor = new HSLA({ ...lineColor.getHSL(), alpha: 0.1 });
-            return { lineColor, gradientColor };
+            return new HSLA({ hue: 350, saturation: 80, lightness: 45 });
         }
 
         if (mode === 'positive') {
-            const lineColor = new HSLA({ hue: 100, saturation: 70, lightness: 40 });
-            const gradientColor = new HSLA({ ...lineColor.getHSL(), alpha: 0.5 });
-            return { lineColor, gradientColor };
+            return new HSLA({ hue: 100, saturation: 70, lightness: 40 });
         }
 
         // Neutral default
-        const lineColor = new HSLA({ hue: 200, saturation: 90, lightness: 40 });
-        const gradientColor = new HSLA({ ...lineColor.getHSL(), alpha: 0.5 });
-        return { lineColor, gradientColor };
+        return new HSLA({ hue: 200, saturation: 90, lightness: 40 });
     }, [mode]);
 
     // Build line path from data
@@ -75,7 +69,7 @@ export const LineChart: React.FC<LineChartProps> = ({
         const slope = covariance / variance;
         const yIntercept = average - (slope * (chartData.length - 1)) / 2;
 
-        const trendlinePoints = xValues.map((x, i) => ({
+        const trendlinePoints = xValues.map(x => ({
             x: (x / (chartData.length - 1)) * VIEWBOX_WIDTH,
             y: VIEWBOX_HEIGHT - ((slope * x + yIntercept) / (chartData.length - 1)) * VIEWBOX_HEIGHT,
         }));
