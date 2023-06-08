@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  currency_dash:
+    container_name: currency-dash
+    build:
+      context: .
+      dockerfile: ./apps/currency-dash/Dockerfile
+    restart: always
+    ports:
+      - 4200:80
+    networks:
+      - currency_dash_network
+
+networks:
+  currency_dash_network:
+    external: true
