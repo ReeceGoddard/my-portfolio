@@ -34,8 +34,6 @@ export const convertCurrencyDataToHistory = (
     baseCurrency: Currency,
     currencyDataList: CurrencyData[]
 ): ConversionsHistoryForCurrency => {
-    const BASE_CURRENCY = currencyDataList[0].baseCurrency; // Get baseCurrency from first day, all days should be the same
-
     // Init object to return
     const conversionHistory: ConversionsHistoryForCurrency = {
         baseCurrency: {
@@ -94,11 +92,15 @@ type RateString = {
 };
 
 export const getRateStrings = (rate: number): RateString => {
-    const [rateInteger, rateDecimals] = rate.toString().split('.');
-    const rateFirstTwoDeciamls = rateDecimals.slice(0, 2);
-    const mainRate = `${rateInteger}.${rateFirstTwoDeciamls}`;
-    const remainingRate = rateDecimals.slice(2);
-    return { mainRate, remainingRate };
+    if (rate) {
+        const [rateInteger, rateDecimals] = rate.toString().split('.');
+        const rateFirstTwoDeciamls = rateDecimals.slice(0, 2);
+        const mainRate = `${rateInteger}.${rateFirstTwoDeciamls}`;
+        const remainingRate = rateDecimals.slice(2);
+        return { mainRate, remainingRate };
+    } else {
+        return { mainRate: '', remainingRate: '' }; //TODO: Handle rate error properly in ConversionCard
+    }
 };
 
 /**
@@ -142,12 +144,17 @@ export function addAlphaToHSL(hslString: string, alpha: Alpha) {
 
     // Extract the HSL values using regular expressions
     const hslPattern = /hsl\(\s*(\d+),\s*(\d+%?),\s*(\d+%?)\)/;
-    const [, hue, saturation, lightness] = trimmedHSL.match(hslPattern);
+    const matchResult = trimmedHSL.match(hslPattern);
 
-    // Construct the updated HSL string with alpha
-    const updatedHSL = `hsla(${hue}, ${saturation}, ${lightness}, ${alpha.value})`;
+    if (matchResult) {
+        const [, hue, saturation, lightness] = matchResult;
 
-    return updatedHSL;
+        // Construct the updated HSL string with alpha
+        const updatedHSL = `hsla(${hue}, ${saturation}, ${lightness}, ${alpha.value})`;
+        return updatedHSL;
+    } else {
+        throw new Error('Cannot parse HSL string.'); //TODO: Improve error handling
+    }
 }
 
 // export const getLabelFromCode = (currencyCode: string): string => {
