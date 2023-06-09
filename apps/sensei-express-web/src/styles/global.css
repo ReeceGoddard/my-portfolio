@@ -1,0 +1,181 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,400;0,700;0,800;1,400;1,700;1,800&family=Vollkorn:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap');
+
+:root {
+    --med-grey: #9b9bac;
+    --dark-grey: #53535f;
+    --ink: #213547;
+    --warm-stone: #f1eeeb;
+    --warm-stone-overlay: hsla(0, 20%, 50%, 0.2);
+    --verdigris: rgb(103 158 156);
+    --ultramarine: rgb(23 79 251);
+    --off-white: rgba(255 255 255 / 87%);
+    --very-light-grey: #f1f1f1;
+
+    --main-text-color: var(--ink);
+
+    --main-background-rgb-vals: 241 238 235;
+    --main-background: var(--warm-stone);
+
+    --card-color: white;
+    --card-heading-color: black;
+    --card-heading-faded-color: var(--med-grey);
+
+    --chart-circle-background: white;
+
+    --header-background: rgba(var(--main-background-rgb-vals) / 65%);
+    --badge-background: var(--very-light-grey);
+    --badge-color: var(--ink);
+    --tooltip-background: black;
+    --tooltip-color: white;
+    --section-heading-color: var(--ink);
+
+    --white-overlay-20: rgb(255 255 255 / 20%);
+
+    --button-color: var(--ink);
+    --button-border-color: rgb(66 132 130);
+    --button-box-shadow-color: rgb(204 0 0 / 16%);
+    --button-background: var(--white-overlay-20);
+    --button-hover-background: var(--ultramarine);
+    --button-hover-color: white;
+
+    --input-color: black;
+    --input-background: white;
+    --input-border-color: black;
+    --input-placeholder-color: var(--dark-grey);
+
+    --border-color: var(--warm-stone-overlay);
+    --transition-duration: 160ms;
+    --transition-duration-slow: 400ms;
+    --transition-ease: ease-out;
+    --transition: all var(--transition-duration) var(--transition-ease);
+    --transition-slow: all var(--transition-duration-slow) ease-in;
+
+    --font-family-mono: 'JetBrains Mono', 'Monaco', 'Andale Mono', 'Courier New', Courier, monospace;
+    --font-family-sans: Inter, system-ui, Avenir, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu,
+        Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    --font-family-serif: 'Vollkorn', Georgia, 'Times New Roman', Times, serif;
+
+    --gradient-x: 0;
+    --gradient-y: 0;
+
+    font-family: var(--font-family-sans);
+    line-height: 1.5;
+    font-weight: 400;
+
+    color-scheme: light dark;
+    color: var(--main-text-color);
+    background-color: #ffffff;
+
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-text-size-adjust: 100%;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+a {
+    font-weight: 500;
+    color: #646cff;
+    text-decoration: inherit;
+}
+a:hover {
+    color: #535bf2;
+}
+
+body {
+    margin: 0;
+    min-width: 320px;
+    line-height: 1.4;
+    font-family: var(--font-family-sans);
+}
+
+h1 {
+    font-size: 3.6em;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+.sans {
+    font-family: var(--font-family-sans);
+}
+
+.mono {
+    font-family: var(--font-family-mono);
+}
+
+.serif {
+    font-family: var(--font-family-serif);
+}
+
+button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+    border-radius: 0.3em;
+    border: 2px solid #dedee3;
+    height: 5em;
+    padding: 0 1.4em;
+    font-size: 0.8em;
+    font-family: inherit;
+    background: var(--button-background);
+    color: var(--button-color);
+    transition: var(--transition);
+    border: 2px solid var(--button-border-color);
+
+    &:hover {
+        background-color: var(--button-hover-background);
+        color: var(--button-hover-color);
+        border-color: transparent;
+        text-shadow: 0 2px 2px hsla(0, 0%, 0%, 0.2);
+        box-shadow: 0px 4px 14px rgb(0 0 0 / 20%);
+        cursor: pointer;
+    }
+
+    &:focus,
+    &:focus-visible {
+        outline: 4px auto -webkit-focus-ring-color;
+    }
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --main-text-color: var(--off-white);
+
+        --card-color: #262729;
+        --card-heading-color: white;
+        /* --card-heading-faded-color: ; */
+
+        --chart-circle-background: black;
+        --badge-background: var(--off-white);
+        --tooltip-background: white;
+        --tooltip-color: var(--ink);
+        --section-heading-color: var(--off-white);
+
+        --button-color: rgb(125, 177, 255);
+        --button-border-color: var(--button-color);
+        --button-background: rgb(255 255 255 / 1%);
+        --button-hover-background: rgb(11 98 228);
+        --button-hover-color: white;
+
+        --toggle-button-background: var(--main-background);
+        --toggle-button-color: var(--off-white);
+        --toggle-button-border-color: var(--dark-grey);
+
+        --aside-background: #161617;
+        --aside-menu-item-color: white;
+
+        --main-background-rgb-vals: 30 30 32;
+        --main-background: rgb(var(--main-background-rgb-vals));
+        --header-background: rgba(var(--main-background-rgb-vals) / 65%);
+    }
+    a:hover {
+        color: #747bff;
+    }
+}

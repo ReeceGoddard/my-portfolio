@@ -1,0 +1,68 @@
+.choice {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: white;
+    width: 6em;
+    height: 3em;
+    font-size: 2em;
+    border-radius: 0.2em;
+    box-shadow: 4px 4px 10px rgb(0 0 0 / 10%);
+    font-weight: 600;
+    position: relative;
+    transition: var(--transition);
+    border: 0.1em solid transparent;
+    overflow: hidden;
+
+    &:hover {
+        background: rgb(237, 237, 255);
+        color: blue;
+        border: 0.1em solid blue;
+        cursor: pointer;
+        scale: 1.05;
+        box-shadow: 6px 6px 16px rgb(0 0 0 / 20%);
+
+        & .hover-gradient {
+            opacity: 1;
+        }
+
+        & .hotkey {
+            background: blue;
+            border-color: transparent;
+            color: white;
+        }
+    }
+
+    & .hover-gradient {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background: radial-gradient(circle at var(--gradient-x) var(--gradient-y), rgb(237, 248, 255), white);
+        opacity: 0;
+        transition: var(--transition);
+        z-index: -1;
+    }
+
+    & .label {
+    }
+
+    & .hotkey {
+        position: absolute;
+        top: 0.5em;
+        left: 0.5em;
+        font-size: 0.35em;
+        background: rgb(241, 246, 248);
+        border: 1px solid lightgrey;
+        height: 1.8em;
+        width: 1.8em;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.2em;
+        font-weight: 800;
+        color: #6a7488;
+        transition: var(--transition);
+    }
+}

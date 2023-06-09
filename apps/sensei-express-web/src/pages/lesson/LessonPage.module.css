@@ -1,0 +1,38 @@
+.progress {
+    display: flex;
+    position: relative;
+    height: 2em;
+    background: grey;
+
+    & .completion-label {
+        position: absolute;
+        left: 1em;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+
+    & .progress-segment {
+        background: grey;
+        flex: 1 1 auto;
+
+        &.correct {
+            background: green;
+        }
+
+        &.incorrect {
+            background: red;
+        }
+    }
+}
+
+.questions {
+    background: white;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 100vw);
+    grid-auto-flow: column; /* Ensures the grid items flow horizontally */
+}
+
+.question {
+    min-width: 100vw;
+    height: 100vh;
+}

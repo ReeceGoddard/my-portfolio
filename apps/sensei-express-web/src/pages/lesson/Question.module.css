@@ -1,0 +1,26 @@
+.question-wrapper {
+    background: rgb(245, 243, 240);
+    display: flex;
+    flex-direction: column;
+    padding: 30px;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 30vh;
+}
+
+.question {
+    font-weight: 900;
+    margin-bottom: 0.5em;
+    font-size: 6em;
+}
+
+.choices {
+    background: #ccc;
+    border-radius: 1em;
+    box-shadow: 4px 4px 10px rgb(0 0 0 / 10%) inset;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Two columns with equal width */
+    grid-template-rows: repeat(2, 1fr); /* Two rows with equal height */
+    gap: 1em;
+    padding: 1em;
+}
