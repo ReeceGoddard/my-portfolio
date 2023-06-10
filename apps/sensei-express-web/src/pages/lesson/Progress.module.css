@@ -1,0 +1,59 @@
+.progress {
+    display: flex;
+    height: 1.8em;
+    gap: 0.4em;
+
+    & .completion-label,
+    & .segments {
+        display: flex;
+        background: rgba(255, 255, 255, 0.8);
+        box-shadow: 10px 10px 20px rgb(32 57 70 / 16%);
+        border-radius: 0.4em;
+        overflow: hidden;
+    }
+
+    & .completion-label {
+        justify-content: center;
+        align-items: center;
+        font-size: 1em;
+        padding: 0 0.4em;
+        font-weight: 900;
+        color: var(--dark-blue);
+    }
+
+    & .segments {
+        flex: 1 1 auto;
+        gap: 0.2em;
+        padding: 0.2em;
+    }
+
+    & .segment {
+        background: #dadcdd;
+        flex: 1 1 auto;
+
+        &:first-of-type {
+            border-top-left-radius: 0.2em;
+            border-bottom-left-radius: 0.2em;
+        }
+
+        &:last-of-type {
+            border-top-right-radius: 0.2em;
+            border-bottom-right-radius: 0.2em;
+        }
+
+        &.correct {
+            background: green;
+        }
+
+        &.incorrect {
+            background: red;
+        }
+    }
+}
+
+.fade {
+    color: var(--med-grey);
+    font-weight: 400;
+    font-style: italic;
+    margin: 0 0.2em;
+}
