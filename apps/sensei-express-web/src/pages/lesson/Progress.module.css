@@ -42,11 +42,11 @@
         }
 
         &.correct {
-            background: green;
+            background: var(--correct-green);
         }
 
         &.incorrect {
-            background: red;
+            background: var(--incorrect-red);
         }
     }
 }
