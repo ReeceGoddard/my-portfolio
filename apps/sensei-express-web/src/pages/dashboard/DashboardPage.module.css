@@ -1,36 +1,101 @@
-.main-heading {
-    background: lightgray;
-    font-size: 2em;
-    height: 2em;
-    display: flex;
-    align-items: center;
-    padding: 0 1em;
+.page-container {
+    background: var(--main-background);
 }
 
-.sections-wrapper {
+.content-wrapper {
+    max-width: 1024px;
+    margin: auto;
+    padding: calc(var(--header-height) + 4em) 2em 40vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
     gap: 2em;
-    padding: 2em;
+}
+
+.card {
+}
+
+header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    box-shadow: var(--main-box-shadow);
+    padding: 0 1.4em;
+    height: var(--header-height);
+    background: var(--header-background);
+    backdrop-filter: blur(10px);
+}
+
+.main-heading {
+    display: flex;
+    align-items: center;
+    font-size: 2em;
+    font-weight: 900;
+    letter-spacing: -0.1em;
+    color: var(--main-heading-color);
+
+    & span {
+        font-size: 0.3em;
+        letter-spacing: -0.1em;
+        font-weight: 800;
+        margin-left: 14px;
+        background: var(--express-circle-background);
+        color: white;
+        padding: 0 0.4em;
+        border-radius: 50%;
+        width: 64px;
+        aspect-ratio: 1 / 1;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+button.actions {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    padding: 0;
 }
 
 .section-heading {
-    font-size: 1.4em;
-    margin-bottom: 0.4em;
+    font-size: 1.2em;
+    margin-bottom: 1em;
+    font-weight: 900;
+    color: var(--dark-blue);
+    letter-spacing: -0.06em;
 }
 
 .options {
     display: flex;
-    flex-direction: column;
-    gap: 20px;
+    gap: 1em;
 
     & .option {
         display: flex;
         align-items: center;
-        padding: 0 1em;
-        height: 3em;
-        border: 1px solid lightgrey;
-        color: cornflowerblue;
-        gap: 1em;
+        padding: 0 1.2em;
+        height: 4em;
+        border-radius: 0.2em;
+        box-shadow: var(--main-box-shadow);
+        background: white;
+        gap: 0.8em;
+        transition: var(--transition);
+
+        & .label {
+            color: var(--dark-blue);
+            font-size: 0.9em;
+            font-weight: 700;
+            transition: var(--transition);
+        }
+
+        &:hover {
+            & .label {
+                color: var(--nice-blue);
+            }
+        }
     }
 }

@@ -1,19 +1,31 @@
 import { Link } from 'react-router-dom';
 import styles from './DashboardPage.module.css';
+import { MenuSVG } from '@/components/MenuSVG';
+import { PencilSVG } from '@/components/PencilSVG';
+import { MultipleChoiceSVG } from '@/components/MultipleChoiceSVG';
 
 export const DashboardPage = (): JSX.Element => {
     return (
-        <div>
-            <h1 className={styles.mainHeading}>Dashboard</h1>
-            <div className={styles.sectionsWrapper}>
+        <div className={styles.pageContainer}>
+            <div className={styles.contentWrapper}>
+                <header className={styles.card}>
+                    <h1 className={styles.mainHeading}>
+                        Sensei <span>EXPRESS</span>
+                    </h1>
+                    <button className={styles.actions}>
+                        <MenuSVG />
+                    </button>
+                </header>
                 <section>
                     <h2 className={styles.sectionHeading}>Lessons</h2>
                     <div className={styles.options}>
                         <Link className={styles.option} to={'/lesson/multi'}>
-                            Start a new multiple choice Lesson
+                            <MultipleChoiceSVG />
+                            <div className={styles.label}>Vowels</div>
                         </Link>
                         <Link className={styles.option} to={'/lesson/writing'}>
-                            Start a new writing Lesson
+                            <PencilSVG />
+                            <div className={styles.label}>Vowels</div>
                         </Link>
                     </div>
                 </section>
