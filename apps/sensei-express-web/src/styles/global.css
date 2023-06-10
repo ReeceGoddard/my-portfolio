@@ -8,6 +8,8 @@
     --warm-stone-overlay: hsla(0, 20%, 50%, 0.2);
     --verdigris: rgb(103 158 156);
     --ultramarine: rgb(23 79 251);
+    --nice-blue: rgb(25, 113, 255);
+    --dark-blue: rgb(77, 96, 106);
     --off-white: rgba(255 255 255 / 87%);
     --very-light-grey: #f1f1f1;
 
@@ -133,7 +135,7 @@ button {
         background-color: var(--button-hover-background);
         color: var(--button-hover-color);
         border-color: transparent;
-        text-shadow: 0 2px 2px hsla(0, 0%, 0%, 0.2);
+        text-shadow: 2px 2px 2px hsla(0, 0%, 0%, 0.14);
         box-shadow: 0px 4px 14px rgb(0 0 0 / 20%);
         cursor: pointer;
     }
