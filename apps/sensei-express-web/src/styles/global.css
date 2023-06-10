@@ -4,7 +4,7 @@
     --med-grey: #9b9bac;
     --dark-grey: #53535f;
     --ink: #213547;
-    --warm-stone: #f1eeeb;
+    --warm-paper: rgb(245, 243, 240);
     --warm-stone-overlay: hsla(0, 20%, 50%, 0.2);
     --verdigris: rgb(103 158 156);
     --ultramarine: rgb(23 79 251);
@@ -12,11 +12,20 @@
     --dark-blue: rgb(77, 96, 106);
     --off-white: rgba(255 255 255 / 87%);
     --very-light-grey: #f1f1f1;
+    --japan-red: rgb(188, 0, 45);
+
+    --correct-green: #91c691;
+    --incorrect-red: #f0796d;
 
     --main-text-color: var(--ink);
 
     --main-background-rgb-vals: 241 238 235;
-    --main-background: var(--warm-stone);
+    --main-background: var(--warm-paper);
+
+    --main-box-shadow: 4px 4px 10px rgb(0 0 0 / 10%);
+
+    --main-heading-color: var(--japan-red);
+    --express-circle-background: var(--main-heading-color);
 
     --card-color: white;
     --card-heading-color: black;
@@ -24,7 +33,8 @@
 
     --chart-circle-background: white;
 
-    --header-background: rgba(var(--main-background-rgb-vals) / 65%);
+    --header-height: 100px;
+    --header-background: rgb(255 255 255 / 65%);
     --badge-background: var(--very-light-grey);
     --badge-color: var(--ink);
     --tooltip-background: black;
@@ -34,10 +44,10 @@
     --white-overlay-20: rgb(255 255 255 / 20%);
 
     --button-color: var(--ink);
-    --button-border-color: rgb(66 132 130);
+    --button-border-color: var(--dark-blue);
     --button-box-shadow-color: rgb(204 0 0 / 16%);
     --button-background: var(--white-overlay-20);
-    --button-hover-background: var(--ultramarine);
+    --button-hover-background: var(--nice-blue);
     --button-hover-color: white;
 
     --input-color: black;
@@ -121,7 +131,6 @@ button {
     justify-content: center;
     font-weight: 900;
     border-radius: 0.3em;
-    border: 2px solid #dedee3;
     height: 5em;
     padding: 0 1.4em;
     font-size: 0.8em;
