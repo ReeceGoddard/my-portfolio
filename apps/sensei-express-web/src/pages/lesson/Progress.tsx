@@ -21,7 +21,11 @@ export const Progress = ({ segments, currentSegment, className, ...rest }: Progr
                     <div
                         key={Math.random()}
                         className={`${styles.segment} ${
-                            segment.result ? (segment.result === true ? styles.correct : styles.incorrect) : ''
+                            segment.result !== undefined
+                                ? segment.result === true
+                                    ? styles.correct
+                                    : styles.incorrect
+                                : ''
                         }`}
                     ></div>
                 ))}
