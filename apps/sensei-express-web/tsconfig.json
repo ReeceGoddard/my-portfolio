@@ -48,6 +48,6 @@
             }
         ]
     },
-    "include": ["src"],
+    "include": ["src", "wav.d.ts"],
     "references": [{ "path": "./tsconfig.node.json" }]
 }
