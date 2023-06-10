@@ -3,6 +3,7 @@ import { Question } from './Question';
 import { Lesson } from './types';
 import styles from './LessonPage.module.css';
 import { useMemo, useState } from 'react';
+import { Progress } from './Progress';
 
 export const LessonPage = () => {
     const lesson = useLoaderData() as Lesson;
@@ -32,23 +33,18 @@ export const LessonPage = () => {
 
     return (
         <div>
-            <div className={styles.progress}>
-                {lesson.questions.map(question => (
-                    <div
-                        key={question.id}
-                        className={`${styles.progressSegment} ${
-                            question.isCorrect != null ? (question.isCorrect ? styles.correct : styles.incorrect) : ''
-                        }`}
-                    ></div>
-                ))}
-                <div className={styles.completionLabel}>
-                    {activeQuestion}/{lesson.questions.length}
-                </div>
-            </div>
+            <Progress
+                className={styles.progress}
+                segments={lesson.questions.map(question => {
+                    return { result: question.isCorrect };
+                })}
+                currentSegment={activeQuestion}
+            />
             <div className={styles.questions}>
                 <Question
                     className={styles.question}
                     question={lesson.questions[activeQuestion - 1].question}
+                    answer={lesson.questions[activeQuestion - 1].answer}
                     onAnswer={userAnswer => handleAnswer(userAnswer)}
                     choices={lesson.questions[activeQuestion - 1].choices ?? []}
                 />
