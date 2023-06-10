@@ -3,7 +3,7 @@ import { SVGProps } from 'react';
 export const PencilSVG = (props: SVGProps<SVGSVGElement>) => {
     return (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" {...props}>
-            <g clip-path="url(#clip0_120_32)">
+            <g clipPath="url(#clip0_120_32)">
                 <path
                     d="M23.2257 22.275L22.067 19.1831L21.2701 17.055C21.0901 16.5056 21.0564 16.2787 20.7507 15.9731L18.5345 13.7568L13.7607 18.5306L15.9789 20.7487C16.1607 20.9306 16.5095 21.0862 17.0589 21.2662L19.187 22.0631L22.2789 23.2218C22.862 23.4112 23.4151 22.8581 23.2257 22.275Z"
                     fill="#FFECB3"
