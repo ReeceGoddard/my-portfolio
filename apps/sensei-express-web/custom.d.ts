@@ -10,3 +10,7 @@ declare module '*.wav' {
     export default src;
     export { duration, metadata };
 }
+declare module '*.mp3' {
+    const src: string;
+    export default src;
+}
