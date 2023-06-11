@@ -1,4 +1,4 @@
-import { HTMLProps } from 'react';
+import { HTMLProps, useEffect } from 'react';
 import styles from './Progress.module.css';
 
 type Segment = {
@@ -14,12 +14,12 @@ export const Progress = ({ segments, currentSegment, className, ...rest }: Progr
     return (
         <div className={`${styles.progress} ${className}`} {...rest}>
             <div className={styles.completionLabel}>
-                Q{currentSegment} <span className={styles.fade}>of</span> {segments.length}
+                {currentSegment} <span className={styles.fade}>/</span> {segments.length}
             </div>
             <div className={styles.segments}>
-                {segments.map(segment => (
+                {segments.map((segment, index) => (
                     <div
-                        key={Math.random()}
+                        key={index}
                         className={`${styles.segment} ${
                             segment.result !== undefined
                                 ? segment.result === true
@@ -30,6 +30,7 @@ export const Progress = ({ segments, currentSegment, className, ...rest }: Progr
                     ></div>
                 ))}
             </div>
+            <button className={styles.endLesson}>END LESSON</button>
         </div>
     );
 };

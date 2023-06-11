@@ -1,14 +1,16 @@
 .progress {
     display: flex;
     height: 1.8em;
-    gap: 0.4em;
+    gap: 0.6em;
 
     & .completion-label,
-    & .segments {
+    & .segments,
+    & button.end-lesson {
         display: flex;
         background: rgba(255, 255, 255, 0.8);
-        box-shadow: 10px 10px 20px rgb(32 57 70 / 16%);
+        box-shadow: var(--large-box-shadow);
         border-radius: 0.4em;
+        border-radius: 6px;
         overflow: hidden;
     }
 
@@ -30,15 +32,18 @@
     & .segment {
         background: #dadcdd;
         flex: 1 1 auto;
+        transition: var(--transition);
+
+        --segment-border-radius: 0.14em;
 
         &:first-of-type {
-            border-top-left-radius: 0.2em;
-            border-bottom-left-radius: 0.2em;
+            border-top-left-radius: var(--segment-border-radius);
+            border-bottom-left-radius: var(--segment-border-radius);
         }
 
         &:last-of-type {
-            border-top-right-radius: 0.2em;
-            border-bottom-right-radius: 0.2em;
+            border-top-right-radius: var(--segment-border-radius);
+            border-bottom-right-radius: var(--segment-border-radius);
         }
 
         &.correct {
@@ -49,6 +54,15 @@
             background: var(--incorrect-red);
         }
     }
+}
+
+button.end-lesson {
+    height: 100%;
+    border: 0;
+    padding: 0 1em;
+    border-radius: 0.4em;
+    font-size: 0.6em;
+    letter-spacing: 0.05em;
 }
 
 .fade {
