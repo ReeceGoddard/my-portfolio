@@ -1,19 +1,16 @@
-import { useLoaderData, useNavigate, useParams } from 'react-router-dom';
+import { Await, useLoaderData, useNavigate } from 'react-router-dom';
 import { Question } from './Question';
-import { Lesson } from './types';
-import styles from './LessonPage.module.css';
-import { useMemo, useState } from 'react';
+import { Lesson, Question as QuestionType } from './types';
+import { Suspense, useState } from 'react';
 import { Progress } from './Progress';
+import styles from './LessonPage.module.css';
+import { LessonProvider } from './LessonContext';
 
 export const LessonPage = () => {
     const lesson = useLoaderData() as Lesson;
+    const [answers, setAnswers] = useState<QuestionType[]>(Array(lesson.questions.length).fill({}));
     const navigate = useNavigate();
-    const { lessonType } = useParams();
     const [activeQuestion, setActiveQuestion] = useState(1);
-
-    const progress = useMemo(() => {
-        return (activeQuestion / lesson.questions.length) * 100;
-    }, [activeQuestion, lesson]);
 
     const finishLesson = () => {
         navigate('/results', { state: lesson });
@@ -21,8 +18,14 @@ export const LessonPage = () => {
 
     const handleAnswer = (userAnswer: string) => {
         const isCorrect = userAnswer.toLowerCase() === lesson.questions[activeQuestion - 1].answer.toLowerCase();
-        lesson.questions[activeQuestion - 1] = { ...lesson.questions[activeQuestion - 1], isCorrect, userAnswer };
-        window.alert(isCorrect);
+        setAnswers(prev =>
+            prev.map((answer, i) => {
+                if (i === activeQuestion - 1) {
+                    return { ...lesson.questions[i], isCorrect, userAnswer };
+                }
+                return answer;
+            })
+        );
 
         if (activeQuestion < lesson.questions.length) {
             setActiveQuestion(activeQuestion + 1);
@@ -32,23 +35,28 @@ export const LessonPage = () => {
     };
 
     return (
-        <div>
-            <Progress
-                className={styles.progress}
-                segments={lesson.questions.map(question => {
-                    return { result: question.isCorrect };
-                })}
-                currentSegment={activeQuestion}
-            />
-            <div className={styles.questions}>
-                <Question
-                    className={styles.question}
-                    question={lesson.questions[activeQuestion - 1].question}
-                    answer={lesson.questions[activeQuestion - 1].answer}
-                    onAnswer={userAnswer => handleAnswer(userAnswer)}
-                    choices={lesson.questions[activeQuestion - 1].choices ?? []}
-                />
-            </div>
-        </div>
+        <LessonProvider>
+            <Suspense>
+                <Await resolve={lesson} errorElement={<p>Error loading lesson.</p>}>
+                    <Progress
+                        className={styles.progress}
+                        segments={answers.map(answer => {
+                            return { result: answer.isCorrect };
+                        })}
+                        currentSegment={activeQuestion}
+                    />
+                    <div key={lesson.id + Math.random()} className={styles.questions}>
+                        <Question
+                            key={lesson.questions[activeQuestion - 1].question}
+                            className={styles.question}
+                            question={lesson.questions[activeQuestion - 1].question}
+                            answer={lesson.questions[activeQuestion - 1].answer}
+                            onAnswer={userAnswer => handleAnswer(userAnswer)}
+                            choices={lesson.questions[activeQuestion - 1].choices ?? []}
+                        />
+                    </div>
+                </Await>
+            </Suspense>
+        </LessonProvider>
     );
 };
