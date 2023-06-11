@@ -7,13 +7,15 @@
     --warm-paper: rgb(245, 243, 240);
     --warm-stone-overlay: hsla(0, 20%, 50%, 0.2);
     --verdigris: rgb(103 158 156);
-    --ultramarine: rgb(23 79 251);
     --nice-blue: rgb(25, 113, 255);
     --dark-blue: rgb(77, 96, 106);
     --off-white: rgba(255 255 255 / 87%);
     --very-light-grey: #f1f1f1;
+    --japan-red-rgb-vals: 188 0 45;
     --japan-red: rgb(188, 0, 45);
 
+    --bold-green-rgb-vals: 10 173 10;
+    --bold-green: rgb(10, 173, 10);
     --correct-green: #91c691;
     --incorrect-red: #f0796d;
 
@@ -23,6 +25,7 @@
     --main-background: var(--warm-paper);
 
     --main-box-shadow: 4px 4px 10px rgb(0 0 0 / 10%);
+    --large-box-shadow: 10px 10px 20px rgb(32 57 70 / 16%);
 
     --main-heading-color: var(--japan-red);
     --express-circle-background: var(--main-heading-color);
