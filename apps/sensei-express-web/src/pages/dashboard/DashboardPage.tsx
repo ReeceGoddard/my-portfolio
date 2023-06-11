@@ -8,18 +8,16 @@ import { useEffect, useRef } from 'react';
 import hoverSound from '@assets/sounds/hover.wav';
 
 export const DashboardPage = (): JSX.Element => {
-    const audioElement = useRef<HTMLAudioElement | null>(null);
+    const audioElementRef = useRef<HTMLAudioElement | null>(null);
 
     useEffect(() => {
-        if (!audioElement.current) return;
-
-        audioElement.current.muted = false;
+        if (audioElementRef.current) audioElementRef.current.muted = false;
     }, []);
 
     const playHoverSound = async () => {
-        if (audioElement.current) {
-            audioElement.current.currentTime = 0;
-            audioElement.current.play();
+        if (audioElementRef.current) {
+            audioElementRef.current.currentTime = 0;
+            audioElementRef.current.play();
         }
     };
 
@@ -61,7 +59,7 @@ export const DashboardPage = (): JSX.Element => {
                     </div>
                 </section>
             </div>
-            <audio ref={audioElement} src={hoverSound} />
+            <audio ref={audioElementRef} src={hoverSound} />
         </div>
     );
 };

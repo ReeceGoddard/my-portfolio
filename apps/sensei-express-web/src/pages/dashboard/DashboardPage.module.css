@@ -33,9 +33,9 @@ header {
 .main-heading {
     display: flex;
     align-items: center;
-    font-size: 2em;
-    font-weight: 900;
-    letter-spacing: -0.1em;
+    font-size: 1.2em;
+    font-weight: 400;
+    text-transform: uppercase;
     color: var(--main-heading-color);
 
     & span {
@@ -43,8 +43,7 @@ header {
         letter-spacing: -0.1em;
         font-weight: 800;
         margin-left: 14px;
-        background: var(--express-circle-background);
-        color: white;
+        color: var(--japan-red);
         padding: 0 0.4em;
         border-radius: 50%;
         width: 64px;
@@ -83,7 +82,9 @@ button.actions {
         box-shadow: var(--main-box-shadow);
         background: white;
         gap: 0.8em;
+        border: 3px solid transparent;
         transition: var(--transition);
+        will-change: translate;
 
         & .label {
             color: var(--dark-blue);
@@ -93,6 +94,10 @@ button.actions {
         }
 
         &:hover {
+            translate: 0 -6px;
+            border-color: var(--nice-blue);
+            box-shadow: var(--large-box-shadow);
+
             & .label {
                 color: var(--nice-blue);
             }
