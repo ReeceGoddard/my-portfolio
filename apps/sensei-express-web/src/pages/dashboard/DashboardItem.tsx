@@ -10,9 +10,8 @@ const iconComponents: Record<DashboardItemLinkType, React.ReactNode> = {
     multipleChoice: <MultipleChoiceSVG />,
     writing: <PencilSVG />,
     mixed: <MultipleChoiceSVG />,
-    board: <MultipleChoiceSVG />,
+    board: null,
 };
-
 const optionLabels: Record<DashboardItemLinkType, string> = {
     multipleChoice: 'Multiple Choice',
     writing: 'Writing',
@@ -21,38 +20,30 @@ const optionLabels: Record<DashboardItemLinkType, string> = {
 };
 
 export interface IconLink {
-    type: DashboardItemLinkType;
+    type?: DashboardItemLinkType;
     to: To;
 }
-
-export interface OptionProps {
-    label: string;
-    options: IconLink[];
+export interface DashboardItemProps {
+    label?: string;
+    option: IconLink;
 }
 
-export const DashboardItem = ({ label, options }: OptionProps) => {
+export const DashboardItem = ({ label, option }: DashboardItemProps) => {
     const { playMenuHoverSound, playStartLessonSound } = useAudioContext();
 
     return (
-        <div className={styles.dashboardItem}>
-            <div className={styles.label}>{label}</div>
-            <div className={styles.line} />
-            <div className={styles.options}>
-                {options.map(option => (
-                    <Link
-                        key={option.type}
-                        className={styles.option}
-                        onMouseEnter={playMenuHoverSound}
-                        onClick={playStartLessonSound}
-                        to={option.to}
-                    >
-                        <div className={styles.optionContentWrapper}>
-                            {iconComponents[option.type]}
-                            <div className={styles.optionLabel}>{optionLabels[option.type]}</div>
-                        </div>
-                    </Link>
-                ))}
+        <Link
+            className={`${styles.option} ${option.type === 'board' ? styles.board : ''}`}
+            onMouseEnter={playMenuHoverSound}
+            onClick={playStartLessonSound}
+            to={option.to}
+        >
+            <div className={styles.optionContentWrapper}>
+                {option.type ? iconComponents[option.type] : null}
+                <div className={styles.optionLabel}>
+                    {option.type && option.type !== 'board' ? optionLabels[option.type] : label}
+                </div>
             </div>
-        </div>
+        </Link>
     );
 };

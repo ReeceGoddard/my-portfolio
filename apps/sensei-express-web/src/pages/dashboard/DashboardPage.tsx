@@ -5,6 +5,8 @@ import { useEffect, useRef } from 'react';
 import hoverSound from '@assets/sounds/hover.wav';
 import startSound from '@assets/sounds/start.wav';
 import { DashboardItem } from './DashboardItem';
+import { Link } from 'react-router-dom';
+import { LessonItem } from './LessonItem';
 
 export const DashboardPage = (): JSX.Element => {
     const hoverAudioElementRef = useRef<HTMLAudioElement | null>(null);
@@ -27,38 +29,38 @@ export const DashboardPage = (): JSX.Element => {
                     </button>
                 </header>
 
-                <section>
+                <section className={styles.boards}>
                     <h2 className={styles.sectionHeading}>Boards</h2>
                     <div className={styles.options}>
-                        <div>Hiragana</div>
-                        <div>Katakana</div>
+                        <DashboardItem label="Hiragana" option={{ type: 'board', to: '/boards/hiragana' }} />
+                        <DashboardItem label="Katkana" option={{ type: 'board', to: '/boards/katakana' }} />
                     </div>
                 </section>
-                <section>
+                <section className={styles.lessons}>
                     <h2 className={styles.sectionHeading}>Lessons</h2>
                     <div className={styles.options}>
-                        <DashboardItem
+                        <LessonItem
                             label="Intro to Hiragana"
                             options={[
                                 { type: 'multipleChoice', to: '/lesson/multi' },
                                 { type: 'writing', to: '/lesson/writing' },
                             ]}
                         />
-                        <DashboardItem
+                        <LessonItem
                             label="Basic Hiragana"
                             options={[
                                 { type: 'multipleChoice', to: '/lesson/multi' },
                                 { type: 'writing', to: '/lesson/writing' },
                             ]}
                         />
-                        <DashboardItem
+                        <LessonItem
                             label="Intermediate Hiragana"
                             options={[
                                 { type: 'multipleChoice', to: '/lesson/multi' },
                                 { type: 'writing', to: '/lesson/writing' },
                             ]}
                         />
-                        <DashboardItem
+                        <LessonItem
                             label="Advanced Hiragana"
                             options={[
                                 { type: 'multipleChoice', to: '/lesson/multi' },
