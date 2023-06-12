@@ -4,6 +4,7 @@ import { Choice } from './Choice';
 import { SoundSVG } from '@/components/SoundSVG';
 import { useAnimate } from 'framer-motion';
 import { useLessonContext } from '@providers/LessonContext';
+import { SendSVG } from '@/components/SendSVG';
 
 interface QuestionProps extends HTMLProps<HTMLDivElement> {
     question: string;
@@ -143,7 +144,9 @@ export const Question = ({
                         value={userAnswer}
                         onInput={handleInputChange}
                     />
-                    <button type="submit">Send</button>
+                    <button type="submit">
+                        <SendSVG />
+                    </button>
                 </form>
             ) : (
                 <div className={styles.choices}>

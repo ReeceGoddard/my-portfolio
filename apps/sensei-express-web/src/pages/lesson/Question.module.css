@@ -58,21 +58,19 @@ button.play-sound {
 }
 
 .question-form {
-    display: flex;
-    flex-direction: column;
-    flex: 0 0 auto;
+    position: relative;
 
     & input.user-answer {
         height: 3em;
-        padding: 0 0.2em;
+        padding: 0 2.6em 0.1em 0.6em;
         border: 3px solid white;
         font-size: 1.4em;
         border-radius: 0.2em;
         box-shadow: 4px 4px 10px rgb(0 0 0 / 10%);
         background: rgb(255 255 255 / 50%);
         color: var(--dark-blue);
-        text-align: center;
         transition: var(--transition);
+        width: 400px;
 
         &:focus {
             box-shadow: 10px 10px 20px rgb(32 57 70 / 16%);
@@ -81,19 +79,36 @@ button.play-sound {
     }
 
     & button[type='submit'] {
-        border: 0;
+        position: absolute;
+        right: 1em;
+        top: 50%;
+        translate: 0 -50%;
+        border: none;
         color: var(--dark-blue);
-        margin-top: 2em;
-        width: fit-content;
         align-self: end;
-        background: #dadcdd;
-        height: 3.4em;
-        padding: 0 2em;
+        background: #e3e7e9;
+        height: 3em;
+        aspect-ratio: 1 / 1;
+        border-radius: 0.4em;
+        padding: 0;
+
+        & svg {
+            fill: var(--dark-blue);
+            margin-left: 3px;
+            width: 24px;
+            height: fit-content;
+            aspect-ratio: 1 / 1;
+            transition: var(--transition);
+        }
 
         &:hover {
             color: white;
             background: var(--nice-blue);
             box-shadow: 4px 4px 10px rgb(0 0 0 / 10%);
+
+            & svg {
+                fill: white;
+            }
         }
     }
 }
