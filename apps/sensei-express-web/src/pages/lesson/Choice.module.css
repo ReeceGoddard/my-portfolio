@@ -3,7 +3,6 @@
     align-items: center;
     justify-content: center;
     background: white;
-    width: 6em;
     height: 3em;
     font-size: 2em;
     border-radius: 0.2em;
@@ -33,6 +32,11 @@
             border-color: transparent;
             color: white;
         }
+    }
+
+    &:focus {
+        /*TODO: Remove focus on click */
+        /* outline: none; */
     }
 
     & .hover-gradient {
