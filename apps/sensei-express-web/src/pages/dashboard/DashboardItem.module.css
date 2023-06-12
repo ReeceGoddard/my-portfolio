@@ -1,11 +1,8 @@
 .dashboard-item {
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 1.4em;
-    background: linear-gradient(to right, white, transparent 60%);
-    padding: 0.6em 0 0.6em 1.6em;
-    border-radius: 0.6em;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.6em;
 }
 
 .label {
@@ -15,15 +12,14 @@
 }
 
 .line {
-    height: 3px;
-    flex: 1 1 auto;
-    background: rgb(0 0 100 / 10%);
-    border-radius: 2px;
-    margin-top: 3px;
+    display: none;
 }
 
 .options {
     display: flex;
+    margin-top: 0.6em;
+    flex-direction: column;
+    width: 100%;
     gap: 0.8em;
 }
 
@@ -61,5 +57,31 @@
         & .option-label {
             color: var(--nice-blue);
         }
+    }
+}
+
+@media screen and (min-width: 768px) {
+    .dashboard-item {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1.4em;
+        background: linear-gradient(to right, white, transparent 60%);
+        padding: 0.6em 0 0.6em 1.6em;
+        border-radius: 0.6em;
+    }
+
+    .line {
+        display: block;
+        height: 3px;
+        flex: 1 1 auto;
+        background: rgb(0 0 100 / 10%);
+        border-radius: 2px;
+        margin-top: 3px;
+    }
+
+    .options {
+        flex-direction: row;
+        width: auto;
     }
 }
