@@ -4,7 +4,7 @@ import { LogoSVG } from '@/components/LogoSVG';
 import { useEffect, useRef } from 'react';
 import hoverSound from '@assets/sounds/hover.wav';
 import startSound from '@assets/sounds/start.wav';
-import { Option } from './Option';
+import { DashboardItem } from './DashboardItem';
 
 export const DashboardPage = (): JSX.Element => {
     const hoverAudioElementRef = useRef<HTMLAudioElement | null>(null);
@@ -26,24 +26,45 @@ export const DashboardPage = (): JSX.Element => {
                         <MenuSVG />
                     </button>
                 </header>
-                <section>
-                    <h2 className={styles.sectionHeading}>Lessons</h2>
-                    <div className={styles.options}>
-                        <div>
-                            <span>Vowels Only —</span> <span>Multi</span> | <span>Writing</span> | <span>Mixed</span>
-                        </div>
-                        <Option label="Vowels Only" icon="multipleChoice" to={'/lesson/multi'} />
-                        <Option label="Vowels Only" icon="writing" to={'/lesson/writing'} />
-                        <Option label="Basic Hiragana" icon="multipleChoice" to={'/lesson/multi'} />
-                        <Option label="Basic Hiragana" icon="writing" to={'/lesson/writing'} />
-                    </div>
-                </section>
 
                 <section>
                     <h2 className={styles.sectionHeading}>Boards</h2>
                     <div className={styles.options}>
-                        <Option label="Hiragana Board" icon="board" to={'/board/hiragana'} />
-                        <Option label="Katakana Board" icon="board" to={'/board/katakana'} />
+                        <div>Hiragana</div>
+                        <div>Katakana</div>
+                    </div>
+                </section>
+                <section>
+                    <h2 className={styles.sectionHeading}>Lessons</h2>
+                    <div className={styles.options}>
+                        <DashboardItem
+                            label="Intro to Hiragana"
+                            options={[
+                                { type: 'multipleChoice', to: '/lesson/multi' },
+                                { type: 'writing', to: '/lesson/writing' },
+                            ]}
+                        />
+                        <DashboardItem
+                            label="Basic Hiragana"
+                            options={[
+                                { type: 'multipleChoice', to: '/lesson/multi' },
+                                { type: 'writing', to: '/lesson/writing' },
+                            ]}
+                        />
+                        <DashboardItem
+                            label="Intermediate Hiragana"
+                            options={[
+                                { type: 'multipleChoice', to: '/lesson/multi' },
+                                { type: 'writing', to: '/lesson/writing' },
+                            ]}
+                        />
+                        <DashboardItem
+                            label="Advanced Hiragana"
+                            options={[
+                                { type: 'multipleChoice', to: '/lesson/multi' },
+                                { type: 'writing', to: '/lesson/writing' },
+                            ]}
+                        />
                     </div>
                 </section>
             </div>

@@ -1,3 +1,32 @@
+.dashboard-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.4em;
+    background: linear-gradient(to right, white, transparent 60%);
+    padding: 0.6em 0 0.6em 1.6em;
+    border-radius: 0.6em;
+}
+
+.label {
+    font-weight: 900;
+    font-size: 1em;
+    color: var(--dark-blue);
+}
+
+.line {
+    height: 3px;
+    flex: 1 1 auto;
+    background: rgb(0 0 100 / 10%);
+    border-radius: 2px;
+    margin-top: 3px;
+}
+
+.options {
+    display: flex;
+    gap: 0.8em;
+}
+
 .option {
     transition: var(--transition);
 
@@ -15,7 +44,7 @@
         will-change: translate;
     }
 
-    & .label {
+    & .option-label {
         color: var(--dark-blue);
         font-size: 0.9em;
         font-weight: 700;
@@ -29,7 +58,7 @@
             translate: 0 -6px;
         }
 
-        & .label {
+        & .option-label {
             color: var(--nice-blue);
         }
     }
