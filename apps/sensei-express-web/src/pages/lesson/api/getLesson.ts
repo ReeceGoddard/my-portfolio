@@ -19,19 +19,23 @@ const getRandomChoices = (questionToIgnore: Question): string[] => {
         .map(question => question.answer);
 };
 
+//TODO: Allow for flipping the lesson, where English letter is shown and 4 Hiragana chars as options
 export const getLesson = (type: LessonType = 'writing'): Promise<Lesson> => {
-    //TODO: Get questions from server
-    // return axios.get(`/lesson`);
-
     return new Promise<Lesson>(resolve => {
-        const lessonQuestions = questionLibrary.sort(() => Math.random() - 0.5);
+        const lessonQuestions = questionLibrary.slice().sort(() => Math.random() - 0.5);
 
         if (type === 'multi') {
-            lessonQuestions.forEach(lessonQuestion => {
+            const updatedQuestions = lessonQuestions.map(lessonQuestion => {
                 const choices: string[] = getRandomChoices(lessonQuestion);
                 choices.push(lessonQuestion.answer);
                 choices.sort(() => Math.random() - 0.5);
-                lessonQuestion.choices = choices;
+                return { ...lessonQuestion, choices };
+            });
+
+            resolve({
+                id: '1',
+                createdAt: 1,
+                questions: updatedQuestions,
             });
         }
 
