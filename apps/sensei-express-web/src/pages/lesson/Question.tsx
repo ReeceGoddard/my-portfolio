@@ -3,7 +3,7 @@ import styles from './Question.module.css';
 import { Choice } from './Choice';
 import { SoundSVG } from '@/components/SoundSVG';
 import { useAnimate } from 'framer-motion';
-import { useLessonContext } from './LessonContext';
+import { useLessonContext } from '@providers/LessonContext';
 
 interface QuestionProps extends HTMLProps<HTMLDivElement> {
     question: string;
@@ -27,6 +27,32 @@ export const Question = ({
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const [questionTextRef, animateQuestionText] = useAnimate();
     const [userInputRef, animateUserInput] = useAnimate();
+
+    useEffect(() => {
+        const handleGlobalKeyDown = (event: KeyboardEvent) => {
+            // Skip if modifier key held
+            if (event.ctrlKey || event.altKey || event.shiftKey || event.metaKey) {
+                return;
+            }
+
+            // Check if the input is not focused and the user starts typing
+            if (document.activeElement !== userInputRef.current && event.key.match(/^[a-zA-Z]$/)) {
+                event.preventDefault();
+                userInputRef.current?.focus();
+                setUserAnswer(prevAnswer => prevAnswer + event.key);
+            }
+        };
+
+        // Focus input on load
+        const inputElement = userInputRef.current;
+        if (inputElement) inputElement.focus();
+
+        document.addEventListener('keydown', handleGlobalKeyDown);
+
+        return () => {
+            document.removeEventListener('keydown', handleGlobalKeyDown);
+        };
+    }, [userInputRef]);
 
     useEffect(() => {
         userInputRef.current?.focus();
