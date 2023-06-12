@@ -1,0 +1,36 @@
+.option {
+    transition: var(--transition);
+
+    & .option-content-wrapper {
+        display: flex;
+        align-items: center;
+        padding: 0 1.2em;
+        height: 4em;
+        border-radius: 0.2em;
+        box-shadow: var(--main-box-shadow);
+        background: white;
+        gap: 0.8em;
+        border: 3px solid transparent;
+        transition: var(--transition);
+        will-change: translate;
+    }
+
+    & .label {
+        color: var(--dark-blue);
+        font-size: 0.9em;
+        font-weight: 700;
+        transition: var(--transition);
+    }
+
+    &:hover {
+        & .option-content-wrapper {
+            border-color: var(--nice-blue);
+            box-shadow: var(--large-box-shadow);
+            translate: 0 -6px;
+        }
+
+        & .label {
+            color: var(--nice-blue);
+        }
+    }
+}
