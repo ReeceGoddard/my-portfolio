@@ -1,6 +1,16 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import React, { ReactNode, RefObject, createContext, useContext, useRef } from 'react';
+import React, {
+    ReactNode,
+    RefObject,
+    createContext,
+    useCallback,
+    useContext,
+    useEffect,
+    useRef,
+    useState,
+} from 'react';
 import music from '@assets/sounds/music.wav';
+import { MusicButton } from '@/components/music-button/MusicButton';
 
 interface AudioContextType {
     musicAudioElement: React.RefObject<HTMLAudioElement> | null;
@@ -8,7 +18,7 @@ interface AudioContextType {
     menuHoverAudioElement: React.RefObject<HTMLAudioElement> | null;
     startLessonAudioElement: React.RefObject<HTMLAudioElement> | null;
     choiceHoverAudioElement: React.RefObject<HTMLAudioElement> | null;
-    playMusic: () => Promise<void>;
+    toggleMusic: () => void;
     playAnswerSound: (isCorrect: boolean) => Promise<void>;
     playMenuHoverSound: () => Promise<void>;
     playStartLessonSound: () => Promise<void>;
@@ -21,9 +31,7 @@ const AudioContext = createContext<AudioContextType>({
     menuHoverAudioElement: null,
     startLessonAudioElement: null,
     choiceHoverAudioElement: null,
-    playMusic: () => {
-        return new Promise(res => res());
-    },
+    toggleMusic: () => {},
     playAnswerSound: () => {
         return new Promise(res => res());
     },
@@ -40,12 +48,17 @@ const AudioContext = createContext<AudioContextType>({
 
 export const useAudioContext = (): AudioContextType => useContext(AudioContext);
 
+const fadeDuration = 5000;
+const fadeInterval = 50;
+
 export const AudioProvider = ({ children }: { children: ReactNode }) => {
+    const [isMusicPlaying, setIsMusicPlaying] = useState<boolean>(false);
     const musicAudioElement = useRef<HTMLAudioElement>(null);
     const answerAudioElement = useRef<HTMLAudioElement>(null);
     const menuHoverAudioElement = useRef<HTMLAudioElement>(null);
     const startLessonAudioElement = useRef<HTMLAudioElement>(null);
     const choiceHoverAudioElement = useRef<HTMLAudioElement>(null);
+    const fadeIntervalId = useRef<number | null>(null);
 
     const playSound = async (ref: RefObject<HTMLAudioElement>, soundName: string): Promise<void> => {
         if (ref.current) {
@@ -56,61 +69,131 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
         }
     };
 
-    const playMusic = async (shouldPlay = true) => {
-        if (musicAudioElement.current) {
-            const fadeDuration = 5000;
-            const fadeInterval = 50;
-            const initialVolume = shouldPlay ? 0 : 1;
-            const targetVolume = shouldPlay ? 1 : 0;
+    // const playMusic = async (shouldPlay = true) => {
+    //     if (musicAudioElement.current) {
+    //         const initialVolume = shouldPlay ? 0 : 1;
+    //         const targetVolume = shouldPlay ? 1 : 0;
 
-            if (shouldPlay) {
-                // Play and fade in
-                const volumeStep = (targetVolume - initialVolume) / (fadeDuration / fadeInterval);
-                musicAudioElement.current.volume = initialVolume;
-                musicAudioElement.current.muted = false;
-                musicAudioElement.current.play();
-                let currentVolume = initialVolume;
+    //         // Stop previous loop if interjected
+    //         if (fadeInIntervalId) window.clearInterval(fadeInIntervalId);
+    //         if (fadeOutIntervalId) window.clearInterval(fadeOutIntervalId);
 
-                const fadeIntervalId = setInterval(() => {
-                    if (musicAudioElement.current) {
-                        if (currentVolume >= 1) {
-                            musicAudioElement.current.volume = 1;
-                            clearInterval(fadeIntervalId);
-                        } else {
-                            currentVolume = Math.min(1, currentVolume + volumeStep);
-                            musicAudioElement.current.volume = currentVolume;
-                        }
-                    }
-                }, fadeInterval);
-            } else {
-                // Fade out and pause
-                const volumeStep = (initialVolume - targetVolume) / (fadeDuration / fadeInterval);
-                let currentVolume = initialVolume;
-                const fadeIntervalId = setInterval(() => {
-                    if (musicAudioElement.current) {
-                        if (currentVolume <= 0) {
-                            musicAudioElement.current.volume = 0;
-                            musicAudioElement.current.pause();
-                            clearInterval(fadeIntervalId);
-                        } else {
-                            currentVolume = Math.max(0, currentVolume - volumeStep);
-                            musicAudioElement.current.volume = currentVolume;
-                        }
-                    }
-                }, fadeInterval);
-            }
-        }
-    };
+    //         if (shouldPlay) {
+    //             // Play and fade in
+    //             const volumeStep = (targetVolume - initialVolume) / (fadeDuration / fadeInterval);
+    //             musicAudioElement.current.volume = initialVolume;
+    //             musicAudioElement.current.muted = false;
+    //             musicAudioElement.current.play();
+    //             setIsMusicPlaying(true);
+    //             let currentVolume = initialVolume;
+
+    //             fadeInIntervalId = window.setInterval(() => {
+    //                 if (musicAudioElement.current) {
+    //                     if (currentVolume >= 1) {
+    //                         musicAudioElement.current.volume = 1;
+    //                         if (fadeInIntervalId) window.clearInterval(fadeInIntervalId);
+    //                     } else {
+    //                         currentVolume = Math.min(1, currentVolume + volumeStep);
+    //                         musicAudioElement.current.volume = currentVolume;
+    //                     }
+    //                 }
+    //             }, fadeInterval);
+    //         } else {
+    //             // Fade out and pause
+    //             setIsMusicPlaying(false);
+    //             const volumeStep = (initialVolume - targetVolume) / (fadeDuration / fadeInterval);
+    //             let currentVolume = initialVolume;
+    //             fadeOutIntervalId = window.setInterval(() => {
+    //                 if (musicAudioElement.current) {
+    //                     if (currentVolume <= 0) {
+    //                         musicAudioElement.current.volume = 0;
+    //                         musicAudioElement.current.pause();
+    //                         if (fadeOutIntervalId) window.clearInterval(fadeOutIntervalId);
+    //                     } else {
+    //                         currentVolume = Math.max(0, currentVolume - volumeStep);
+    //                         musicAudioElement.current.volume = currentVolume;
+    //                     }
+    //                 }
+    //             }, fadeInterval);
+    //         }
+    //     }
+    // };
 
     const playAnswerSound = (isCorrect: boolean) => playSound(answerAudioElement, isCorrect ? 'correct' : 'incorrect');
     const playMenuHoverSound = () => playSound(menuHoverAudioElement, 'choice-hover');
     const playStartLessonSound = () => playSound(startLessonAudioElement, 'start2');
-    const playChoiceHoverSound = () => playSound(startLessonAudioElement, 'choice-hover');
+    const playChoiceHoverSound = () => playSound(choiceHoverAudioElement, 'choice-hover');
+
+    const playAndFadeInMusic = useCallback(() => {
+        if (musicAudioElement.current) {
+            const initialVolume = musicAudioElement.current.volume;
+            const targetVolume = 1;
+
+            const volumeStep = (targetVolume - initialVolume) / (fadeDuration / fadeInterval);
+            musicAudioElement.current.volume = initialVolume;
+            musicAudioElement.current.muted = false;
+            musicAudioElement.current.play();
+            setIsMusicPlaying(true);
+            let currentVolume = initialVolume;
+
+            fadeIntervalId.current = window.setInterval(() => {
+                if (musicAudioElement.current) {
+                    if (currentVolume >= 1) {
+                        musicAudioElement.current.volume = 1;
+                        if (fadeIntervalId.current) window.clearInterval(fadeIntervalId.current);
+                    } else {
+                        currentVolume = Math.min(1, currentVolume + volumeStep);
+                        musicAudioElement.current.volume = currentVolume;
+                    }
+                }
+            }, fadeInterval);
+        }
+    }, []);
+
+    const fadeOutAndPauseMusic = useCallback(() => {
+        if (musicAudioElement.current) {
+            const initialVolume = musicAudioElement.current.volume;
+            const targetVolume = 0;
+
+            setIsMusicPlaying(false);
+            const volumeStep = (initialVolume - targetVolume) / (fadeDuration / fadeInterval);
+            let currentVolume = initialVolume;
+            fadeIntervalId.current = window.setInterval(() => {
+                if (musicAudioElement.current) {
+                    if (currentVolume <= 0) {
+                        musicAudioElement.current.volume = 0;
+                        musicAudioElement.current.pause();
+                        if (fadeIntervalId.current) window.clearInterval(fadeIntervalId.current);
+                    } else {
+                        currentVolume = Math.max(0, currentVolume - volumeStep);
+                        musicAudioElement.current.volume = currentVolume;
+                    }
+                }
+            }, fadeInterval);
+        }
+    }, []);
+
+    const toggleMusic = () => {
+        setIsMusicPlaying(!isMusicPlaying);
+    };
+
+    useEffect(() => {
+        if (musicAudioElement.current) {
+            if (fadeIntervalId.current) window.clearInterval(fadeIntervalId.current);
+
+            if (isMusicPlaying === true) playAndFadeInMusic();
+            else fadeOutAndPauseMusic();
+        }
+    }, [isMusicPlaying, fadeIntervalId, playAndFadeInMusic, fadeOutAndPauseMusic]);
+
+    useEffect(() => {
+        if (musicAudioElement.current) musicAudioElement.current.volume = 0;
+    }, [musicAudioElement]);
 
     return (
         <AudioContext.Provider
             value={{
-                playMusic,
+                toggleMusic,
                 answerAudioElement,
                 menuHoverAudioElement,
                 startLessonAudioElement,
@@ -127,15 +210,8 @@ export const AudioProvider = ({ children }: { children: ReactNode }) => {
             <audio ref={menuHoverAudioElement} />
             <audio ref={startLessonAudioElement} />
             <audio ref={choiceHoverAudioElement} />
-            <button
-                style={{ position: 'fixed', zIndex: 1000, right: 0, bottom: 0 }}
-                onClick={() => {
-                    playMusic(musicAudioElement.current?.muted);
-                }}
-            >
-                M
-            </button>
             {children}
+            <MusicButton isMuted={!isMusicPlaying} onClick={toggleMusic} />
         </AudioContext.Provider>
     );
 };
