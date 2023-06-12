@@ -1,4 +1,4 @@
-import { HTMLProps, useEffect } from 'react';
+import { HTMLProps } from 'react';
 import styles from './Progress.module.css';
 
 type Segment = {
@@ -8,9 +8,10 @@ type Segment = {
 export interface ProgressProps extends HTMLProps<HTMLDivElement> {
     segments: Segment[];
     currentSegment: number;
+    endLesson: () => void;
 }
 
-export const Progress = ({ segments, currentSegment, className, ...rest }: ProgressProps) => {
+export const Progress = ({ segments, currentSegment, endLesson, className, ...rest }: ProgressProps) => {
     return (
         <div className={`${styles.progress} ${className}`} {...rest}>
             <div className={styles.completionLabel}>
@@ -30,7 +31,9 @@ export const Progress = ({ segments, currentSegment, className, ...rest }: Progr
                     ></div>
                 ))}
             </div>
-            <button className={styles.endLesson}>END LESSON</button>
+            <button className={styles.endLesson} onClick={endLesson}>
+                END LESSON
+            </button>
         </div>
     );
 };

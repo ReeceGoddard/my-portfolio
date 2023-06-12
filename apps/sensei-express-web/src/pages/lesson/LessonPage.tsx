@@ -1,16 +1,21 @@
 import { Await, useLoaderData, useNavigate } from 'react-router-dom';
 import { Question } from './Question';
 import { Lesson, Question as QuestionType } from './types';
-import { Suspense, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import { Progress } from './Progress';
 import styles from './LessonPage.module.css';
-import { LessonProvider } from './LessonContext';
+import { useLessonContext } from '@/providers/LessonContext';
 
 export const LessonPage = () => {
+    const { initLesson, currentLesson, answerCurrentQuestion, clearLesson } = useLessonContext();
     const lesson = useLoaderData() as Lesson;
-    const [answers, setAnswers] = useState<QuestionType[]>(Array(lesson.questions.length).fill({}));
+    // const [answers, setAnswers] = useState<QuestionType[]>(Array(lesson.questions.length).fill({}));
     const navigate = useNavigate();
     const [activeQuestion, setActiveQuestion] = useState(1);
+
+    useEffect(() => {
+        initLesson(lesson);
+    }, []);
 
     const finishLesson = () => {
         navigate('/results', { state: lesson });
@@ -18,14 +23,15 @@ export const LessonPage = () => {
 
     const handleAnswer = (userAnswer: string) => {
         const isCorrect = userAnswer.toLowerCase() === lesson.questions[activeQuestion - 1].answer.toLowerCase();
-        setAnswers(prev =>
-            prev.map((answer, i) => {
-                if (i === activeQuestion - 1) {
-                    return { ...lesson.questions[i], isCorrect, userAnswer };
-                }
-                return answer;
-            })
-        );
+        answerCurrentQuestion(userAnswer);
+        // setAnswers(prev =>
+        //     prev.map((answer, i) => {
+        //         if (i === activeQuestion - 1) {
+        //             return { ...lesson.questions[i], isCorrect, userAnswer };
+        //         }
+        //         return answer;
+        //     })
+        // );
 
         if (activeQuestion < lesson.questions.length) {
             setActiveQuestion(activeQuestion + 1);
@@ -35,28 +41,31 @@ export const LessonPage = () => {
     };
 
     return (
-        <LessonProvider>
-            <Suspense>
-                <Await resolve={lesson} errorElement={<p>Error loading lesson.</p>}>
-                    <Progress
-                        className={styles.progress}
-                        segments={answers.map(answer => {
-                            return { result: answer.isCorrect };
-                        })}
-                        currentSegment={activeQuestion}
-                    />
-                    <div key={lesson.id + Math.random()} className={styles.questions}>
-                        <Question
-                            key={lesson.questions[activeQuestion - 1].question}
-                            className={styles.question}
-                            question={lesson.questions[activeQuestion - 1].question}
-                            answer={lesson.questions[activeQuestion - 1].answer}
-                            onAnswer={userAnswer => handleAnswer(userAnswer)}
-                            choices={lesson.questions[activeQuestion - 1].choices ?? []}
+        <Suspense>
+            <Await resolve={lesson} errorElement={<p>Error loading lesson.</p>}>
+                {currentLesson ? (
+                    <>
+                        <Progress
+                            className={styles.progress}
+                            segments={currentLesson.questions.map(question => {
+                                return { result: question.isCorrect };
+                            })}
+                            currentSegment={activeQuestion}
+                            endLesson={finishLesson}
                         />
-                    </div>
-                </Await>
-            </Suspense>
-        </LessonProvider>
+                        <div key={currentLesson.id + Math.random()} className={styles.questions}>
+                            <Question
+                                key={currentLesson.questions[activeQuestion - 1].question}
+                                className={styles.question}
+                                question={currentLesson.questions[activeQuestion - 1].question}
+                                answer={currentLesson.questions[activeQuestion - 1].answer}
+                                onAnswer={userAnswer => handleAnswer(userAnswer)}
+                                choices={currentLesson.questions[activeQuestion - 1].choices ?? []}
+                            />
+                        </div>
+                    </>
+                ) : null}
+            </Await>
+        </Suspense>
     );
 };
