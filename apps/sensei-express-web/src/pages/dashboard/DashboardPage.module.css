@@ -71,36 +71,6 @@ button.actions {
 
 .options {
     display: flex;
+    flex-direction: column;
     gap: 1em;
-
-    & .option {
-        display: flex;
-        align-items: center;
-        padding: 0 1.2em;
-        height: 4em;
-        border-radius: 0.2em;
-        box-shadow: var(--main-box-shadow);
-        background: white;
-        gap: 0.8em;
-        border: 3px solid transparent;
-        transition: var(--transition);
-        will-change: translate;
-
-        & .label {
-            color: var(--dark-blue);
-            font-size: 0.9em;
-            font-weight: 700;
-            transition: var(--transition);
-        }
-
-        &:hover {
-            translate: 0 -6px;
-            border-color: var(--nice-blue);
-            box-shadow: var(--large-box-shadow);
-
-            & .label {
-                color: var(--nice-blue);
-            }
-        }
-    }
 }
