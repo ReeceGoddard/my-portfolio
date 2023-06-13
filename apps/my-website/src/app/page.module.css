@@ -1,0 +1,66 @@
+.main {
+    padding: 6rem;
+    min-height: 100vh;
+}
+
+section.logoSection {
+    display: flex;
+    justify-content: center;
+
+    & .logo {
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        width: 60px;
+        height: 60px;
+        border-radius: 0.2rem;
+        background: #e60355;
+        box-shadow: 4px 4px 14px rgb(0 0 0 /14%);
+        padding-bottom: 12px;
+        padding-right: 10px;
+        position: relative;
+        overflow: hidden;
+
+        & .logoBackground {
+            mix-blend-mode: difference;
+            opacity: 0.15;
+        }
+
+        & .logoSVG {
+            overflow: visible;
+            z-index: 1;
+
+            & .logoSVGPath {
+                filter: drop-shadow(2px 2px 2px rgb(0 0 0 / 20%));
+            }
+        }
+    }
+}
+
+section.headingsSection {
+    margin: 50px auto 0;
+    text-align: center;
+    font-size: 26px;
+    max-width: 386px;
+
+    & .firstHeading {
+        font-weight: 400;
+    }
+
+    & .secondHeading {
+        font-style: italic;
+        font-weight: 400;
+        margin-top: 20px;
+        background-image: linear-gradient(130deg, #cb9696, #255242);
+        background-clip: text;
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .bold {
+        font-weight: 600;
+    }
+}
+
+section.projects {
+}
