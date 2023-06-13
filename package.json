@@ -3,7 +3,9 @@
     "scripts": {
         "build": "turbo run build",
         "dev": "turbo run dev",
+        "dev:my-website": "turbo run dev --filter my-website",
         "dev:currency-dash": "turbo run dev --filter currency-dash",
+        "dev:sensei-express": "turbo run dev --filter sensei-express-web",
         "lint": "turbo run lint",
         "format": "prettier --write \"**/*.{ts,tsx,md}\"",
         "test": "turbo run test",
