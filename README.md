@@ -1,81 +1,67 @@
-# Turborepo starter
+# Welcome to Reece Goddard's portfilo repo
 
-This is an official starter Turborepo.
+Welcome to my code portfolio, a collection of three awesome applications designed to showcase various technologies and solve different purposes.
 
-## Using this example
+## 1. My Website
+
+-   Repository: [my-website](https://github.com/your-username/my-website)
+-   Description: A static website built with Next.js and TypeScript. It serves as my portfolio website, showcasing my projects and skills.
+
+## 2. Sensei Express
+
+-   Repository: [sensei-express-web](https://github.com/your-username/sensei-express-web) (Frontend) | [sensei-express-api](https://github.com/your-username/sensei-express-api) (Backend)
+-   Description: A full stack application for learning the Japanese alphabet and basic words. It uses React, TypeScript, Node.js, Express, Prisma, and MongoDB.
+
+## 3. Currency Dash
+
+-   Repository: [currency-dash](https://github.com/your-username/currency-dash)
+-   Description: A frontend-only project built with React and TypeScript. Currency Dash provides real-time currency conversion using a free currency conversion API. It also implements caching with React Query and routing with React Router.
+
+Feel free to explore each repository for more details and dive into the code to see how these applications were built. Happy coding!
+
+# How to run
+
+This project uses Turborepo, so you can decide to run all apps at the same time, or choose individual apps to run.
+
+## To run all apps simualtaniously
 
 Run the following command:
 
 ```sh
-npx create-turbo@latest
+npm run dev
 ```
 
-## What's inside?
+## To run a specific app
 
-This Turborepo includes the following packages/apps:
+Run one of the following commands:
 
-### Apps and Packages
-
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `ui`: a stub React component library shared by both `web` and `docs` applications
-- `eslint-config-custom`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `tsconfig`: `tsconfig.json`s used throughout the monorepo
-
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
-
-### Utilities
-
-This Turborepo has some additional tools already setup for you:
-
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
-
-### Build
-
-To build all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm build
+```sh
+npm run dev:my-website
 ```
 
-### Develop
-
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-pnpm dev
+```sh
+npm run dev:dev:currency-dash
 ```
 
-### Remote Caching
-
-Turborepo can use a technique known as [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
-
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup), then enter the following commands:
-
-```
-cd my-turborepo
-npx turbo login
+```sh
+npm run dev:sensei-express
 ```
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
+### Tools used
 
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-npx turbo link
-```
-
-## Useful Links
-
-Learn more about the power of Turborepo:
-
-- [Tasks](https://turbo.build/repo/docs/core-concepts/monorepos/running-tasks)
-- [Caching](https://turbo.build/repo/docs/core-concepts/caching)
-- [Remote Caching](https://turbo.build/repo/docs/core-concepts/remote-caching)
-- [Filtering](https://turbo.build/repo/docs/core-concepts/monorepos/filtering)
-- [Configuration Options](https://turbo.build/repo/docs/reference/configuration)
-- [CLI Usage](https://turbo.build/repo/docs/reference/command-line-reference)
+-   [React](https://react.dev/) Declaritive UI development library
+-   [Next](https://nextjs.org/) Full-stack React Framework
+-   [Node.js](https://nodejs.org/en) JavaScript runtime environment / backend
+-   [MongoDB](https://www.mongodb.com/) NoSQL document database
+-   [TypeScript](https://www.typescriptlang.org/) Static type checking
+-   [Docker](https://www.docker.com/) Containerisation
+-   [Turborepo](https://turbo.build/repo/) High-performance monorepo build system
+-   [Vite](https://vitejs.dev/) Fast build tool
+-   [React Router](https://reactrouter.com/) SPA Routing
+-   [TanStack React Query](https://react-query.tanstack.com/) Efficient API caching
+-   [Prisma](https://www.prisma.io/) TypeScript ORM
+-   [Jest](https://jestjs.io/) Robust testing framework
+-   [ESLint](https://eslint.org/) Code quality checking
+-   [Prettier](https://prettier.io) Code formatting
+-   [Framer Motion](https://www.framer.com/api/motion/) Smooth animations
+-   [CSS modules](https://github.com/css-modules/css-modules) Scoped CSS
