@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { Project } from './project';
 import styles from './page.module.css';
 
 export default function Home() {
@@ -35,7 +36,35 @@ export default function Home() {
                 </h1>
                 <h2 className={styles.secondHeading}>Experienced in both product design and full-stack development.</h2>
             </section>
-            <section className={styles.projects}></section>
+            <section className={styles.projectsSection}>
+                <h4 className={styles.projectsSectionHeading}>SOME OF MY SIDE PROJECTS</h4>
+                <div className={styles.projects}>
+                    <Project
+                        name="Sensei Academy"
+                        subheading="web app for learning Japanese"
+                        techUsed={[
+                            'React w/ Router, Query, Framer Motion',
+                            'Full-stack TypeScript',
+                            'Express & Node.js',
+                            'Prisma & MongoDB',
+                            'Docker',
+                            'AWS',
+                            'TurboRepo',
+                        ]}
+                        launchURL="/sensei-academy"
+                        repoURL="https://github.com/ReeceGoddard/my-portfolio/tree/master/apps"
+                        backgroundImageURL="/project-background.gif"
+                    />
+                    <Project
+                        name="FX Dash"
+                        subheading="web app for viewing currency conversions"
+                        techUsed={['React', 'TypeScript', 'React Router', 'React Query', 'Docker', 'AWS', 'TurboRepo']}
+                        launchURL="/currency-dash"
+                        repoURL="https://github.com/ReeceGoddard/my-portfolio/tree/master/apps/currency-dash"
+                        backgroundImageURL="/project-background-2.gif"
+                    />
+                </div>
+            </section>
         </main>
     );
 }
