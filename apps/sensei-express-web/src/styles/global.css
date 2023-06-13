@@ -5,12 +5,11 @@
     --dark-grey: #53535f;
     --ink: #213547;
     --warm-paper: rgb(245, 243, 240);
-    --warm-stone-overlay: hsla(0, 20%, 50%, 0.2);
-    --verdigris: rgb(103 158 156);
     --nice-blue: rgb(25, 113, 255);
     --dark-blue: rgb(77, 96, 106);
     --off-white: rgba(255 255 255 / 87%);
     --very-light-grey: #f1f1f1;
+    --light-grey: #eeeeee;
     --japan-red-rgb-vals: 188 0 45;
     --japan-red: rgb(188, 0, 45);
 
@@ -30,11 +29,18 @@
     --main-heading-color: var(--japan-red);
     --express-circle-background: var(--main-heading-color);
 
+    --dashboard-lesson-background-stop: white;
+    --dashboard-lesson-label-color: var(--dark-blue);
+    --dashboard-option-line-background: rgb(131 131 182 / 10%);
+    --dashboard-option-color: var(--dark-blue);
+    --dashboard-option-color-hover: var(--nice-blue);
+    --dashboard-option-background: white;
+    --dashboard-option-background-hover: white;
+    --dashboard-option-border-color: transparent;
+
     --card-color: white;
     --card-heading-color: black;
     --card-heading-faded-color: var(--med-grey);
-
-    --chart-circle-background: white;
 
     --header-height: 100px;
     --header-background: rgb(255 255 255 / 65%);
@@ -106,6 +112,8 @@ body {
     min-width: 320px;
     line-height: 1.4;
     font-family: var(--font-family-sans);
+    background: var(--main-background);
+    min-height: 100vh;
 }
 
 h1 {
@@ -150,6 +158,10 @@ button {
         text-shadow: 2px 2px 2px hsla(0, 0%, 0%, 0.14);
         box-shadow: 0px 4px 14px rgb(0 0 0 / 20%);
         cursor: pointer;
+
+        & svg {
+            fill: var(--button-hover-color);
+        }
     }
 
     &:focus,
@@ -166,7 +178,6 @@ button {
         --card-heading-color: white;
         /* --card-heading-faded-color: ; */
 
-        --chart-circle-background: black;
         --badge-background: var(--off-white);
         --tooltip-background: white;
         --tooltip-color: var(--ink);
@@ -178,16 +189,25 @@ button {
         --button-hover-background: rgb(11 98 228);
         --button-hover-color: white;
 
+        --main-box-shadow: 0 10px 20px 4px rgb(0 0 0 / 20%);
+        --large-box-shadow: 10px 10px 20px rgb(0 0 0 / 40%);
+
         --toggle-button-background: var(--main-background);
         --toggle-button-color: var(--off-white);
         --toggle-button-border-color: var(--dark-grey);
 
-        --aside-background: #161617;
-        --aside-menu-item-color: white;
-
         --main-background-rgb-vals: 30 30 32;
         --main-background: rgb(var(--main-background-rgb-vals));
-        --header-background: rgba(var(--main-background-rgb-vals) / 65%);
+        --header-background: rgb(var(--main-background-rgb-vals) / 65%);
+
+        --dashboard-lesson-background-stop: #111218;
+        --dashboard-lesson-label-color: rgb(170 180 186);
+        --dashboard-option-line-background: rgb(131 131 182 / 10%);
+        --dashboard-option-color: rgb(255 255 255 / 80%);
+        --dashboard-option-color-hover: white;
+        --dashboard-option-background: #131318;
+        --dashboard-option-background-hover: radial-gradient(#131318, #27273a);
+        --dashboard-option-border-color: #000000;
     }
     a:hover {
         color: #747bff;
