@@ -1,0 +1,11 @@
+.contactForm {
+    display: flex;
+    flex-direction: column;
+
+    & .formError {
+        color: red;
+        margin-top: 10px;
+        margin-bottom: 20px;
+        font-style: italic;
+    }
+}

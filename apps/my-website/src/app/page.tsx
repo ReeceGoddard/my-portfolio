@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { Project } from './project';
 import styles from './page.module.css';
+import { ContactForm } from './contactForm';
 
 export default function Home() {
     return (
@@ -9,7 +10,7 @@ export default function Home() {
                 <div className={styles.logo}>
                     <Image
                         className={styles.logoBackground}
-                        src="/logo-background.webp"
+                        src="/images/logo-background.webp"
                         alt="Animated logo background"
                         fill
                     />
@@ -34,37 +35,76 @@ export default function Home() {
                     <span className={styles.bold}>I&apos;m a</span> full-stack{' '}
                     <span className={styles.bold}>maker.</span>
                 </h1>
-                <h2 className={styles.secondHeading}>Experienced in both product design and full-stack development.</h2>
+                <h2 className={styles.secondHeading}>Experienced in both software development and product design.</h2>
+                {/* <h2>Development leader who bridges the gap between code and design.</h2> */}
             </section>
             <section className={styles.projectsSection}>
-                <h4 className={styles.projectsSectionHeading}>SOME OF MY SIDE PROJECTS</h4>
+                <h4 className={styles.sectionHeading}>SOME OF MY SIDE PROJECTS</h4>
                 <div className={styles.projects}>
                     <Project
                         name="Sensei Academy"
                         subheading="web app for learning Japanese"
                         techUsed={[
-                            'React w/ Router, Query, Framer Motion',
+                            'React → Router, Query, Framer Motion',
                             'Full-stack TypeScript',
-                            'Express & Node.js',
-                            'Prisma & MongoDB',
+                            'Node.js → Express',
+                            'MongoDB → Prisma',
                             'Docker',
                             'AWS',
                             'TurboRepo',
                         ]}
                         launchURL="/sensei-academy"
                         repoURL="https://github.com/ReeceGoddard/my-portfolio/tree/master/apps"
-                        backgroundImageURL="/project-background.gif"
+                        backgroundImageURL="/images/project-background-2.gif"
+                        backgroundImageOpacity={0.6}
+                    />
+                    <Project
+                        name="Nutri"
+                        subheading="web app for managing recipes"
+                        techUsed={[
+                            'React → Router, Query',
+                            'TypeScript',
+                            'Node.js → Express',
+                            'MongoDB → Prisma',
+                            'Docker',
+                            'AWS',
+                            'TurboRepo',
+                        ]}
+                        launchURL="/currency-dash"
+                        repoURL="https://github.com/ReeceGoddard/my-portfolio/tree/master/apps/nutri"
+                        backgroundImageURL="/images/project-background-2.gif"
+                        backgroundImageOpacity={0.6}
                     />
                     <Project
                         name="FX Dash"
                         subheading="web app for viewing currency conversions"
-                        techUsed={['React', 'TypeScript', 'React Router', 'React Query', 'Docker', 'AWS', 'TurboRepo']}
+                        techUsed={['React → Router, Query', 'TypeScript', 'Docker', 'AWS', 'TurboRepo']}
                         launchURL="/currency-dash"
                         repoURL="https://github.com/ReeceGoddard/my-portfolio/tree/master/apps/currency-dash"
-                        backgroundImageURL="/project-background-2.gif"
+                        backgroundImageURL="/images/project-background-2.gif"
+                        backgroundImageOpacity={0.6}
                     />
                 </div>
             </section>
+            <address>
+                <a className={styles.contact} href="mailto:goddard.reece@gmail.com">
+                    <svg
+                        className={styles.emailIcon}
+                        width="24"
+                        height="24"
+                        viewBox="0 0 24 24"
+                        fill="white"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path d="M22 6C22 4.9 21.1 4 20 4H4C2.9 4 2 4.9 2 6V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V6ZM20 6L12 11L4 6H20ZM20 18H4V8L12 13L20 8V18Z" />
+                    </svg>
+                    <div>Email Reece</div>
+                </a>
+            </address>
+            {/* <section className={styles.contactSection}>
+                <h4 className={styles.sectionHeading}>CONTACT REECE</h4>
+                <ContactForm />
+            </section> */}
         </main>
     );
 }

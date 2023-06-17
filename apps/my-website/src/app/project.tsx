@@ -8,6 +8,7 @@ export interface ProjectProps {
     launchURL: string;
     repoURL: string;
     backgroundImageURL?: string;
+    backgroundImageOpacity?: number;
 }
 
 export const Project = ({
@@ -17,6 +18,7 @@ export const Project = ({
     launchURL,
     repoURL,
     backgroundImageURL = '/project-background.gif',
+    backgroundImageOpacity = 1,
 }: ProjectProps) => {
     return (
         <div className={styles.project}>
@@ -25,6 +27,7 @@ export const Project = ({
                 src={backgroundImageURL}
                 alt={'Cool animated background image.'}
                 fill
+                style={{ opacity: backgroundImageOpacity }}
             />
             <section className={styles.projectInfoSection}>
                 <h3 className={styles.mainHeading}>{name}</h3>
