@@ -2,30 +2,131 @@
     max-width: 1024px;
     padding-top: 60px;
     margin: 0 auto 60vh;
+    padding: var(--page-padding);
 }
 
-.authorsGrid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 2px;
+.poemsGrid {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    margin-top: 60px;
 
-    & .author {
-        background: #eef2f7;
-        border-radius: 4px;
+    & .poem {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 64px;
-        padding: 0 20px;
+        flex-direction: column;
         font-weight: 600;
+        border: 3px solid rgb(0 0 0 / 10%);
+        border-radius: 6px;
         transition: all 140ms ease-out;
-        box-shadow: 0 0 0 rgb(0 0 0 /0%);
+        box-shadow: 0px 6px 14px rgb(0 0 0 / 4%);
+        overflow: hidden;
 
-        &:hover {
-            background: rgb(0, 89, 255);
-            color: white;
-            cursor: pointer;
-            box-shadow: 4px 4px 14px rgb(0 0 0 /14%);
+        & .poemLinesWrapper {
+            display: grid;
+            grid-template-rows: 0fr;
+            transition: grid-template-rows 400ms ease-out, padding 300ms ease-out, opacity 400ms ease-out;
+        }
+
+        & .poemLines {
+            overflow: hidden;
+            opacity: 0;
+            transition: all 140ms ease-out;
+
+            & .line {
+                min-height: 28px;
+                margin: 0;
+                display: flex;
+                align-items: center;
+                font-weight: 500;
+                font-size: 18px;
+            }
+        }
+
+        & .togglePoem {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            height: 80px;
+            font-weight: 600;
+            font-size: 20px;
+            background: transparent;
+            border-bottom: 3px solid rgb(0 0 0 / 0%);
+            text-align: left;
+            color: var(--dark-grey-blue);
+            transition: all 140ms ease-out;
+
+            &:hover {
+                background: rgb(255 255 255 / 30%);
+                color: var(--blue);
+                cursor: pointer;
+
+                & svg.chevronIcon {
+                    fill: var(--blue);
+                }
+            }
+
+            &:focus {
+                outline: none;
+                color: var(--blue);
+
+                & svg.chevronIcon {
+                    fill: var(--blue);
+                }
+            }
+
+            & svg.chevronIcon {
+                width: 32px;
+                aspect-ratio: 1 / 1;
+                fill: #aaaaaa;
+                transition: all 140ms ease-out;
+            }
+        }
+
+        &.poemVisible {
+            background: white;
+
+            & .poemLinesWrapper {
+                grid-template-rows: 1fr;
+                padding: 0 30px 30px;
+            }
+
+            & .poemLines {
+                opacity: 1;
+            }
+
+            & .togglePoem {
+                font-weight: 900;
+                font-size: 24px;
+                height: 100px;
+                padding-right: 30px;
+            }
+
+            & svg.chevronIcon {
+                transform: rotate(180deg);
+            }
+        }
+
+        &.poemHidden {
+            & .poemLines {
+                /* height: 10px; */
+            }
         }
     }
 }
+
+/* .selectedPoemOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0%;
+    background: white;
+    opacity: 0;
+    transition: opacity 160ms ease-out;
+
+    &.overlayVisible {
+        height: 100%;
+        opacity: 1;
+    }
+} */
