@@ -1,13 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import styles from './AuthorProfile.module.css';
 import { getAuthorProfileQuery } from '../../api/getAuthorProfile';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 
-const AuthorProfile = () => {
+const AuthorProfile: React.FC = (): JSX.Element => {
     const { authorName } = useParams<keyof { authorName: string }>() as { authorName: string };
     const { data: poems } = useQuery(getAuthorProfileQuery(authorName as string));
     const [poemsToggleStatus, setPoemsToggleStatus] = useState<Map<number, boolean>>(new Map<number, boolean>());
+    const navigate = useNavigate();
 
     useEffect(() => {
         const titles: [[number, boolean]] = poems?.map((_, index) => [index, false]) ?? [];
@@ -18,6 +19,12 @@ const AuthorProfile = () => {
 
     return (
         <div className={styles.authorProfile}>
+            <button className={styles.back} onClick={() => navigate('/')}>
+                <svg viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M6.87891 12L13.9389 19.061L16.0609 16.939L11.1209 12L16.0609 7.06104L13.9389 4.93903L6.87891 12Z" />
+                </svg>
+                Back
+            </button>
             <h1>Poems by {poems !== undefined && poems[0].author}</h1>
             <div className={styles.poemsGrid}>
                 {poems
