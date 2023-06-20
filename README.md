@@ -16,7 +16,6 @@ Welcome to my code portfolio, a collection applications designed and implmented 
 
 -   Repository: [currency-dash](https://github.com/ReeceGoddard/my-portfolio/tree/master/apps/currency-dash)
 -   Description: A frontend-only project built with React and TypeScript. Currency Dash provides real-time currency conversion using a free currency conversion API. It also implements caching with React Query and routing with React Router.
--
 
 ## 4. Verse
 
