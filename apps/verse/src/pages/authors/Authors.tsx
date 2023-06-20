@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { getAuthorsQuery } from '../../api/getAuthors';
+import { authorsQuery } from '../../api/getAuthors';
 import styles from './Authors.module.css';
 import { Link } from 'react-router-dom';
 
 const Authors = () => {
-    const { data } = useQuery(getAuthorsQuery);
+    const { data } = useQuery(authorsQuery);
 
     return (
         <div className={styles.authors}>

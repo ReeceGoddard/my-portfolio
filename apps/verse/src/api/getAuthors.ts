@@ -1,4 +1,4 @@
-import { FetchQueryOptions, QueryClient } from '@tanstack/react-query';
+import { FetchQueryOptions } from '@tanstack/react-query';
 import { GetAuthorsAPIResponse } from '../types';
 import { API_BASE } from './consts';
 
@@ -14,7 +14,7 @@ export const getAuthors = async (): Promise<string[]> => {
     return data.authors;
 };
 
-export const getAuthorsQuery: FetchQueryOptions<string[]> = {
+export const authorsQuery: FetchQueryOptions<string[]> = {
     queryKey: ['authors'],
     queryFn: getAuthors,
 };
