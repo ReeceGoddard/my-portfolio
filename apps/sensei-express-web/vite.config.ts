@@ -10,6 +10,9 @@ const viteConfig = (args: ViteConfigInput) => {
     const generateScopedName = args.mode === 'production' ? '[hash:base64:8]' : '[name]__[local]__[hash:base64:4]';
 
     return defineConfig({
+        server: {
+            port: 5050,
+        },
         plugins: [react()],
         resolve: {
             alias: {
