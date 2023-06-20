@@ -5,6 +5,7 @@ import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { authorProfileLoader } from './pages/author-profile/AuthorProfile.loader';
 import './App.css';
 import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
+import { authorsLoader } from './pages/authors/Authors.loader';
 
 const Authors = lazy(() => import('./pages/authors/Authors'));
 const AuthorProfile = lazy(() => import('./pages/author-profile/AuthorProfile'));
@@ -29,6 +30,7 @@ function App() {
         {
             path: '/',
             element: <Authors />,
+            loader: () => authorsLoader,
         },
         {
             path: 'author/:authorName',
