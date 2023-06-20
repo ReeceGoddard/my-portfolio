@@ -93,6 +93,13 @@
 @media screen and (min-width: 768px) {
     .search {
         margin-bottom: 40px;
+        text-align: center;
+
+        &:not(:placeholder-shown),
+        &:hover,
+        &:focus {
+            background: radial-gradient(40% 80% at 50% 100%, var(--light-blue), transparent);
+        }
     }
 
     .authorsGrid {
