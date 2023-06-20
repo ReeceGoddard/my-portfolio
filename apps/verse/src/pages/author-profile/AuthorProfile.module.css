@@ -1,0 +1,31 @@
+.authorProfile {
+    max-width: 1024px;
+    padding-top: 60px;
+    margin: 0 auto 60vh;
+}
+
+.authorsGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 2px;
+
+    & .author {
+        background: #eef2f7;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 64px;
+        padding: 0 20px;
+        font-weight: 600;
+        transition: all 140ms ease-out;
+        box-shadow: 0 0 0 rgb(0 0 0 /0%);
+
+        &:hover {
+            background: rgb(0, 89, 255);
+            color: white;
+            cursor: pointer;
+            box-shadow: 4px 4px 14px rgb(0 0 0 /14%);
+        }
+    }
+}
