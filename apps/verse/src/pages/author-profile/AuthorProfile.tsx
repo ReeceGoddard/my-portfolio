@@ -3,16 +3,14 @@ import styles from './AuthorProfile.module.css';
 import { getAuthorProfileQuery } from '../../api/getAuthorProfile';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { Poem } from '../../types';
 
 const AuthorProfile = () => {
     const { authorName } = useParams<keyof { authorName: string }>() as { authorName: string };
     const { data: poems } = useQuery(getAuthorProfileQuery(authorName as string));
     const [poemsToggleStatus, setPoemsToggleStatus] = useState<Map<number, boolean>>(new Map<number, boolean>());
-    // const [selectedPoem, setSelectedPoem] = useState<Poem | null>(null);
 
     useEffect(() => {
-        const titles: [[number, boolean]] = poems?.map((poem, index) => [index, false]) ?? [];
+        const titles: [[number, boolean]] = poems?.map((_, index) => [index, false]) ?? [];
         const map: Map<number, boolean> = new Map(titles);
 
         setPoemsToggleStatus(map);
@@ -61,12 +59,6 @@ const AuthorProfile = () => {
                         </div>
                     ))}
             </div>
-            {/* <div className={`${styles.selectedPoemOverlay} ${selectedPoem !== null ? styles.overlayVisible : ''}`}>
-                <button onClick={() => setSelectedPoem(null)}>Close</button>
-                {selectedPoem?.lines.map(line => (
-                    <div key={line}>{line}</div>
-                ))}
-            </div> */}
         </div>
     );
 };
