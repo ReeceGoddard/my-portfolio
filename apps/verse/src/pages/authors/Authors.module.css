@@ -19,6 +19,9 @@
     background: transparent;
     border-bottom: 3px solid rgb(99, 107, 126);
     transition: all 140ms ease-out;
+    position: sticky;
+    top: 0px;
+    background: white;
 
     &::placeholder {
         color: rgb(99, 107, 126);
