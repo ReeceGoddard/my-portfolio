@@ -2,6 +2,8 @@
 
 Welcome to my code portfolio, a collection applications designed and implmented by me. Showcasing various technologies and ideas.
 
+&nbsp;
+
 ## 1. Sensei Express
 
 -   Repository: [sensei-express-web](https://github.com/ReeceGoddard/my-portfolio/tree/master/apps/sensei-express-web) (Frontend) | [sensei-express-api](https://github.com/ReeceGoddard/my-portfolio/tree/master/apps/sensei-express-api) (Backend)
@@ -24,6 +26,8 @@ Welcome to my code portfolio, a collection applications designed and implmented 
 
 Feel free to explore each repository for more details and dive into the code to see how these applications were built.
 
+&nbsp;
+
 # How to run
 
 This project uses Turborepo, so you can decide to run all apps at the same time, or choose individual apps to run.
@@ -41,10 +45,6 @@ npm run dev
 Run one of the following commands:
 
 ```sh
-npm run dev:my-website
-```
-
-```sh
 npm run dev:sensei-express
 ```
 
@@ -56,7 +56,13 @@ npm run dev:currency-dash
 npm run dev:verse
 ```
 
-### Tools used
+```sh
+npm run dev:my-website
+```
+
+&nbsp;
+
+# Tools used
 
 -   [React](https://react.dev/) Declaritive UI development library
 -   [Next](https://nextjs.org/) Full-stack React Framework
