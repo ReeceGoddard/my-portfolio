@@ -18,6 +18,7 @@
     --dark-grey-blue: rgb(47, 50, 57);
 
     --page-padding: 30px 30px 60vh;
+    --transition: all 140ms ease-out;
 }
 
 * {
@@ -39,6 +40,7 @@ body {
     background: linear-gradient(to bottom, var(--background-color), white);
     min-height: 100vh;
     height: 100vh;
+    overflow-y: scroll;
 }
 
 h1 {
