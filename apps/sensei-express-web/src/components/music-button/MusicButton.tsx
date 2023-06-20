@@ -46,7 +46,7 @@ export const MusicButton = ({ isMuted = true, ...rest }: MusicButtonProps) => {
                         fill="black"
                     />
                     <rect x="18" y="3" width="3" height="3" rx="1.5" fill="#444444" />
-                    <path d="M19.5 4.5L19 8L17 10" stroke="#666666" stroke-linecap="round" />
+                    <path d="M19.5 4.5L19 8L17 10" stroke="#666666" strokeLinecap="round" />
                     <circle cx="12" cy="12" r="0.5" fill="#333333" />
                 </svg>
             </div>

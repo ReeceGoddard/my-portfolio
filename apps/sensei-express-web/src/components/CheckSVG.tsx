@@ -13,14 +13,14 @@ export const CheckSVG = (props: SVGProps<SVGSVGElement>) => {
                 height="22"
             >
                 <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
+                    fillRule="evenodd"
+                    clipRule="evenodd"
                     d="M2.66666 16L5.99999 12.6667L12.6667 19.3333L26 6L29.3333 9.33333L12.6667 26L2.66666 16Z"
                     fill="#555555"
                     stroke="white"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                 />
             </mask>
             <g mask="url(#mask0_126_221)">
