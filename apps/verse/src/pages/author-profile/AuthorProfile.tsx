@@ -20,8 +20,8 @@ const AuthorProfile: React.FC = (): JSX.Element => {
     return (
         <div className={styles.authorProfile}>
             <button className={styles.back} onClick={() => navigate('/')}>
-                <svg viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M6.87891 12L13.9389 19.061L16.0609 16.939L11.1209 12L16.0609 7.06104L13.9389 4.93903L6.87891 12Z" />
+                <svg width="11" height="16" viewBox="0 0 11 16" fill="black" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M0.878906 8.00004L7.93891 15.061L10.0609 12.939L5.12091 8.00004L10.0609 3.06104L7.93891 0.939034L0.878906 8.00004Z" />
                 </svg>
                 Back
             </button>
