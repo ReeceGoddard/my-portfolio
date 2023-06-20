@@ -1,23 +1,29 @@
-# Welcome to Reece Goddard's portfilo repo
+# Welcome to Reece Goddard's portfolio repo
 
-Welcome to my code portfolio, a collection of three awesome applications designed to showcase various technologies and solve different purposes.
+Welcome to my code portfolio, a collection applications designed and implmented by me. Showcasing various technologies and ideas.
 
 ## 1. My Website
 
 -   Repository: [my-website](https://github.com/your-username/my-website)
--   Description: A static website built with Next.js and TypeScript. It serves as my portfolio website, showcasing my projects and skills.
+-   Description: A static website built with Next.js and TypeScript. It serves as my portfolio website, presenting my projects, skills, and contact info.
 
 ## 2. Sensei Express
 
--   Repository: [sensei-express-web](https://github.com/your-username/sensei-express-web) (Frontend) | [sensei-express-api](https://github.com/your-username/sensei-express-api) (Backend)
+-   Repository: [sensei-express-web](https://github.com/ReeceGoddard/my-portfolio/tree/master/apps/sensei-express-web) (Frontend) | [sensei-express-api](https://github.com/ReeceGoddard/my-portfolio/tree/master/apps/sensei-express-api) (Backend)
 -   Description: A full stack application for learning the Japanese alphabet and basic words. It uses React, TypeScript, Node.js, Express, Prisma, and MongoDB.
 
 ## 3. Currency Dash
 
--   Repository: [currency-dash](https://github.com/your-username/currency-dash)
+-   Repository: [currency-dash](https://github.com/ReeceGoddard/my-portfolio/tree/master/apps/currency-dash)
 -   Description: A frontend-only project built with React and TypeScript. Currency Dash provides real-time currency conversion using a free currency conversion API. It also implements caching with React Query and routing with React Router.
+-
 
-Feel free to explore each repository for more details and dive into the code to see how these applications were built. Happy coding!
+## 4. Verse
+
+-   Repository: [verse](https://github.com/ReeceGoddard/my-portfolio/tree/master/apps/verse)
+-   Description: A frontend-only project built with React and TypeScript. Verse is a poetry viewer app, showcasing a collection of classic poems. Long-term cache via React Query and routing with React Router.
+
+Feel free to explore each repository for more details and dive into the code to see how these applications were built.
 
 # How to run
 
@@ -40,11 +46,15 @@ npm run dev:my-website
 ```
 
 ```sh
-npm run dev:dev:currency-dash
+npm run dev:sensei-express
 ```
 
 ```sh
-npm run dev:sensei-express
+npm run dev:currency-dash
+```
+
+```sh
+npm run dev:verse
 ```
 
 ### Tools used
