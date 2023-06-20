@@ -1,0 +1,17 @@
+{
+    "name": "database",
+    "version": "0.0.0",
+    "main": "./index.ts",
+    "types": "./index.ts",
+    "type": "module",
+    "scripts": {},
+    "prisma": {
+        "seed": "ts-node ./seed.ts"
+    },
+    "dependencies": {},
+    "devDependencies": {
+        "@types/node": "^18.16.1",
+        "ts-node": "^10.9.1",
+        "typescript": "^5.0.4"
+    }
+}
