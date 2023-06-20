@@ -1,19 +1,8 @@
-:root {
-    --blue: rgb(0, 89, 255);
-    --light-blue: #e7efff;
-}
-
 .authors {
     max-width: 1024px;
     margin: 0 auto;
-    padding: 30px 30px 60vh;
+    padding: var(--page-padding);
     width: 100%;
-}
-
-.heading {
-    margin: 0;
-    margin-bottom: 14px;
-    color: rgb(47, 50, 57);
 }
 
 .search {
@@ -27,6 +16,7 @@
     border-radius: 0px;
     border: 0;
     color: rgb(47, 50, 57);
+    background: transparent;
     border-bottom: 3px solid rgb(99, 107, 126);
     transition: all 140ms ease-out;
 
@@ -101,14 +91,6 @@
 }
 
 @media screen and (min-width: 768px) {
-    .authors {
-        padding: calc(60px + 2vw) 60px 60vh;
-    }
-
-    .heading {
-        margin-bottom: 20px;
-    }
-
     .search {
         margin-bottom: 40px;
     }

@@ -3,15 +3,21 @@
     line-height: 1.5;
     font-weight: 400;
 
-    color-scheme: light dark;
+    color-scheme: dark light;
     color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
 
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
+
+    --background-color: rgb(255, 255, 255);
+    --blue: rgb(0, 89, 255);
+    --light-blue: #e7efff;
+    --dark-grey-blue: rgb(47, 50, 57);
+
+    --page-padding: 30px 30px 60vh;
 }
 
 * {
@@ -30,16 +36,20 @@ a:hover {
 body {
     padding: 0;
     margin: 0;
+    background: linear-gradient(to bottom, var(--background-color), white);
+    min-height: 100vh;
+    height: 100vh;
 }
 
 h1 {
     font-size: 3.2em;
     line-height: 1.1;
+    margin: 0 0 14px;
+    color: var(--dark-grey-blue);
 }
 
 button {
-    border-radius: 8px;
-    border: 1px solid transparent;
+    border: none;
     padding: 0.6em 1.2em;
     font-size: 1em;
     font-weight: 500;
@@ -47,9 +57,6 @@ button {
     background-color: #1a1a1a;
     cursor: pointer;
     transition: border-color 0.25s;
-}
-button:hover {
-    border-color: #646cff;
 }
 button:focus,
 button:focus-visible {
@@ -66,5 +73,15 @@ button:focus-visible {
     }
     button {
         background-color: #f9f9f9;
+    }
+}
+
+@media screen and (min-width: 768px) {
+    :root {
+        --page-padding: calc(60px + 2vw) 60px 60vh;
+    }
+
+    h1 {
+        margin-bottom: 20px;
     }
 }
