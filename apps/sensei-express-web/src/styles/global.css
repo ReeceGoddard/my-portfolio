@@ -27,7 +27,35 @@
     --large-box-shadow: 10px 10px 20px rgb(32 57 70 / 16%);
 
     --main-heading-color: var(--japan-red);
-    --express-circle-background: var(--main-heading-color);
+
+    --question-background: rgb(255 255 255 / 50%);
+    --question-color: var(--dark-blue);
+    --question-border-color: white;
+    --question-box-shadow: 10px 10px 20px rgb(32 57 70 / 16%);
+    --button-play-sound-border-color: var(--dark-blue);
+    --button-play-sound-background: rgb(255 255 255 / 50%);
+    --button-play-sound-box-shadow: 6px 6px 10px rgb(0 0 0 / 6%);
+    --button-play-sound-icon-fill: var(--dark-blue);
+    --button-play-sound-border-color-hover: var(--nice-blue);
+    --button-play-sound-background-hover: white;
+    --button-play-sound-icon-fill-hover: var(--nice-blue);
+
+    --choices-container-background: #dadcdd;
+    --choices-container-box-shadow: 4px 4px 10px rgb(0 0 0 / 10%) inset;
+    --choice-background: white;
+    --choice-box-shadow: 4px 4px 10px rgb(0 0 0 / 10%);
+    --choice-label-color: white;
+    --choice-label-color-hover: var(--nice-blue);
+    --choice-border-color: transparent;
+    --choice-hotkey-background: white;
+    --choice-hotkey-background-hover: var(--nice-blue);
+    --choice-hotkey-color: var(--dark-blue);
+    --choice-hotkey-color-hover: white;
+    --choice-hotkey-border-color: rgb(199, 207, 210);
+    --choice-hotkey-box-shadow: 2px 2px 5px rgb(0 0 0 / 6%);
+    --choice-hover-background: rgb(237, 237, 255);
+    --choice-hover-gradient-middle: rgb(237, 248, 255);
+    --choice-hover-gradient-outer: white;
 
     --dashboard-lesson-background-stop: white;
     --dashboard-lesson-label-color: var(--dark-blue);
@@ -176,7 +204,35 @@ button {
 
         --card-color: #262729;
         --card-heading-color: white;
-        /* --card-heading-faded-color: ; */
+
+        --question-background: #141518;
+        --question-color: #eeeeee;
+        --question-border-color: #38393e;
+        --question-box-shadow: 10px 10px 20px rgb(0 0 20 / 20%);
+        --button-play-sound-border-color: #38393e;
+        --button-play-sound-background: #141518;
+        --button-play-sound-box-shadow: 6px 6px 10px rgb(0 0 0 / 20%);
+        --button-play-sound-icon-fill: #eeeeee;
+        --button-play-sound-border-color-hover: var(--nice-blue);
+        --button-play-sound-background-hover: var(--nice-blue);
+        --button-play-sound-icon-fill-hover: white;
+
+        --choices-container-background: #141519;
+        --choices-container-box-shadow: 4px 4px 10px rgb(0 0 0 / 60%) inset;
+        --choice-background: #38393f;
+        --choice-box-shadow: 4px 4px 10px rgb(0 0 0 / 10%);
+        --choice-label-color: white;
+        --choice-label-color-hover: white;
+        --choice-border-color: transparent;
+        --choice-hotkey-background: #141519;
+        --choice-hotkey-background-hover: white;
+        --choice-hotkey-color: rgb(111 124 130);
+        --choice-hotkey-color-hover: var(--nice-blue);
+        --choice-hotkey-border-color: rgb(0 0 0);
+        --choice-hotkey-box-shadow: 4px 4px 6px rgb(0 0 0 / 20%);
+        --choice-hover-background: var(--nice-blue);
+        --choice-hover-gradient-middle: rgb(0, 98, 255);
+        --choice-hover-gradient-outer: var(--nice-blue);
 
         --badge-background: var(--off-white);
         --tooltip-background: white;
