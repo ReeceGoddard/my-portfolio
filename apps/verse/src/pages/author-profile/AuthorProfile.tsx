@@ -59,7 +59,7 @@ const AuthorProfile: React.FC = (): JSX.Element => {
                             <div className={styles.poemLinesWrapper}>
                                 <div className={styles.poemLines}>
                                     {poem.lines.map(line => (
-                                        <p className={styles.line} key={line}>
+                                        <p className={styles.line} key={line + Math.random()}>
                                             {line}
                                         </p>
                                     ))}
