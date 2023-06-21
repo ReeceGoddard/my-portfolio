@@ -1,6 +1,7 @@
 import { useAnimate } from 'framer-motion';
 import styles from './Choice.module.css';
-import { HTMLProps } from 'react';
+import { HTMLProps, useCallback, useEffect } from 'react';
+import { useAudioContext } from '@/providers/AudioProvider';
 
 interface ChoiceProps extends HTMLProps<HTMLButtonElement> {
     label: string;
@@ -11,6 +12,7 @@ interface ChoiceProps extends HTMLProps<HTMLButtonElement> {
 
 export const Choice = ({ label, choiceNumber, isCorrectAnswer, onChoiceSelected, className, ...rest }: ChoiceProps) => {
     const [scope, animate] = useAnimate();
+    const { playChoiceHoverSound } = useAudioContext();
 
     const handleMouseMove = (event: React.MouseEvent<HTMLButtonElement>) => {
         const { clientX, clientY } = event;
@@ -21,7 +23,7 @@ export const Choice = ({ label, choiceNumber, isCorrectAnswer, onChoiceSelected,
         document.documentElement.style.setProperty('--gradient-y', `${centerY}px`);
     };
 
-    const selectChoice = () => {
+    const selectChoice = useCallback(() => {
         const rgbVar = isCorrectAnswer ? '--bold-green-rgb-vals' : '--japan-red-rgb-vals';
         const duration = 0.3;
 
@@ -42,12 +44,33 @@ export const Choice = ({ label, choiceNumber, isCorrectAnswer, onChoiceSelected,
         );
 
         onChoiceSelected(label);
-    };
+    }, [animate, isCorrectAnswer, label, onChoiceSelected, scope]);
+
+    useEffect(() => {
+        const handleGlobalKeyDown = (event: KeyboardEvent) => {
+            // Skip if modifier key held
+            if (event.ctrlKey || event.altKey || event.shiftKey || event.metaKey) {
+                return;
+            }
+
+            // Check if the input is not focused and the user starts typing
+            if (event.key === choiceNumber.toString()) {
+                selectChoice();
+            }
+        };
+
+        document.addEventListener('keydown', handleGlobalKeyDown);
+
+        return () => {
+            document.removeEventListener('keydown', handleGlobalKeyDown);
+        };
+    }, [choiceNumber, selectChoice]);
 
     return (
         <button
             className={`${styles.choice} ${className ? className : ''}`}
             ref={scope}
+            onMouseEnter={playChoiceHoverSound}
             onMouseMove={handleMouseMove}
             {...rest}
             type={'button'}
