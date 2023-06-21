@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, HTMLProps, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, HTMLProps, useEffect, useRef, useState } from 'react';
 import styles from './Question.module.css';
 import { Choice } from './Choice';
 import { SoundSVG } from '@/components/SoundSVG';
@@ -63,19 +63,23 @@ export const Question = ({
         setUserAnswer(event.target.value);
     };
 
-    const handleSubmit = (event: FormEvent) => {
-        event.preventDefault();
-
+    const handleSubmit = () => {
         if (userAnswer.length === 0) return;
-
         handleUserAnswer(userAnswer);
         setUserAnswer('');
     };
 
+    const handleKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.key === 'Enter') {
+            handleSubmit();
+        }
+    };
+
     const handleUserAnswer = (userAnswer: string) => {
         if (onAnswer) {
-            const isCorrectAnswer = userAnswer === answer;
+            const isCorrectAnswer = userAnswer.toLowerCase() === answer.toLowerCase();
             const rgbVar = isCorrectAnswer ? '--bold-green-rgb-vals' : '--japan-red-rgb-vals';
+            const duration = 0.4;
 
             Promise.all([
                 playAnswerSound(isCorrectAnswer),
@@ -88,7 +92,7 @@ export const Question = ({
                                   `0 0 400px 200px rgb(var(${rgbVar}) / 0)`,
                               ],
                           },
-                          { duration: 0.3 }
+                          { duration }
                       )
                     : null,
                 animateQuestionText(
@@ -98,7 +102,7 @@ export const Question = ({
                         translate: ['0 0', `0 ${isCorrectAnswer ? '-20px' : '20px'}`],
                         color: [null, `${isCorrectAnswer ? 'var(--bold-green)' : 'var(--japan-red)'}`],
                     },
-                    { duration: 0.3 }
+                    { duration }
                 ),
             ]).then(() => {
                 onAnswer(userAnswer);
@@ -136,18 +140,20 @@ export const Question = ({
             </div>
 
             {choices.length === 0 ? (
-                <form className={styles.questionForm} onSubmit={handleSubmit}>
+                <div className={styles.writingAnswerWrapper}>
                     <input
                         ref={userInputRef}
                         className={styles.userAnswer}
                         type="text"
                         value={userAnswer}
                         onInput={handleInputChange}
+                        onSubmit={handleSubmit}
+                        onKeyDown={handleKeyDown}
                     />
-                    <button type="submit">
+                    <button type="button" onClick={handleSubmit}>
                         <SendSVG />
                     </button>
-                </form>
+                </div>
             ) : (
                 <div className={styles.choices}>
                     {choices.map((choice, index) => (

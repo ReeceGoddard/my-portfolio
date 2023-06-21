@@ -4,9 +4,7 @@
     align-items: center;
     justify-content: flex-start;
     gap: calc(1em + 4vh);
-    min-height: 100vh;
     padding: 6em 30px 0;
-    background: rgb(245, 243, 240);
 }
 
 .question-wrapper {
@@ -18,16 +16,16 @@
 
 .question {
     font-size: 6em;
-    color: var(--dark-blue);
+    color: var(--question-color);
     border-radius: 0.2em;
-    background: rgb(255 255 255 / 50%);
+    background: var(--question-background);
     height: 100%;
     padding: 0 0.25em 0.15em;
-    border: 3px solid white;
+    border: 3px solid var(--question-border-color);
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 10px 10px 20px rgb(32 57 70 / 16%);
+    box-shadow: var(--question-box-shadow);
 }
 
 button.play-sound {
@@ -36,28 +34,28 @@ button.play-sound {
     height: 3em;
     border-radius: 50%;
     padding: 0;
-    border: 2px solid var(--dark-blue);
-    background: rgb(255 255 255 / 50%);
-    box-shadow: 6px 6px 10px rgb(0 0 0 / 6%);
+    border: 2px solid var(--button-play-sound-border-color);
+    background: var(--button-play-sound-background);
+    box-shadow: var(--button-play-sound-box-shadow);
     top: 50%;
     right: 0;
     transform: translate(150%, -50%);
 
     & svg {
-        fill: var(--dark-blue);
+        fill: var(--button-play-sound-icon-fill);
     }
 
     &:hover {
-        border-color: var(--nice-blue);
-        background: white;
+        border-color: var(--button-play-sound-border-color-hover);
+        background: var(--button-play-sound-background-hover);
 
         & svg {
-            fill: var(--nice-blue);
+            fill: var(--button-play-sound-icon-fill-hover);
         }
     }
 }
 
-.question-form {
+.writing-answer-wrapper {
     position: relative;
 
     & input.user-answer {
@@ -78,7 +76,7 @@ button.play-sound {
         }
     }
 
-    & button[type='submit'] {
+    & button {
         position: absolute;
         right: 1em;
         top: 50%;
@@ -114,9 +112,9 @@ button.play-sound {
 }
 
 .choices {
-    background: #dadcdd;
+    background: var(--choices-container-background);
     border-radius: 1em;
-    box-shadow: 4px 4px 10px rgb(0 0 0 / 10%) inset;
+    box-shadow: var(--choices-container-box-shadow);
     display: grid;
     grid-template-columns: repeat(2, 1fr); /* Two columns with equal width */
     grid-template-rows: repeat(2, 1fr); /* Two rows with equal height */
