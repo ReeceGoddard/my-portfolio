@@ -20,7 +20,7 @@ button.back {
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 5px;
-    color: #5b6d7b;
+    color: var(--mid-grey-blue);
     transition: var(--transition);
 
     & svg {
