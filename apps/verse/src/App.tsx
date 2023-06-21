@@ -1,4 +1,4 @@
-import { lazy } from 'react';
+import { Suspense, lazy } from 'react';
 import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client';
 import { QueryClient } from '@tanstack/react-query';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
@@ -41,7 +41,9 @@ function App() {
 
     return (
         <PersistQueryClientProvider client={queryClient} persistOptions={{ persister, maxAge: FIVE_DAYS }}>
-            <RouterProvider router={router} />
+            <Suspense fallback={<div>Loading... </div>}>
+                <RouterProvider router={router} />
+            </Suspense>
         </PersistQueryClientProvider>
     );
 }
