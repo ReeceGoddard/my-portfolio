@@ -1,38 +1,29 @@
 import { LoaderFunctionArgs, createBrowserRouter, redirect } from 'react-router-dom';
 
-// import { Landing } from '@/features/misc';
-// import { useAuth } from '@/lib/auth';
-
-import { protectedRoutes } from './protected';
-import { publicRoutes } from './public';
 import { DashboardPage } from '@pages/dashboard/DashboardPage';
 import { LessonPage } from '@pages/lesson/LessonPage';
 import { queryClient } from '@/lib/react-query';
-import { QueryClient } from '@tanstack/react-query';
-import { LessonType, getLesson } from '@/pages/lesson/api/getLesson';
+import { LessonLevel, LessonType, getLesson } from '@/pages/lesson/api/getLesson';
 import { ResultsPage } from '@/pages/results/ResultsPage';
-
-export const AppRoutes = () => {
-    // const auth = useAuth();
-    // const auth = { user: null };
-    // const commonRoutes = [{ path: '/', element: <LandingPage /> }];
-    // const routes = auth.user ? protectedRoutes : publicRoutes;
-    // const element = useRoutes([...routes, ...commonRoutes]);
-    // return <>{element}</>;
-};
+import { HiraganaBoard } from '@/pages/board/HiraganaBoard';
+import { BoardType, kanaCharsQuery } from '@/pages/board/api/getKanaChars';
 
 export const lessonQuery = (lessonType: LessonType = 'writing') => ({
     queryKey: ['lesson'],
     queryFn: () => getLesson(lessonType),
 });
 
-const lessonLoader =
-    (queryClient: QueryClient) =>
-    async ({ params }: LoaderFunctionArgs) => {
-        if (!params.lessonType) throw new Error('Lesson type not provided.');
-        const lesson = await queryClient.ensureQueryData(lessonQuery(params.lessonType));
-        return lesson;
-    };
+const lessonLoader = async ({ params }: LoaderFunctionArgs) => {
+    if (!params.lessonType) throw new Error('Lesson type not provided.');
+    const lesson = await getLesson(params.lessonLevel as LessonLevel, params.lessonType as LessonType);
+    return lesson;
+};
+
+const boardLoader = async ({ params }: LoaderFunctionArgs) => {
+    if (!params.boardType) throw new Error('Board type type not provided.');
+    const chars = await queryClient.ensureQueryData(kanaCharsQuery({ boardType: params.boardType as BoardType }));
+    return chars;
+};
 
 export const router = createBrowserRouter([
     {
@@ -46,12 +37,17 @@ export const router = createBrowserRouter([
         Component: DashboardPage,
     },
     {
-        path: '/lesson/:lessonType',
-        loader: lessonLoader(queryClient),
-        Component: LessonPage,
+        path: '/lesson/hiragana/:lessonLevel/:lessonType',
+        loader: lessonLoader,
+        element: <LessonPage />,
     },
     {
-        path: 'results',
+        path: '/results',
         Component: ResultsPage,
+    },
+    {
+        path: '/board/:boardType',
+        element: <HiraganaBoard />,
+        loader: boardLoader,
     },
 ]);
