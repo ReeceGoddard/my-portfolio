@@ -2,7 +2,7 @@ import { HTMLProps } from 'react';
 import styles from './Progress.module.css';
 
 type Segment = {
-    result?: boolean;
+    result: boolean | null;
 };
 
 export interface ProgressProps extends HTMLProps<HTMLDivElement> {
@@ -22,11 +22,7 @@ export const Progress = ({ segments, currentSegment, endLesson, className, ...re
                     <div
                         key={index}
                         className={`${styles.segment} ${
-                            segment.result !== undefined
-                                ? segment.result === true
-                                    ? styles.correct
-                                    : styles.incorrect
-                                : ''
+                            segment.result !== null ? (segment.result === true ? styles.correct : styles.incorrect) : ''
                         }`}
                     ></div>
                 ))}

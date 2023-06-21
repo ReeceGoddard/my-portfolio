@@ -63,6 +63,11 @@ button.end-lesson {
     border-radius: 0.4em;
     font-size: 0.6em;
     letter-spacing: 0.05em;
+
+    &:hover {
+        background: var(--nice-blue);
+        color: white;
+    }
 }
 
 .fade {
