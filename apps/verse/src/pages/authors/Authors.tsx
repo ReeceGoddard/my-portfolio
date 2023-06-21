@@ -14,7 +14,10 @@ const Authors = () => {
 
     return (
         <div className={styles.authors}>
-            <h1 className={styles.heading}>Poets</h1>
+            <h1 className={styles.heading}>Verse</h1>
+            <h4 className={styles.subheading}>
+                <i>Choose a poet to view their works</i>
+            </h4>
             <input
                 className={styles.search}
                 type="text"

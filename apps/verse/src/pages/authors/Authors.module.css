@@ -5,6 +5,16 @@
     width: 100%;
 }
 
+.heading {
+    background: linear-gradient(0deg, #be4b71, #9f87b8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.subheading {
+    color: var(--mid-grey-blue);
+}
+
 .search {
     display: block;
     width: 100%;
