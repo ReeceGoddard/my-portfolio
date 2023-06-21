@@ -26,12 +26,11 @@
     border-radius: 0px;
     border: 0;
     color: rgb(47, 50, 57);
-    background: transparent;
     border-bottom: 3px solid rgb(99, 107, 126);
     transition: all 140ms ease-out;
     position: sticky;
-    top: 0px;
-    background: white;
+    top: -1px;
+    background: radial-gradient(40% 80% at 34% 100%, white, white);
 
     &::placeholder {
         color: rgb(99, 107, 126);
@@ -43,7 +42,7 @@
     &:not(:placeholder-shown),
     &:hover,
     &:focus {
-        background: radial-gradient(40% 80% at 34% 100%, var(--light-blue), transparent);
+        background: radial-gradient(40% 80% at 34% 100%, var(--light-blue), white);
     }
 
     &:hover {
@@ -111,7 +110,7 @@
         &:not(:placeholder-shown),
         &:hover,
         &:focus {
-            background: radial-gradient(40% 80% at 50% 100%, var(--light-blue), transparent);
+            background: radial-gradient(40% 80% at 50% 100%, var(--light-blue), white);
         }
     }
 
