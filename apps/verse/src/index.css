@@ -12,11 +12,33 @@
     -moz-osx-font-smoothing: grayscale;
     -webkit-text-size-adjust: 100%;
 
-    --background-color: rgb(255, 255, 255);
+    --background-color-top: rgb(255, 255, 255);
+    --background-color-bottom: rgb(255, 255, 255);
     --blue: rgb(0, 89, 255);
     --light-blue: #e7efff;
     --mid-grey-blue: #5b6d7b;
     --dark-grey-blue: rgb(47, 50, 57);
+
+    --h1-color: var(--dark-grey-blue);
+    --anchor-color: black;
+
+    --logo-color-top: #be4b71;
+    --logo-color-bottom: #9f87b8;
+
+    --back-button-color: var(--mid-grey-blue);
+    --back-button-border-color: var(--dark-grey-blue);
+    --back-button-icon-color: var(--dark-grey-blue);
+    --back-button-color-hover: var(--blue);
+    --back-button-border-color-hover: var(--blue);
+    --back-button-icon-color-hover: var(--blue);
+
+    --search-radial-background-color: var(--light-blue);
+
+    --poem-border-color: rgb(0 0 0 / 10%);
+    --poem-heading-color: var(--dark-grey-blue);
+    --poem-background-color-hover: rgb(255 255 255 / 30%);
+    --poem-open-background-color: white;
+    --poem-line-color: var(--dark-grey-blue);
 
     --page-padding: 30px 30px 60vh;
     --transition: all 140ms ease-out;
@@ -28,27 +50,30 @@
 
 a {
     font-weight: 500;
-    color: #646cff;
-    text-decoration: inherit;
+    color: var(--anchor-color);
+    text-decoration: underline;
 }
 a:hover {
-    color: #535bf2;
+    color: var(--blue);
+}
+
+html {
+    background: var(--background-color-bottom);
 }
 
 body {
     padding: 0;
     margin: 0;
-    background: linear-gradient(to bottom, var(--background-color), white);
+    background: linear-gradient(to bottom, var(--background-color-top), var(--background-color-bottom));
     min-height: 100vh;
     height: 100vh;
-    overflow-y: scroll;
 }
 
 h1 {
     font-size: 3.2em;
     line-height: 1.1;
     margin: 0 0 14px;
-    color: var(--dark-grey-blue);
+    color: var(--h1-color);
 }
 
 button {
@@ -66,10 +91,31 @@ button:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
 }
 
-@media (prefers-color-scheme: light) {
+@media (prefers-color-scheme: dark) {
     :root {
         color: #213547;
         background-color: #ffffff;
+
+        --background-color-top: #171719;
+        --background-color-bottom: #202125;
+
+        --h1-color: var(--light-blue);
+        --anchor-color: var(--light-blue);
+
+        --logo-color-top: #ae9410;
+        --logo-color-bottom: #3b74e6;
+
+        --back-button-color: var(--light-blue);
+        --back-button-border-color: var(--light-blue);
+        --back-button-icon-color: var(--light-blue);
+
+        --search-radial-background-color: rgb(255 255 255 / 3%);
+
+        --poem-border-color: rgb(255 255 255 / 8%);
+        --poem-heading-color: var(--light-blue);
+        --poem-background-color-hover: rgb(255 255 255 / 4%);
+        --poem-open-background-color: #18191d;
+        --poem-line-color: #e9ecf0;
     }
     a:hover {
         color: #747bff;

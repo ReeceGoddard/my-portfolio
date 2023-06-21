@@ -6,7 +6,7 @@
 }
 
 .heading {
-    background: linear-gradient(0deg, #be4b71, #9f87b8);
+    background: linear-gradient(to bottom, var(--logo-color-top), var(--logo-color-bottom));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -30,7 +30,7 @@
     transition: all 140ms ease-out;
     position: sticky;
     top: -1px;
-    background: radial-gradient(40% 80% at 34% 100%, white, white);
+    background: radial-gradient(40% 80% at 34% 100%, var(--background-color-top), var(--background-color-top));
 
     &::placeholder {
         color: rgb(99, 107, 126);
@@ -42,7 +42,11 @@
     &:not(:placeholder-shown),
     &:hover,
     &:focus {
-        background: radial-gradient(40% 80% at 34% 100%, var(--light-blue), white);
+        background: radial-gradient(
+            40% 80% at 34% 100%,
+            var(--search-radial-background-color),
+            var(--background-color-top)
+        );
     }
 
     &:hover {
@@ -77,17 +81,15 @@
     gap: 0px;
 
     & .author {
-        background: transparent;
-        border-radius: 4px;
         display: flex;
         align-items: center;
         justify-content: flex-start;
+        background: transparent;
+        border-radius: 4px;
         height: 80px;
         padding: 0 10px;
         font-weight: 600;
-        box-shadow: 0 0 0 rgb(0 0 0 /0%);
-        color: black;
-        text-decoration: underline;
+        box-shadow: 0 0 0 rgb(0 0 0 / 0%);
         text-shadow: 2px 2px 2px rgb(0 0 0 / 0%);
 
         &:hover {
@@ -110,7 +112,11 @@
         &:not(:placeholder-shown),
         &:hover,
         &:focus {
-            background: radial-gradient(40% 80% at 50% 100%, var(--light-blue), white);
+            background: radial-gradient(
+                40% 80% at 50% 100%,
+                var(--search-radial-background-color),
+                var(--background-color-top)
+            );
         }
     }
 

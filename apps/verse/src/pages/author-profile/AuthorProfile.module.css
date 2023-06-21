@@ -1,7 +1,6 @@
 .authorProfile {
     max-width: 1024px;
-    padding-top: 60px;
-    margin: 0 auto 60vh;
+    margin: 0 auto;
     padding: var(--page-padding);
 }
 
@@ -14,28 +13,28 @@ button.back {
     width: 100%;
     padding: 0;
     border-radius: 3px;
-    border-bottom: 6px solid var(--dark-grey-blue);
+    border-bottom: 6px solid var(--back-button-border-color);
     height: 80px;
     font-weight: 700;
     font-size: 14px;
     text-transform: uppercase;
     letter-spacing: 5px;
-    color: var(--mid-grey-blue);
+    color: var(--back-button-color);
     transition: var(--transition);
 
     & svg {
         height: 32px;
         width: fit-content;
-        fill: var(--dark-grey-blue);
+        fill: var(--back-button-icon-color);
         transition: var(--transition);
     }
 
     &:hover {
-        color: var(--blue);
-        border-color: var(--blue);
+        color: var(--back-button-color-hover);
+        border-color: var(--back-button-border-color-hover);
 
         & svg {
-            fill: var(--blue);
+            fill: var(--back-button-icon-color-hover);
         }
     }
 
@@ -56,7 +55,7 @@ button.back {
         flex-direction: column;
         align-items: flex-start;
         font-weight: 600;
-        border: 3px solid rgb(0 0 0 / 10%);
+        border: 3px solid var(--poem-border-color);
         border-radius: 6px;
         transition: var(--transition);
         overflow: hidden;
@@ -79,6 +78,7 @@ button.back {
                 align-items: center;
                 font-weight: 500;
                 font-size: 18px;
+                color: var(--poem-line-color);
             }
         }
 
@@ -86,22 +86,23 @@ button.back {
             display: flex;
             align-items: center;
             justify-content: space-between;
+            width: 100%;
             gap: 20px;
             text-align: left;
             line-height: 1.5;
-            width: 100%;
             min-height: 80px;
             font-weight: 700;
             font-size: 20px;
             padding: 30px;
             background: transparent;
-            color: var(--dark-grey-blue);
+            color: var(--poem-heading-color);
             transition: var(--transition);
 
             &:hover {
-                background: rgb(255 255 255 / 30%);
+                background: linear-gradient(to bottom, var(--poem-background-color-hover), transparent);
                 color: var(--blue);
                 cursor: pointer;
+                text-shadow: 2px 2px 6px rgb(0 0 0 / 20%);
 
                 & svg.chevronIcon {
                     fill: var(--blue);
@@ -120,14 +121,14 @@ button.back {
             & svg.chevronIcon {
                 width: 32px;
                 aspect-ratio: 1 / 1;
-                fill: #aaaaaa;
+                fill: var(--poem-heading-color);
                 transition: var(--transition);
                 flex: 0 0 auto;
             }
         }
 
         &.poemVisible {
-            background: white;
+            background: var(--poem-open-background-color);
 
             & .poemLinesWrapper {
                 grid-template-rows: 1fr;
@@ -163,7 +164,5 @@ button.back {
         padding-right: 100px;
         width: auto;
         border-radius: 0px;
-        border: 0;
-        border-bottom: 6px solid var(--dark-grey-blue);
     }
 }
