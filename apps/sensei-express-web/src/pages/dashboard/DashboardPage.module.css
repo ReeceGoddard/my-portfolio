@@ -1,5 +1,4 @@
 .page-container {
-    background: var(--main-background);
 }
 
 .content-wrapper {
@@ -84,7 +83,7 @@ section.lessons {
     .options {
         display: flex;
         flex-direction: column;
-        gap: 2em;
+        gap: 3em;
     }
 }
 
