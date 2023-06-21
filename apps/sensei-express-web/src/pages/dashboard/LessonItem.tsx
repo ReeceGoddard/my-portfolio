@@ -13,7 +13,11 @@ export const LessonItem = ({ label, options }: LessonItemProps): JSX.Element => 
             <div className={styles.line} />
             <div className={styles.options}>
                 {options.map(option => (
-                    <DashboardItem key={option.type} label={label} option={{ type: option.type, to: option.to }} />
+                    <DashboardItem
+                        key={option.type}
+                        label={label}
+                        option={{ type: option.type, url: option.url, onItemSelected: option.onItemSelected }}
+                    />
                 ))}
             </div>
         </div>
