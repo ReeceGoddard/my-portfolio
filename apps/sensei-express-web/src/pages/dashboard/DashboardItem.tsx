@@ -1,8 +1,7 @@
 import { MultipleChoiceSVG } from '@/components/MultipleChoiceSVG';
 import { useAudioContext } from '@/providers/AudioProvider';
-import { Link, To } from 'react-router-dom';
-import styles from './DashboardItem.module.css';
 import { PencilSVG } from '@/components/PencilSVG';
+import styles from './DashboardItem.module.css';
 
 export type DashboardItemLinkType = 'multipleChoice' | 'writing' | 'mixed' | 'board';
 
@@ -21,7 +20,8 @@ const optionLabels: Record<DashboardItemLinkType, string> = {
 
 export interface IconLink {
     type?: DashboardItemLinkType;
-    to: To;
+    url: string;
+    onItemSelected: (url: string) => void;
 }
 export interface DashboardItemProps {
     label?: string;
@@ -29,14 +29,13 @@ export interface DashboardItemProps {
 }
 
 export const DashboardItem = ({ label, option }: DashboardItemProps) => {
-    const { playMenuHoverSound, playStartLessonSound } = useAudioContext();
+    const { playMenuHoverSound } = useAudioContext();
 
     return (
-        <Link
+        <button
             className={`${styles.option} ${option.type === 'board' ? styles.board : ''}`}
             onMouseEnter={playMenuHoverSound}
-            onClick={playStartLessonSound}
-            to={option.to}
+            onMouseDown={() => option.onItemSelected(option.url)}
         >
             <div className={styles.optionContentWrapper}>
                 {option.type ? iconComponents[option.type] : null}
@@ -44,6 +43,6 @@ export const DashboardItem = ({ label, option }: DashboardItemProps) => {
                     {option.type && option.type !== 'board' ? optionLabels[option.type] : label}
                 </div>
             </div>
-        </Link>
+        </button>
     );
 };

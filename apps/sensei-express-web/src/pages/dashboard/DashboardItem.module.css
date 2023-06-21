@@ -18,7 +18,16 @@
 }
 
 .option {
+    height: auto;
+    display: block;
+    border: 0;
+    padding: 0;
+    font-size: unset;
+    border-radius: 0;
+    font-weight: unset;
     transition: var(--transition);
+    background: none;
+    text-shadow: 2px 2px 2px hsla(0, 0%, 0%, 0);
 
     & .option-content-wrapper {
         display: flex;
@@ -42,6 +51,9 @@
     }
 
     &:hover {
+        background: none;
+        box-shadow: none;
+
         & .option-content-wrapper {
             border-color: var(--nice-blue);
             box-shadow: var(--large-box-shadow);
@@ -51,6 +63,13 @@
 
         & .option-label {
             color: var(--dashboard-option-color-hover);
+        }
+    }
+
+    &:focus {
+        outline: none;
+        & .option-content-wrapper {
+            outline: auto;
         }
     }
 
