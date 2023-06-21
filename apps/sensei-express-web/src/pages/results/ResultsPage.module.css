@@ -1,0 +1,100 @@
+.results-page-container {
+    padding: 3em 1em 60vh;
+    background: var(--main-background);
+    min-height: 100lvh;
+    margin: auto;
+    max-width: 520px;
+}
+
+.score-message {
+    text-align: center;
+    color: var(--ink);
+    font-size: 2em;
+    font-weight: 900;
+    margin-bottom: 1em;
+}
+
+.results-header {
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    margin-bottom: 1em;
+    padding-right: 1em;
+}
+
+.main-heading {
+    /* text-align: center; */
+    font-size: 1em;
+    color: var(--dark-blue);
+    font-weight: 900;
+}
+
+.sub-heading {
+    font-size: 1em;
+    font-weight: 900;
+    /* text-align: center; */
+    color: var(--dark-blue);
+}
+
+.results {
+    background: rgb(255 255 255 / 80%);
+    border-radius: 0.6em;
+    padding: 0.2em 0;
+    box-shadow: var(--main-box-shadow);
+}
+
+.no-answers-label {
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    color: var(--med-grey);
+}
+
+section.post-lesson {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 2em;
+
+    & .actions {
+        display: flex;
+        flex-direction: column;
+        gap: 1em;
+        width: 100%;
+
+        & a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgb(255 255 255 / 80%);
+            text-align: center;
+            color: var(--nice-blue);
+            font-weight: 900;
+            font-size: 1.2em;
+            height: 4em;
+            padding: 0 1em;
+            border-radius: 0.6em;
+            box-shadow: var(--main-box-shadow);
+            transition: var(--transition);
+
+            &.ghost {
+                background: transparent;
+                color: var(--med-grey);
+                box-shadow: none;
+            }
+
+            &:hover {
+                background: var(--nice-blue);
+                color: white;
+                box-shadow: var(--large-box-shadow);
+            }
+        }
+    }
+}
+
+@media screen and (min-width: 1360px) {
+    .results-page-container {
+        padding-top: calc(4em + 4vw);
+    }
+}
