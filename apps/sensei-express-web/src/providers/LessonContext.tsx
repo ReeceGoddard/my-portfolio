@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { Lesson, Question } from '@/pages/lesson/types';
+import { Lesson, Question, QuestionWithAnswer } from '@/pages/lesson/types';
 import React, { ReactNode, createContext, useContext, useMemo, useRef, useState } from 'react';
 
 interface LessonContextType {
-    currentLesson: Lesson | null;
-    initLesson: (lesson: Lesson) => void;
+    currentLesson: QuestionWithAnswer[] | null;
+    initLesson: (questions: Question[]) => void;
     clearLesson: () => void;
     answerCurrentQuestion: (answer: string) => boolean;
-    currentQuestion: Question | null;
+    currentQuestion: QuestionWithAnswer | null;
     numberOfQuestions: number;
     audioElement: React.RefObject<HTMLAudioElement> | null;
     playAnswerSound: (isCorrect: boolean) => Promise<void>;
@@ -31,38 +31,45 @@ const LessonContext = createContext<LessonContextType>({
 export const useLessonContext = (): LessonContextType => useContext(LessonContext);
 
 export const LessonProvider = ({ children }: { children: ReactNode }) => {
-    const [currentLesson, setCurrentLesson] = useState<Lesson | null>(null);
+    const [currentLesson, setCurrentLesson] = useState<QuestionWithAnswer[] | null>(null);
     const audioElement = useRef<HTMLAudioElement>(null);
 
-    const currentQuestion: Question | null = useMemo(() => {
-        const numOfAnswers = currentLesson?.questions.filter(question => question.userAnswer).length;
-        return currentLesson?.questions[numOfAnswers || 0] || null;
+    const currentQuestion: QuestionWithAnswer | null = useMemo(() => {
+        const numOfAnswers = currentLesson?.filter(question => question.userAnswer).length;
+        return currentLesson?.[numOfAnswers || 0] || null;
     }, [currentLesson]);
 
     const numberOfQuestions: number = useMemo(() => {
-        return currentLesson?.questions.length || 0;
+        return currentLesson?.length || 0;
     }, [currentLesson]);
 
-    const initLesson = (lesson: Lesson) => {
-        setCurrentLesson(lesson);
+    const initLesson = (questions: Question[]) => {
+        const questionsWithAnswers: QuestionWithAnswer[] = questions.map(question => ({
+            question,
+            isCorrect: null,
+            userAnswer: null,
+            userID: '1',
+        }));
+
+        setCurrentLesson(questionsWithAnswers);
     };
 
     const answerCurrentQuestion = (userAnswer: string): boolean => {
         let isCorrect = false;
 
-        const updatedQuestions = currentLesson?.questions.map(question => {
-            if (question.id === currentQuestion?.id) {
+        const updatedQuestions: QuestionWithAnswer[] | undefined = currentLesson?.map(lessonQuestion => {
+            if (lessonQuestion.question.charID === currentQuestion?.question.charID) {
                 // Check correctness
-                isCorrect = userAnswer === question.answer;
-                return { ...question, userAnswer, isCorrect };
-            }
+                isCorrect = userAnswer.toLowerCase() === lessonQuestion.question.answer.toLowerCase();
 
-            return question;
+                return { ...lessonQuestion, userAnswer, isCorrect };
+            }
+            return lessonQuestion;
         });
 
         // Set state
         if (currentLesson && updatedQuestions) {
-            setCurrentLesson({ id: currentLesson.id, createdAt: currentLesson.createdAt, questions: updatedQuestions });
+            setCurrentLesson(updatedQuestions);
         }
 
         return isCorrect;
