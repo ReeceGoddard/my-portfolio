@@ -2,22 +2,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background: white;
+    background: var(--choice-background);
     height: 3em;
     font-size: 2em;
     border-radius: 0.2em;
-    box-shadow: 4px 4px 10px rgb(0 0 0 / 10%);
+    box-shadow: var(--choice-box-shadow);
     font-weight: 800;
     position: relative;
     transition: var(--transition);
-    border: 0.1em solid transparent;
+    border: 0.1em solid var(--choice-border-color);
     overflow: hidden;
     text-transform: uppercase;
-    color: var(--dark-blue);
+    color: var(--choice-color);
 
     &:hover {
         background: rgb(237, 237, 255);
-        color: var(--nice-blue);
+        background: var(--choice-hover-background);
+        color: var(--choice-label-color-hover);
         border: 0.1em solid var(--nice-blue);
         cursor: pointer;
         scale: 1.05;
@@ -28,9 +29,9 @@
         }
 
         & .hotkey {
-            background: var(--nice-blue);
+            background: var(--choice-hotkey-background-hover);
             border-color: transparent;
-            color: white;
+            color: var(--choice-hotkey-color-hover);
         }
     }
 
@@ -45,13 +46,18 @@
         top: 0;
         width: 100%;
         height: 100%;
-        background: radial-gradient(circle at var(--gradient-x) var(--gradient-y), rgb(237, 248, 255), white);
+        background: radial-gradient(
+            circle at var(--gradient-x) var(--gradient-y),
+            var(--choice-hover-gradient-middle),
+            var(--choice-hover-gradient-outer)
+        );
         opacity: 0;
         transition: var(--transition);
         z-index: -1;
     }
 
     & .label {
+        padding-bottom: 2px;
     }
 
     & .hotkey {
@@ -59,9 +65,9 @@
         top: 0.5em;
         left: 0.5em;
         font-size: 0.35em;
-        background: white;
-        border: 1px solid rgb(199, 207, 210);
-        box-shadow: 2px 2px 5px rgb(0 0 0 / 6%);
+        background: var(--choice-hotkey-background);
+        border: 1px solid var(--choice-hotkey-border-color);
+        box-shadow: var(--choice-hotkey-box-shadow);
         height: 1.8em;
         width: 1.8em;
         display: flex;
@@ -69,7 +75,7 @@
         justify-content: center;
         border-radius: 0.2em;
         font-weight: 800;
-        color: var(--dark-blue);
+        color: var(--choice-hotkey-color);
         transition: var(--transition);
     }
 }
