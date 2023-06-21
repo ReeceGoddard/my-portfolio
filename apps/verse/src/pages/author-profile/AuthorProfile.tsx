@@ -13,8 +13,10 @@ const AuthorProfile: React.FC = (): JSX.Element => {
     useEffect(() => {
         const titles: [[number, boolean]] = poems?.map((_, index) => [index, false]) ?? [];
         const map: Map<number, boolean> = new Map(titles);
-
         setPoemsToggleStatus(map);
+        document.documentElement.scrollTo({
+            top: 0,
+        });
     }, [poems]);
 
     return (
