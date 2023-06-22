@@ -58,7 +58,7 @@ export const LessonProvider = ({ children }: { children: ReactNode }) => {
             question,
             isCorrect: null,
             userAnswer: null,
-            userID: '1',
+            userID: '6494c4a6b2795a4bba82907f',
         }));
 
         setCurrentLesson(questionsWithAnswers);
