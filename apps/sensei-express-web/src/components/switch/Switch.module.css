@@ -1,13 +1,19 @@
 :root {
+    --switch-height: 20px;
+    --switch-width: 32px;
     --switch-padding: 3px;
     --switch-border-width: 2px;
-    --switch-border-color: var(--dark-blue);
-    --switch-background: white;
-    --switch-toggle-background: var(--dark-blue);
+    --switch-border-color: var(--med-grey);
+    --switch-background: rgb(255 255 255 / 0%);
+    --switch-toggle-background: var(--med-grey);
+    --switch-label-color: var(--med-grey);
 
-    --switch__checked--background: white;
+    --switch__hover--background: white;
+
+    --switch__checked--background: rgb(255 255 255 / 100%);
     --switch__checked--border-color: var(--nice-blue);
     --switch__checked--toggle-background: var(--nice-blue);
+    --switch__checked--label-color: var(--nice-blue);
 }
 
 .switchWrapper {
@@ -25,15 +31,19 @@
 
 .switchLabel {
     display: block;
-    width: 40px;
-    height: 24px;
+    width: var(--switch-width);
+    height: var(--switch-height);
     border: var(--switch-border-width) solid var(--switch-border-color);
-    box-shadow: var(--button-play-sound-box-shadow);
     background: var(--switch-background);
     border-radius: 100px;
     text-indent: -9999px;
     position: relative;
-    cursor: pointer;
+    transition: var(--transition);
+
+    &:hover {
+        cursor: pointer;
+        background: var(--switch__hover--background);
+    }
 
     &:after {
         content: '';
@@ -50,8 +60,13 @@
 }
 
 .switchInput:checked + .switchLabel {
-    background: var(--switch-background__checked);
+    background: var(--switch__checked--background);
     border-color: var(--switch__checked--border-color);
+    box-shadow: var(--button-play-sound-box-shadow);
+
+    &:hover {
+        background: var(--switch__hover--background);
+    }
 
     &:after {
         background: var(--switch__checked--toggle-background);
@@ -69,8 +84,18 @@
 
 .label {
     font-size: 0.5em;
-    font-weight: 600;
-    color: var(--dark-blue);
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
+    font-weight: 800;
+    letter-spacing: 0.1em;
+    color: var(--switch-label-color);
+    transition: var(--transition);
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.switchWrapper.checked {
+    & .label {
+        color: var(--switch__checked--label-color);
+    }
 }

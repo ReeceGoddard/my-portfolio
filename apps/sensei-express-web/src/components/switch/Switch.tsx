@@ -8,7 +8,7 @@ interface SwitchProps {
 
 export const Switch = ({ checked, onChange, label }: SwitchProps) => {
     return (
-        <div className={styles.switchWrapper}>
+        <div className={`${styles.switchWrapper} ${checked ? styles.checked : null}`}>
             <input type="checkbox" id="switch" className={styles.switchInput} checked={checked} onChange={onChange} />
             <label className={styles.switchLabel} htmlFor="switch" />
             {label ? (
