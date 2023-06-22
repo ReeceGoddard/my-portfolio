@@ -72,7 +72,11 @@ export const DashboardPage = (): JSX.Element => {
                                     url: `/lesson/hiragana/vowels/multi`,
                                     onItemSelected: handleItemSelected,
                                 },
-                                { type: 'writing', url: '/lesson/writing', onItemSelected: handleItemSelected },
+                                {
+                                    type: 'writing',
+                                    url: '/lesson/hiragana/vowels/writing',
+                                    onItemSelected: handleItemSelected,
+                                },
                             ]}
                         />
                         <LessonItem
