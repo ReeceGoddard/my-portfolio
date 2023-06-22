@@ -8,7 +8,8 @@ import { useLessonContext } from '@/providers/LessonContext';
 import { AnimatePresence, motion, useAnimate } from 'framer-motion';
 
 export const LessonPage = () => {
-    const { initLesson, currentLesson, currentQuestion, answerCurrentQuestion } = useLessonContext();
+    const { initLesson, currentLesson, currentQuestion, currentQuestionIndex, answerCurrentQuestion } =
+        useLessonContext();
     const lesson = useLoaderData() as Lesson;
     const navigate = useNavigate();
     const [activeQuestion, setActiveQuestion] = useState(1);
@@ -73,7 +74,7 @@ export const LessonPage = () => {
                             <div className={styles.questions}>
                                 {currentQuestion ? (
                                     <Question
-                                        key={currentQuestion?.question.charID}
+                                        key={currentQuestionIndex}
                                         className={styles.question}
                                         question={currentQuestion.question.question}
                                         answer={currentQuestion.question.answer}
