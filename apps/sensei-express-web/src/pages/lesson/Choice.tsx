@@ -1,7 +1,7 @@
-import { useAnimate } from 'framer-motion';
-import styles from './Choice.module.css';
 import { HTMLProps, useCallback, useEffect } from 'react';
-import { useAudioContext } from '@/providers/AudioProvider';
+import { useAnimate } from 'framer-motion';
+import { useAudioContext } from '@providers/AudioProvider';
+import styles from './Choice.module.css';
 
 interface ChoiceProps extends HTMLProps<HTMLButtonElement> {
     label: string;

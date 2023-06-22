@@ -1,10 +1,10 @@
-import { ChangeEvent, HTMLProps, useCallback, useEffect, useRef, useState } from 'react';
-import styles from './Question.module.css';
-import { Choice } from './Choice';
-import { SoundSVG } from '@/components/SoundSVG';
+import { ChangeEvent, HTMLProps, useEffect, useRef, useState } from 'react';
 import { useAnimate } from 'framer-motion';
 import { useLessonContext } from '@providers/LessonContext';
-import { SendSVG } from '@/components/SendSVG';
+import { SoundSVG } from '@components/icons/SoundSVG';
+import { SendSVG } from '@components/icons/SendSVG';
+import { Choice } from './Choice';
+import styles from './Question.module.css';
 
 interface QuestionProps extends HTMLProps<HTMLDivElement> {
     question: string;

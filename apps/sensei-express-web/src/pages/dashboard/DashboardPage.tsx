@@ -1,12 +1,12 @@
 import styles from './DashboardPage.module.css';
-import { MenuSVG } from '@/components/MenuSVG';
-import { LogoSVG } from '@/components/LogoSVG';
+import { MenuSVG } from '@components/icons/MenuSVG';
+import { LogoSVG } from '@components/icons/LogoSVG';
 import { useEffect, useRef } from 'react';
 import hoverSound from '@assets/sounds/hover.wav';
 import startSound from '@assets/sounds/start.wav';
 import { DashboardItem } from './DashboardItem';
 import { LessonItem } from './LessonItem';
-import { useAudioContext } from '@/providers/AudioProvider';
+import { useAudioContext } from '@providers/AudioProvider';
 import { useNavigate } from 'react-router-dom';
 import { useAnimate } from 'framer-motion';
 

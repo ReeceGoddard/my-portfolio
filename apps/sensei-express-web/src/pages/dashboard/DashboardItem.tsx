@@ -1,6 +1,6 @@
-import { MultipleChoiceSVG } from '@/components/MultipleChoiceSVG';
-import { useAudioContext } from '@/providers/AudioProvider';
-import { PencilSVG } from '@/components/PencilSVG';
+import { MultipleChoiceSVG } from '@components/icons/MultipleChoiceSVG';
+import { useAudioContext } from '@providers/AudioProvider';
+import { PencilSVG } from '@components/icons/PencilSVG';
 import styles from './DashboardItem.module.css';
 
 export type DashboardItemLinkType = 'multipleChoice' | 'writing' | 'mixed' | 'board';

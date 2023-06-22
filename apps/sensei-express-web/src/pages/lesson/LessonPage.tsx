@@ -1,12 +1,12 @@
-import { Await, useLoaderData, useNavigate } from 'react-router-dom';
-import { Question } from './Question';
-import { Lesson, Question as QuestionType } from './types';
 import { Suspense, useEffect, useState } from 'react';
-import { Progress } from './Progress';
-import styles from './LessonPage.module.css';
-import { useLessonContext } from '@/providers/LessonContext';
+import { Await, useLoaderData, useNavigate } from 'react-router-dom';
 import { AnimatePresence, motion, useAnimate } from 'framer-motion';
-import { API_URL } from '@/lib/axios';
+import { useLessonContext } from '@providers/LessonContext';
+import { Question } from './Question';
+import { Progress } from './Progress';
+import { Lesson } from './types';
+import { API_URL } from '@lib/axios';
+import styles from './LessonPage.module.css';
 
 export const LessonPage = () => {
     const { initLesson, currentLesson, currentQuestion, currentQuestionIndex, answerCurrentQuestion } =

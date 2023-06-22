@@ -1,5 +1,5 @@
-import { CheckSVG } from '@/components/CheckSVG';
-import { CrossSVG } from '@/components/CrossSVG';
+import { CheckSVG } from '@components/icons/CheckSVG';
+import { CrossSVG } from '@components/icons/CrossSVG';
 import styles from './QuestionResult.module.css';
 import { QuestionWithAnswer } from '../lesson/types';
 
