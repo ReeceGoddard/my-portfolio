@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-empty-function */
-import { Lesson, Question, QuestionWithAnswer } from '@/pages/lesson/types';
+import { Question, QuestionWithAnswer } from '@/pages/lesson/types';
 import React, { ReactNode, createContext, useContext, useMemo, useRef, useState } from 'react';
 
 interface LessonContextType {
@@ -7,6 +7,7 @@ interface LessonContextType {
     initLesson: (questions: Question[]) => void;
     clearLesson: () => void;
     answerCurrentQuestion: (answer: string) => boolean;
+    currentQuestionIndex: number | null;
     currentQuestion: QuestionWithAnswer | null;
     numberOfQuestions: number;
     audioElement: React.RefObject<HTMLAudioElement> | null;
@@ -20,6 +21,7 @@ const LessonContext = createContext<LessonContextType>({
     answerCurrentQuestion: () => {
         return false;
     },
+    currentQuestionIndex: null,
     currentQuestion: null,
     numberOfQuestions: 0,
     audioElement: null,
@@ -34,10 +36,13 @@ export const LessonProvider = ({ children }: { children: ReactNode }) => {
     const [currentLesson, setCurrentLesson] = useState<QuestionWithAnswer[] | null>(null);
     const audioElement = useRef<HTMLAudioElement>(null);
 
-    const currentQuestion: QuestionWithAnswer | null = useMemo(() => {
-        const numOfAnswers = currentLesson?.filter(question => question.userAnswer).length;
-        return currentLesson?.[numOfAnswers || 0] || null;
+    const currentQuestionIndex: number | null = useMemo(() => {
+        return currentLesson?.filter(question => question.userAnswer).length || 0;
     }, [currentLesson]);
+
+    const currentQuestion: QuestionWithAnswer | null = useMemo(() => {
+        return currentLesson?.[currentQuestionIndex || 0] || null;
+    }, [currentLesson, currentQuestionIndex]);
 
     const numberOfQuestions: number = useMemo(() => {
         return currentLesson?.length || 0;
@@ -57,13 +62,14 @@ export const LessonProvider = ({ children }: { children: ReactNode }) => {
     const answerCurrentQuestion = (userAnswer: string): boolean => {
         let isCorrect = false;
 
-        const updatedQuestions: QuestionWithAnswer[] | undefined = currentLesson?.map(lessonQuestion => {
-            if (lessonQuestion.question.charID === currentQuestion?.question.charID) {
+        const updatedQuestions: QuestionWithAnswer[] | undefined = currentLesson?.map((lessonQuestion, index) => {
+            if (index === currentQuestionIndex) {
                 // Check correctness
                 isCorrect = userAnswer.toLowerCase() === lessonQuestion.question.answer.toLowerCase();
 
                 return { ...lessonQuestion, userAnswer, isCorrect };
             }
+
             return lessonQuestion;
         });
 
@@ -96,6 +102,7 @@ export const LessonProvider = ({ children }: { children: ReactNode }) => {
                 currentLesson,
                 answerCurrentQuestion,
                 clearLesson,
+                currentQuestionIndex,
                 currentQuestion,
                 numberOfQuestions,
                 audioElement,
