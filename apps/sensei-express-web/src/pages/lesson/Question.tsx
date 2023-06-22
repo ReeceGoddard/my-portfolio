@@ -57,7 +57,7 @@ export const Question = ({
 
     useEffect(() => {
         userInputRef.current?.focus();
-    }, []);
+    }, [userInputRef]);
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setUserAnswer(event.target.value);
