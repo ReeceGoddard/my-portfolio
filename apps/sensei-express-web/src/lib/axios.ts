@@ -1,6 +1,6 @@
 import Axios, { InternalAxiosRequestConfig } from 'axios';
 
-const API_URL = import.meta.env.VITE_BASE_URL as string;
+export const API_URL = import.meta.env.VITE_BASE_URL as string;
 import storage from '@/utils/storage';
 
 const authRequestInterceptor = (config: InternalAxiosRequestConfig) => {
