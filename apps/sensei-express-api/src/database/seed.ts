@@ -53,6 +53,7 @@ const addJapaneseCharacterLibrary = async () => {
         return {
             ...char,
             alphabet: 'hiragana',
+            soundUrl: `/public/assets/sounds/kana/${char.romaji}.wav`,
         };
     });
 

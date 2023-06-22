@@ -6,6 +6,7 @@ import { Progress } from './Progress';
 import styles from './LessonPage.module.css';
 import { useLessonContext } from '@/providers/LessonContext';
 import { AnimatePresence, motion, useAnimate } from 'framer-motion';
+import { API_URL } from '@/lib/axios';
 
 export const LessonPage = () => {
     const { initLesson, currentLesson, currentQuestion, currentQuestionIndex, answerCurrentQuestion } =
@@ -80,6 +81,7 @@ export const LessonPage = () => {
                                         answer={currentQuestion.question.answer}
                                         onAnswer={userAnswer => handleAnswer(userAnswer)}
                                         choices={currentQuestion.question.choices ?? []}
+                                        soundUrl={`${API_URL}${currentQuestion.question.soundUrl}`}
                                     />
                                 ) : null}
                             </div>

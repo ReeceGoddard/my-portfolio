@@ -11,6 +11,7 @@ export type Question = {
     answer: string;
     charID: string;
     choices?: string[];
+    soundUrl: string;
 };
 
 export type QuestionWithAnswer = {

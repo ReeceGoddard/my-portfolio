@@ -1,4 +1,4 @@
-import { ChangeEvent, HTMLProps, useEffect, useRef, useState } from 'react';
+import { ChangeEvent, HTMLProps, useCallback, useEffect, useRef, useState } from 'react';
 import styles from './Question.module.css';
 import { Choice } from './Choice';
 import { SoundSVG } from '@/components/SoundSVG';
@@ -11,7 +11,7 @@ interface QuestionProps extends HTMLProps<HTMLDivElement> {
     answer: string;
     onAnswer: (userAnswer: string) => void;
     choices: string[];
-    hasSound?: boolean;
+    soundUrl?: string | null;
 }
 
 export const Question = ({
@@ -19,7 +19,7 @@ export const Question = ({
     answer,
     onAnswer,
     choices = [],
-    hasSound = true,
+    soundUrl = null,
     className,
     ...rest
 }: QuestionProps) => {
@@ -28,6 +28,10 @@ export const Question = ({
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const [questionTextRef, animateQuestionText] = useAnimate();
     const [userInputRef, animateUserInput] = useAnimate();
+
+    const playAudio = () => {
+        if (audioRef.current) audioRef.current.play();
+    };
 
     useEffect(() => {
         const handleGlobalKeyDown = (event: KeyboardEvent) => {
@@ -49,6 +53,7 @@ export const Question = ({
         if (inputElement) inputElement.focus();
 
         document.addEventListener('keydown', handleGlobalKeyDown);
+        userInputRef.current?.focus();
 
         return () => {
             document.removeEventListener('keydown', handleGlobalKeyDown);
@@ -56,8 +61,8 @@ export const Question = ({
     }, [userInputRef]);
 
     useEffect(() => {
-        userInputRef.current?.focus();
-    }, [userInputRef]);
+        playAudio();
+    }, []);
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setUserAnswer(event.target.value);
@@ -110,31 +115,18 @@ export const Question = ({
         }
     };
 
-    const loadAudio = async () => {
-        const audioModule = await import(`../../assets/sounds/${answer}.wav`);
-
-        if (audioRef.current) {
-            audioRef.current.src = audioModule.default;
-        }
-    };
-
-    const playAudio = async () => {
-        await loadAudio();
-        if (audioRef.current) audioRef.current.play();
-    };
-
     return (
         <div className={`${styles.questionPageContainer} ${className}`} {...rest}>
             <div className={styles.questionWrapper}>
                 <div className={styles.question}>
                     <span ref={questionTextRef}>{question}</span>
                 </div>
-                {hasSound ? (
+                {soundUrl ? (
                     <>
                         <button className={styles.playSound} onClick={playAudio}>
                             <SoundSVG width={24} height={24} />
                         </button>
-                        <audio ref={audioRef} />
+                        <audio ref={audioRef} src={soundUrl} />
                     </>
                 ) : null}
             </div>

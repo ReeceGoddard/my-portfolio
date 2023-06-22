@@ -1,6 +1,8 @@
 import dotenv from 'dotenv';
 import express, { NextFunction, Request, Router } from 'express';
 import cors from 'cors';
+import { fileURLToPath } from 'url';
+import path, { dirname } from 'path';
 import morgan from 'morgan';
 import { PrismaClient } from '@prisma/client';
 
@@ -16,10 +18,13 @@ morgan.token('body', (req: Request) => {
 });
 
 const app = express();
-app.use(cors());
-app.use(express.json());
 app.disable('x-powered-by');
 app.use(morgan(':method :url :status :res[content-length] - :response-time ms :body'));
+app.use(cors());
+app.use(express.json());
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
+app.use('/public', express.static(path.join(__dirname, '../public')));
 
 const prisma = new PrismaClient();
 
