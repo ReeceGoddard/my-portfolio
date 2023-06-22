@@ -1,6 +1,6 @@
 import { AlphabetType, Character } from '@prisma/client';
 import { prisma } from '../database/PrismaClient.js';
-import { LessonType } from './types/index.js';
+import { LessonLevel, LessonType } from './types/index.js';
 
 export type Question = {
     question: string;
@@ -14,8 +14,8 @@ export type Lesson = {
 };
 
 export class LessonService {
-    async getLesson(alphabet: AlphabetType, lessonType: LessonType): Promise<Lesson> {
-        return this.generateLesson(alphabet, lessonType);
+    async getLesson(alphabet: AlphabetType, lessonLevel: LessonLevel, lessonType: LessonType): Promise<Lesson> {
+        return this.generateLesson(alphabet, lessonLevel, lessonType);
     }
 
     private shuffleArray<T>(array: T[]): T[] {
@@ -32,15 +32,29 @@ export class LessonService {
         return chars[randomIndex];
     }
 
-    private async generateLesson(alphabet: AlphabetType, lessonType: LessonType, numOfQuestions = 12): Promise<Lesson> {
-        const allCharacters = await prisma.character.findMany(); //TODO: Get chars based on alphabet provided
+    private async generateLesson(
+        alphabet: AlphabetType,
+        lessonLevel: LessonLevel,
+        lessonType: LessonType,
+        numOfQuestions = 12
+    ): Promise<Lesson> {
+        const allCharacters = await prisma.character.findMany({
+            where: {
+                alphabet: {
+                    equals: alphabet,
+                },
+            },
+        });
         const allCharactersShuffled = this.shuffleArray(allCharacters);
-
-        const questions: Question[] = allCharactersShuffled.slice(0, numOfQuestions).map(char => {
-            let question: Question = { question: char.character, answer: char.romaji, charID: char.id };
+        const vowels = ['a', 'e', 'i', 'o', 'u'];
+        const filteredQuestions = allCharactersShuffled.filter(character => vowels.includes(character.romaji));
+        const questions: Question[] = Array.from({ length: 12 }, () => {
+            const randomIndex = Math.floor(Math.random() * filteredQuestions.length);
+            const char = filteredQuestions[randomIndex];
+            const question: Question = { question: char.character, answer: char.romaji, charID: char.id };
 
             if (lessonType === 'multi' || (lessonType === 'mixed' && Math.random() < 0.5)) {
-                question.choices = this.getRandomChoices(question, allCharacters);
+                question.choices = this.getRandomChoices(question, filteredQuestions);
             }
 
             return question;

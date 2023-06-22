@@ -10,12 +10,12 @@ export class LessonController {
     }
 
     getLesson = async (req: Request<LessonRouteParams>, resp: Response) => {
-        if (!req.params.alphabet || !req.params.lessonType) {
+        if (!req.params.alphabet || !req.params.lessonLevel || !req.params.lessonType) {
             throw new Error('Request error');
         }
 
-        const { alphabet, lessonType } = req.params;
-        const lesson = await this.lessonService.getLesson(alphabet, lessonType);
+        const { alphabet, lessonLevel, lessonType } = req.params;
+        const lesson = await this.lessonService.getLesson(alphabet, lessonLevel, lessonType);
         resp.json(lesson);
     };
 }
