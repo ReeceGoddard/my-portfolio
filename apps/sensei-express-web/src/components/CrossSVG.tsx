@@ -18,9 +18,9 @@ export const CrossSVG = (props: SVGProps<SVGSVGElement>) => {
                     d="M4 7.33333L7.33333 4L16 12.6667L24.6667 4L28 7.33333L19.3333 16L28 24.6667L24.6667 28L16 19.3333L7.33333 28L4 24.6667L12.6667 16L4 7.33333Z"
                     fill="#555555"
                     stroke="#F0796D"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                 />
             </mask>
             <g mask="url(#mask0_126_359)">
