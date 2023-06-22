@@ -11,6 +11,8 @@ interface LessonContextType {
     currentQuestion: QuestionWithAnswer | null;
     numberOfQuestions: number;
     audioElement: React.RefObject<HTMLAudioElement> | null;
+    playQuestionSoundOnLoad: boolean;
+    setPlayQuestionSoundOnLoad: React.Dispatch<React.SetStateAction<boolean>>;
     playAnswerSound: (isCorrect: boolean) => Promise<void>;
 }
 
@@ -25,6 +27,8 @@ const LessonContext = createContext<LessonContextType>({
     currentQuestion: null,
     numberOfQuestions: 0,
     audioElement: null,
+    playQuestionSoundOnLoad: false,
+    setPlayQuestionSoundOnLoad: () => {},
     playAnswerSound: () => {
         return new Promise(res => res());
     },
@@ -34,6 +38,7 @@ export const useLessonContext = (): LessonContextType => useContext(LessonContex
 
 export const LessonProvider = ({ children }: { children: ReactNode }) => {
     const [currentLesson, setCurrentLesson] = useState<QuestionWithAnswer[] | null>(null);
+    const [playQuestionSoundOnLoad, setPlayQuestionSoundOnLoad] = useState<boolean>(false);
     const audioElement = useRef<HTMLAudioElement>(null);
 
     const currentQuestionIndex: number | null = useMemo(() => {
@@ -106,6 +111,8 @@ export const LessonProvider = ({ children }: { children: ReactNode }) => {
                 currentQuestion,
                 numberOfQuestions,
                 audioElement,
+                playQuestionSoundOnLoad,
+                setPlayQuestionSoundOnLoad,
                 playAnswerSound,
             }}
         >

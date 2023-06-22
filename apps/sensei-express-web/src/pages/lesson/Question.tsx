@@ -5,6 +5,7 @@ import { SoundSVG } from '@components/icons/SoundSVG';
 import { SendSVG } from '@components/icons/SendSVG';
 import { Choice } from './Choice';
 import styles from './Question.module.css';
+import { Switch } from '@/components/switch/Switch';
 
 interface QuestionProps extends HTMLProps<HTMLDivElement> {
     question: string;
@@ -23,7 +24,7 @@ export const Question = ({
     className,
     ...rest
 }: QuestionProps) => {
-    const { playAnswerSound } = useLessonContext();
+    const { playAnswerSound, playQuestionSoundOnLoad, setPlayQuestionSoundOnLoad } = useLessonContext();
     const [userAnswer, setUserAnswer] = useState<string>('');
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const [questionTextRef, animateQuestionText] = useAnimate();
@@ -61,8 +62,8 @@ export const Question = ({
     }, [userInputRef]);
 
     useEffect(() => {
-        playAudio();
-    }, []);
+        if (playQuestionSoundOnLoad) playAudio();
+    }, [playQuestionSoundOnLoad]);
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
         setUserAnswer(event.target.value);
@@ -122,12 +123,18 @@ export const Question = ({
                     <span ref={questionTextRef}>{question}</span>
                 </div>
                 {soundUrl ? (
-                    <>
+                    <div className={styles.soundActions}>
                         <button className={styles.playSound} onClick={playAudio}>
                             <SoundSVG width={24} height={24} />
                         </button>
                         <audio ref={audioRef} src={soundUrl} />
-                    </>
+
+                        <Switch
+                            checked={playQuestionSoundOnLoad}
+                            onChange={() => setPlayQuestionSoundOnLoad(!playQuestionSoundOnLoad)}
+                            label="AUTO"
+                        />
+                    </div>
                 ) : null}
             </div>
 

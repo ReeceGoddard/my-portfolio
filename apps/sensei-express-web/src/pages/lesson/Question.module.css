@@ -30,7 +30,6 @@
 }
 
 button.play-sound {
-    position: absolute;
     width: 3em;
     height: 3em;
     border-radius: 50%;
@@ -38,9 +37,6 @@ button.play-sound {
     border: 2px solid var(--button-play-sound-border-color);
     background: var(--button-play-sound-background);
     box-shadow: var(--button-play-sound-box-shadow);
-    top: 50%;
-    right: 0;
-    transform: translate(150%, -50%);
 
     & svg {
         fill: var(--button-play-sound-icon-fill);
@@ -121,6 +117,21 @@ button.play-sound {
     grid-template-rows: repeat(2, 1fr); /* Two rows with equal height */
     gap: 1em;
     padding: 1em;
+}
+
+.soundActions {
+    background: rgb(255 255 255 / 50%);
+    padding: 0.4em 0.4em 0.6em;
+    border: 3px solid white;
+    border-radius: 6px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(150%, -50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.6em;
 }
 
 @media screen and (min-width: 768px) {
