@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import express, { NextFunction, Request, Router } from 'express';
+import express, { Request, Router } from 'express';
 import cors from 'cors';
 import { fileURLToPath } from 'url';
 import path, { dirname } from 'path';
@@ -8,6 +8,7 @@ import { PrismaClient } from '@prisma/client';
 
 import { router as lessonRoutes } from './lesson/lesson.routes.js';
 import { router as boardRoutes } from './board/board.routes.js';
+import { router as resultsRoutes } from './results/results.routes.js';
 import { errorHandler } from './errorHandler.js';
 
 dotenv.config();
@@ -31,6 +32,7 @@ const prisma = new PrismaClient();
 const routerV1 = Router();
 routerV1.use('/lesson', lessonRoutes);
 routerV1.use('/board', boardRoutes);
+routerV1.use('/results', resultsRoutes);
 
 app.use('/v1', routerV1);
 
