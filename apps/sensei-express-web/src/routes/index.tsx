@@ -8,9 +8,9 @@ import { ResultsPage } from '@/pages/results/ResultsPage';
 import { HiraganaBoard } from '@/pages/board/HiraganaBoard';
 import { BoardType, kanaCharsQuery } from '@/pages/board/api/getKanaChars';
 
-export const lessonQuery = (lessonType: LessonType = 'writing') => ({
+export const lessonQuery = (lessonLevel: LessonLevel, lessonType: LessonType) => ({
     queryKey: ['lesson'],
-    queryFn: () => getLesson(lessonType),
+    queryFn: () => getLesson(lessonLevel, lessonType),
 });
 
 const lessonLoader = async ({ params }: LoaderFunctionArgs) => {
