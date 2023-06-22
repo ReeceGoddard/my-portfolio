@@ -16,7 +16,6 @@ const viteConfig = (args: ViteConfigInput) => {
                 usePolling: true,
             },
             host: true,
-            strictPort: true,
             port: 5173,
         },
         resolve: {
