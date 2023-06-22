@@ -3,9 +3,10 @@ import { PersistQueryClientProvider } from '@tanstack/react-query-persist-client
 import { QueryClient } from '@tanstack/react-query';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import { authorProfileLoader } from './pages/author-profile/AuthorProfile.loader';
-import './App.css';
 import { createSyncStoragePersister } from '@tanstack/query-sync-storage-persister';
 import { authorsLoader } from './pages/authors/Authors.loader';
+import { Helmet } from 'react-helmet';
+import './App.css';
 
 const Authors = lazy(() => import('./pages/authors/Authors'));
 const AuthorProfile = lazy(() => import('./pages/author-profile/AuthorProfile'));
@@ -41,6 +42,11 @@ function App() {
 
     return (
         <PersistQueryClientProvider client={queryClient} persistOptions={{ persister, maxAge: FIVE_DAYS }}>
+            <Helmet>
+                <title>Verse | Masters of Poetry</title>
+                <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+                <meta name="theme-color" content="#171719" media="(prefers-color-scheme: dark)" />
+            </Helmet>
             <Suspense fallback={<div>Loading... </div>}>
                 <RouterProvider router={router} />
             </Suspense>
