@@ -1,0 +1,61 @@
+:root {
+    --switch-padding: 3px;
+    --switch-border-width: 2px;
+    --switch-border-color: var(--dark-blue);
+    --switch-background: white;
+    --switch-toggle-background: var(--dark-blue);
+
+    --switch__checked--background: white;
+    --switch__checked--border-color: var(--nice-blue);
+    --switch__checked--toggle-background: var(--nice-blue);
+}
+
+.switchInput {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+}
+
+.switchLabel {
+    display: block;
+    width: 40px;
+    height: 24px;
+    border: var(--switch-border-width) solid var(--switch-border-color);
+    box-shadow: var(--button-play-sound-box-shadow);
+    background: var(--switch-background);
+    border-radius: 100px;
+    text-indent: -9999px;
+    position: relative;
+    cursor: pointer;
+
+    &:after {
+        content: '';
+        position: absolute;
+        top: var(--switch-padding);
+        left: var(--switch-padding);
+        height: calc(100% - calc(var(--switch-padding) * 2));
+        width: fit-content;
+        aspect-ratio: 1 / 1;
+        background: var(--switch-toggle-background);
+        border-radius: 100px;
+        transition: var(--transition);
+    }
+}
+
+.switchInput:checked + .switchLabel {
+    background: var(--switch-background__checked);
+    border-color: var(--switch__checked--border-color);
+
+    &:after {
+        background: var(--switch__checked--toggle-background);
+    }
+}
+
+.switchInput:checked + .switchLabel:after {
+    left: calc(100% - var(--switch-padding));
+    transform: translateX(-100%);
+}
+
+.switchLabel:active:after {
+    aspect-ratio: 1.2 / 1;
+}
