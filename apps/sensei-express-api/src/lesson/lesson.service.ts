@@ -2,15 +2,14 @@ import { AlphabetType, Character } from '@prisma/client';
 import { prisma } from '../database/PrismaClient.js';
 import { LessonLevel, LessonType } from './types/index.js';
 
-export type Question = {
+export type CharacterWithChoices = {
     question: string;
     answer: string;
-    charID: string;
     choices?: string[];
-};
+} & Character;
 
 export type Lesson = {
-    questions: Question[];
+    questions: CharacterWithChoices[];
 };
 
 export class LessonService {
@@ -48,10 +47,10 @@ export class LessonService {
         const allCharactersShuffled = this.shuffleArray(allCharacters);
         const vowels = ['a', 'e', 'i', 'o', 'u'];
         const filteredQuestions = allCharactersShuffled.filter(character => vowels.includes(character.romaji));
-        const questions: Question[] = Array.from({ length: 12 }, () => {
+        const questions: CharacterWithChoices[] = Array.from({ length: 12 }, () => {
             const randomIndex = Math.floor(Math.random() * filteredQuestions.length);
             const char = filteredQuestions[randomIndex];
-            const question: Question = { question: char.character, answer: char.romaji, charID: char.id };
+            const question: CharacterWithChoices = { ...char, question: char.character, answer: char.romaji };
 
             if (lessonType === 'multi' || (lessonType === 'mixed' && Math.random() < 0.5)) {
                 question.choices = this.getRandomChoices(question, filteredQuestions);
@@ -73,8 +72,8 @@ export class LessonService {
      * @param charList The list of characters to get choices from.
      * @returns The array of choices.
      */
-    private getRandomChoices(question: Question, charList: Character[]): string[] {
-        const choices = [question.answer];
+    private getRandomChoices(question: CharacterWithChoices, charList: Character[], type?: keyof Character): string[] {
+        const choices = [question.romaji];
         while (choices.length < 4) {
             const randomChar = this.getRandomChar(charList);
 
