@@ -3,6 +3,8 @@ import { useLessonContext } from '@/providers/LessonContext';
 import { QuestionResult } from './QuestionResult';
 import styles from './ResultsPage.module.css';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useEffect } from 'react';
+import { postResults } from './api/postResults';
 
 const calculateScoreMessage = (percentCorrect: number) => {
     if (percentCorrect === 100) {
@@ -25,6 +27,32 @@ export const ResultsPage = () => {
 
     const scoreMessage = calculateScoreMessage(percentCorrect);
 
+    useEffect(() => {
+        const abortController = new AbortController();
+
+        const postResultsOnLoad = async () => {
+            await postResults(
+                {
+                    results: questionsWithAnswers.map(questionResult => {
+                        return {
+                            userID: questionResult.userID,
+                            characterID: questionResult.question.id,
+                            isCorrect: questionResult.isCorrect || false,
+                            userAnswer: questionResult.userAnswer || '',
+                        };
+                    }),
+                },
+                { signal: abortController.signal }
+            );
+        };
+
+        if (questionsWithAnswers.length > 0) postResultsOnLoad();
+
+        return () => {
+            abortController.abort();
+        };
+    }, [questionsWithAnswers]);
+
     return (
         <AnimatePresence>
             <motion.div
@@ -44,7 +72,7 @@ export const ResultsPage = () => {
                 <div className={styles.results}>
                     {questionsWithAnswers.map((question, index) => (
                         <QuestionResult
-                            key={question.question.charID}
+                            key={question.question.id + Math.random()}
                             questionWithAnswer={question}
                             questionNumber={index + 1}
                         />

@@ -7,9 +7,9 @@ export type KanaCharacter = {
 };
 
 export type Question = {
+    id: string;
     question: string;
     answer: string;
-    charID: string;
     choices?: string[];
     soundUrl: string;
 };
